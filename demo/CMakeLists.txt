@@ -17,8 +17,6 @@ elseif(WIN32)
             set(PATH_SFML_DEPEND ${BASE_PATH}/external_libs/libs/win/release/msvc/sfml)
         endif()
         set(SFML_DEPENDENCIES opengl32.lib winmm.lib gdi32.lib ${PATH_SFML_DEPEND}/freetype.lib ${PATH_SFML_DEPEND}/openal32.lib ${PATH_SFML_DEPEND}/flac.lib ${PATH_SFML_DEPEND}/vorbisenc.lib ${PATH_SFML_DEPEND}/vorbisfile.lib ${PATH_SFML_DEPEND}/vorbis.lib ${PATH_SFML_DEPEND}/ogg.lib ws2_32.lib )
-        #set(SFML_DEPENDENCIES  ${PATH_SFML_DEPEND}/freetype.lib ${PATH_SFML_DEPEND}/openal32.lib ${PATH_SFML_DEPEND}/flac.lib ${PATH_SFML_DEPEND}/vorbisenc.lib ${PATH_SFML_DEPEND}/vorbisfile.lib ${PATH_SFML_DEPEND}/vorbis.lib ${PATH_SFML_DEPEND}/ogg.lib ws2_32.lib )
-        #set(SFML_DEPEND_2 opengl32 winmm gdi32 )
     else()
         message("USING MINGW")
         if(DEBUG)
@@ -36,37 +34,6 @@ elseif(APPLE)
 
     set(SFML_DEPENDENCIES ${PATH_SFML_DEPEND}/FLAC.framework ${PATH_SFML_DEPEND}/freetype.framework ${PATH_SFML_DEPEND}/ogg.framework ${PATH_SFML_DEPEND}/OpenAL.framework ${PATH_SFML_DEPEND}/vorbis.framework ${PATH_SFML_DEPEND}/vorbisenc.framework ${PATH_SFML_DEPEND}/vorbisfile.framework)
 endif()
-
-#set(FMT_SOURCE_FILES ${PROJECT_SOURCE_DIR}/external_libs/source/fmt/format.cc ${PROJECT_SOURCE_DIR}/external_libs/source/fmt/posix.cc)
-#
-#set(IMGUI_SOURCE_FILES ${PROJECT_SOURCE_DIR}/external_libs/include/imgui/imgui.cpp ${PROJECT_SOURCE_DIR}/external_libs/include/imgui/imconfig.h
-#        ${PROJECT_SOURCE_DIR}/external_libs/include/imgui/imgui_draw.cpp ${PROJECT_SOURCE_DIR}/external_libs/include/imgui/imgui_widgets.cpp
-#        ${PROJECT_SOURCE_DIR}/external_libs/include/imgui/imgui_demo.cpp ${PROJECT_SOURCE_DIR}/external_libs/include/imgui/misc/cpp/imgui_stdlib.cpp
-#        ${PROJECT_SOURCE_DIR}/external_libs/include/imgui/imgui-SFML.cpp)
-
-#set(GUI_SOURCE_FILES src/gui/controls/Button.cpp src/gui/controls/Button.h src/gui/controls/Checkbox.cpp src/gui/controls/Checkbox.h
-#        src/gui/controls/CheckboxSection.cpp src/gui/controls/CheckboxSection.h src/gui/controls/Child.cpp src/gui/controls/Child.h
-#        src/gui/controls/ColorButton.cpp src/gui/controls/ColorButton.h src/gui/controls/ColoredText.cpp src/gui/controls/ColoredText.h
-#        src/gui/controls/ColorPicker.cpp src/gui/controls/ColorPicker.h src/gui/controls/Column.cpp src/gui/controls/Column.h
-#        src/gui/controls/Combobox.cpp src/gui/controls/Combobox.h src/gui/controls/Control.cpp src/gui/controls/Control.h
-#        src/gui/controls/DataColumn.cpp src/gui/controls/DataColumn.h src/gui/controls/DataColumnDefinition.cpp
-#        src/gui/controls/DataColumnDefinition.h src/gui/controls/DataRow.cpp src/gui/controls/DataRow.h src/gui/controls/DataTable.cpp
-#        src/gui/controls/DataTable.h src/gui/controls/DragFloat.cpp src/gui/controls/DragFloat.h src/gui/controls/DragInt.cpp
-#        src/gui/controls/DragInt.h src/gui/controls/Group.cpp src/gui/controls/Group.h src/gui/controls/Image.cpp src/gui/controls/Image.h
-#        src/gui/controls/ImageButton.cpp src/gui/controls/ImageButton.h src/gui/controls/InputFloat.cpp src/gui/controls/InputFloat.h
-#        src/gui/controls/InputInt.cpp src/gui/controls/InputInt.h src/gui/controls/Label.cpp src/gui/controls/Label.h
-#        src/gui/controls/Listbox.cpp src/gui/controls/Listbox.h src/gui/controls/MenuBar.cpp src/gui/controls/MenuBar.h
-#        src/gui/controls/MenuItem.cpp src/gui/controls/MenuItem.h src/gui/controls/MenuItemCollection.cpp
-#        src/gui/controls/MenuItemCollection.h src/gui/controls/Progressbar.cpp src/gui/controls/Progressbar.h
-#        src/gui/controls/RadioSection.cpp src/gui/controls/RadioSection.h src/gui/controls/Row.cpp src/gui/controls/Row.h
-#        src/gui/controls/Selectable.cpp src/gui/controls/Selectable.h src/gui/controls/SliderFloat.cpp src/gui/controls/SliderFloat.h
-#        src/gui/controls/SliderInt.cpp src/gui/controls/SliderInt.h src/gui/controls/Table.cpp src/gui/controls/Table.h
-#        src/gui/controls/Textbox.cpp src/gui/controls/Textbox.h src/gui/controls/TreeList.cpp src/gui/controls/TreeList.h
-#        src/gui/controls/TreeNode.cpp src/gui/controls/TreeNode.h src/gui/forms/Form.cpp src/gui/forms/Form.h
-#        src/gui/forms/MessagePopup.cpp src/gui/forms/MessagePopup.h src/gui/forms/Popup.cpp src/gui/forms/Popup.h
-#        src/gui/forms/TextEditorForm.cpp src/gui/forms/TextEditorForm.h src/gui/properties/RadioData.cpp src/gui/properties/RadioData.h
-#        src/gui/properties/Tooltip.cpp src/gui/properties/Tooltip.h src/gui/themes/Theme.cpp src/gui/themes/Theme.h
-#        src/gui/TextEditor.cpp src/gui/TextEditor.h)
 
 set(SOURCE_FILES DemoManager.cpp DemoManager.h)
 
@@ -96,7 +63,7 @@ elseif(WIN32)
         add_executable(pmgui_demo main.cpp ${SOURCE_FILES} ${GUI_SOURCE_FILES} ${IMGUI_SOURCE_FILES} ${FMT_SOURCE_FILES}) #${BASE_PATH}/logo/icon.rc)
         target_link_libraries(pmgui_demo pmgui ${MY_STATIC_LIBS} ${SFML_DEPENDENCIES})
     else()
-        #set(MY_STATIC_LIBS ${PATH_LIBS}/libfmt.a ${PATH_SFML_LIB}/libsfml-network.a ${PATH_SFML_LIB}/libsfml-audio.a ${PATH_SFML_LIB}/libsfml-graphics.a ${PATH_SFML_LIB}/libsfml-window.a ${PATH_SFML_LIB}/libsfml-system.a)
+
         if(DEBUG)
             set(PATH_SFML_LIB ${BASE_PATH}/external_libs/libs/win/debug/mingw/sfml)
             set(MY_STATIC_LIBS ${PATH_SFML_LIB}/libsfml-network-s-d.a ${PATH_SFML_LIB}/libsfml-audio-s-d.a ${PATH_SFML_LIB}/libsfml-graphics-s-d.a ${PATH_SFML_LIB}/libsfml-window-s-d.a ${PATH_SFML_LIB}/libsfml-system-s-d.a)
@@ -135,10 +102,7 @@ elseif(APPLE)
     set(MACOSX_BUNDLE_LONG_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
     set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
     set(MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
-    #set_source_files_properties(${BASE_PATH}/logo/AppIcon.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
     add_executable(pmgui_demo MACOSX_BUNDLE main.cpp ${SOURCE_FILES} ${GUI_SOURCE_FILES} ${IMGUI_SOURCE_FILES} ${FMT_SOURCE_FILES} )
-    #target_link_libraries(pmgui_demo stdc++fs ${MY_STATIC_LIBS} ${SFML_DEPENDENCIES})
-    #stdc++
     if(SFML_BUILD_STATIC)
         target_link_libraries(pmgui_demo pmgui stdc++ -ObjC /usr/local/opt/llvm/lib/libc++experimental.a /usr/local/opt/llvm/lib/libc++fs.a ${MY_STATIC_LIBS} ${FRAMEWORK_LIBS_BASE} ${SFML_DEPENDENCIES})
     else()
