@@ -5,7 +5,7 @@
 #ifndef PMGUI_FILEDIALOG_H
 #define PMGUI_FILEDIALOG_H
 
-#include "../../EmuJukpmguiConfig.h"
+#include "../../PmguiConfig.h"
 
 #if MSVC
 #include <filesystem>
@@ -34,7 +34,7 @@ namespace fs = std::experimental::filesystem;
 #include "../gui/forms/Popup.h"
 #include "../gui/controls/ImageButton.h"
 #include "FileTable.h"
-#include "../../content/files_mapper.h"
+#include "../files_mapper.h"
 #include <map>
 #include "../gui/forms/MessagePopup.h"
 #include "../gui/controls/Combobox.h"

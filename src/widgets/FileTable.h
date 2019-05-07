@@ -7,7 +7,7 @@
 
 #include "../../EmuJukpmguiConfig.h"
 #include "../gui/controls/DataTable.h"
-#include "../../content/files_mapper.h"
+#include "../files_mapper.h"
 
 #include <map>
 #include <cpplinq.hpp>

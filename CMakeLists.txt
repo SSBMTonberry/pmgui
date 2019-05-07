@@ -126,7 +126,7 @@ set(GUI_SOURCE_FILES src/gui/controls/Button.cpp src/gui/controls/Button.h src/g
         src/gui/properties/Tooltip.cpp src/gui/properties/Tooltip.h src/gui/themes/Theme.cpp src/gui/themes/Theme.h
         src/gui/TextEditor.cpp src/gui/TextEditor.h)
 
-set(SOURCE_FILES DemoManager.cpp DemoManager.h)
+set(SOURCE_FILES DemoManager.cpp DemoManager.h src/pmgui.h)
 
 if(LINUX)
     if(DEBUG)
@@ -139,7 +139,7 @@ if(LINUX)
         set(MY_STATIC_LIBS ${PATH_SFML_LIB}/libsfml-network-s.a ${PATH_SFML_LIB}/libsfml-audio-s.a ${PATH_SFML_LIB}/libsfml-graphics-s.a ${PATH_SFML_LIB}/libsfml-window-s.a ${PATH_SFML_LIB}/libsfml-system-s.a)
     endif()
 
-    add_executable(pmgui_demo main.cpp ${SOURCE_FILES} ${GUI_SOURCE_FILES} ${IMGUI_SOURCE_FILES} ${FMT_SOURCE_FILES}  )
+    add_executable(pmgui_demo main.cpp ${SOURCE_FILES} ${GUI_SOURCE_FILES} ${IMGUI_SOURCE_FILES} ${FMT_SOURCE_FILES} )
     target_link_libraries(pmgui_demo stdc++fs png ${MY_STATIC_LIBS} ${SFML_DEPENDENCIES} ${SFML_REST})
 elseif(WIN32)
     if(MSVC)
