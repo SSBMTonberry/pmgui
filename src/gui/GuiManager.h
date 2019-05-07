@@ -7,7 +7,7 @@
 
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
-#include "Themes/Theme.h"
+#include "themes/Theme.h"
 #include "imgui-SFML.h"
 
 #include "fmt/format.h"
@@ -17,9 +17,9 @@
 #include "SFML/Window/Event.hpp"
 #include "../EventManager.h"
 
-#include "Forms/Form.h"
-#include "Controls/GuiFactory.h"
-#include "Forms/TextEditorForm.h"
+#include "forms/Form.h"
+#include "controls/GuiFactory.h"
+#include "forms/TextEditorForm.h"
 
 using namespace std;
 

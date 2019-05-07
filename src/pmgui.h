@@ -5,6 +5,8 @@
 #ifndef PMGUI_PMGUI_H
 #define PMGUI_PMGUI_H
 
+#include "gui/GuiManager.h"
+
 //Controls
 #include "gui/controls/Button.h"
 #include "gui/controls/Checkbox.h"
