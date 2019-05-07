@@ -1,4 +1,4 @@
-#include "PmguiConfig.h"
+#include "../PmguiConfig.h"
 #include <iostream>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"

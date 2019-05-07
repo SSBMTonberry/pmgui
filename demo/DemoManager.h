@@ -5,12 +5,12 @@
 #ifndef PMGUI_DEMO_DEMOMANAGER_H
 #define PMGUI_DEMO_DEMOMANAGER_H
 
-#include "src/misc/Tools.hpp"
+#include "../src/misc/Tools.hpp"
 #include <unordered_map>
 #include "SFML/Graphics.hpp"
 #include "SFML/Main.hpp"
-#include "src/gui/forms/Form.h"
-#include "src/gui/controls/Textbox.h"
+#include "../src/gui/forms/Form.h"
+#include "../src/gui/controls/Textbox.h"
 #include "imgui/imgui-SFML.h"
 
 namespace pmgui
