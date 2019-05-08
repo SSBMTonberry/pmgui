@@ -2,7 +2,6 @@
 #include <iostream>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
-#include "fmt/format.h"
 #include "DemoManager.h"
 
 

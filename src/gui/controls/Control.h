@@ -6,12 +6,12 @@
 #define PMGUI_CONTROL_H
 
 #include <iostream>
-#include <fmt/core.h>
-#include <fmt/format.h>
-#include <fmt/time.h>
-#include <imgui/imgui.h>
+#include "../../fmt/core.h"
+#include "../../fmt/format.h"
+#include "../../fmt/time.h"
+#include "../../imgui/imgui.h"
 #include "../properties/Tooltip.h"
-#include "imgui/imgui-SFML.h"
+#include "../../imgui/imgui-SFML.h"
 #include "../../misc/Enums.hpp"
 #include <optional>
 #include <vector>

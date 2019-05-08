@@ -3,12 +3,12 @@ project(pmgui)
 
 include_directories(../external_libs/include)
 
-set(FMT_SOURCE_FILES ../external_libs/source/fmt/format.cc ../external_libs/source/fmt/posix.cc)
+set(FMT_SOURCE_FILES fmt/format.cc fmt/posix.cc)
 
-set(IMGUI_SOURCE_FILES ../external_libs/include/imgui/imgui.cpp ../external_libs/include/imgui/imconfig.h
-        ../external_libs/include/imgui/imgui_draw.cpp ../external_libs/include/imgui/imgui_widgets.cpp
-        ../external_libs/include/imgui/imgui_demo.cpp ../external_libs/include/imgui/misc/cpp/imgui_stdlib.cpp
-        ../external_libs/include/imgui/imgui-SFML.cpp)
+set(IMGUI_SOURCE_FILES imgui/imgui.cpp imgui/imconfig.h
+        imgui/imgui_draw.cpp imgui/imgui_widgets.cpp
+        imgui/imgui_demo.cpp imgui/misc/cpp/imgui_stdlib.cpp
+        imgui/imgui-SFML.cpp)
 
 set(SOURCE_FILES gui/controls/Button.cpp gui/controls/Button.h gui/controls/Checkbox.cpp gui/controls/Checkbox.h
         gui/controls/CheckboxSection.cpp gui/controls/CheckboxSection.h gui/controls/Child.cpp gui/controls/Child.h
@@ -32,6 +32,6 @@ set(SOURCE_FILES gui/controls/Button.cpp gui/controls/Button.h gui/controls/Chec
         gui/forms/MessagePopup.cpp gui/forms/MessagePopup.h gui/forms/Popup.cpp gui/forms/Popup.h
         gui/forms/TextEditorForm.cpp gui/forms/TextEditorForm.h gui/properties/RadioData.cpp gui/properties/RadioData.h
         gui/properties/Tooltip.cpp gui/properties/Tooltip.h gui/themes/Theme.cpp gui/themes/Theme.h
-        gui/TextEditor.cpp gui/TextEditor.h pmgui.h)
+        gui/TextEditor.cpp gui/TextEditor.h pmgui.h cpplinq.hpp EventManager.h EventManager.cpp gui/GuiManager.h gui/GuiManager.cpp)
 
 add_library(pmgui STATIC ${SOURCE_FILES} ${IMGUI_SOURCE_FILES} ${FMT_SOURCE_FILES})

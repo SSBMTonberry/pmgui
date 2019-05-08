@@ -54,7 +54,6 @@
 //Theme
 #include "gui/themes/Theme.h"
 
-#include "misc/EmuThemes.hpp"
 #include "misc/EnumBitflags.hpp"
 #include "misc/Enums.hpp"
 #include "misc/Tools.hpp"

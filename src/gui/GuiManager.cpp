@@ -3,8 +3,8 @@
 //
 
 #include "GuiManager.h"
-#include "Themes/Theme.h"
-#include "../../PixelmoundStudio/files/files.h"
+#include "themes/Theme.h"
+//#include "../../PixelmoundStudio/files/files.h"
 
 
 pmgui::GuiManager::GuiManager()
@@ -80,7 +80,7 @@ void pmgui::GuiManager::draw(bool callWindowDisplay)
 
 void pmgui::GuiManager::addTestForm()
 {
-    unique_ptr<pmgui::Form> form = GuiFactory::CreateForm({0, 0}, {400, 600}, "form1", "Testalini", "0");
+    /*unique_ptr<pmgui::Form> form = GuiFactory::CreateForm({0, 0}, {400, 600}, "form1", "Testalini", "0");
     form->setFormFlags(pmgui::FormFlags::NoResize | FormFlags::NoTitleBar);
 
     unique_ptr<pmgui::TreeNode> tree1 = GuiFactory::CreateTreeNode("tree1", "My first shit!", pmgui::TreeNode::NodeType::CollapsingHeader);
@@ -332,17 +332,7 @@ void pmgui::GuiManager::addTestForm()
 
     addForm(move(form));
 
-    /*unique_ptr<pmgui::Popup> popup = GuiFactory::CreatePopup("popup_test_id", "PopupModal 1.60", "922");
-    unique_ptr<pmgui::Combobox> comborillo = GuiFactory::CreateCombobox("combo_test_id", "Combotest");
-    //comborillo->setHasLabel(false); //Removed not to make confusion
-    comborillo->addValue("Robin's shitty code");
-    comborillo->addValue("does not work :(");
-    popup->add(move(comborillo));
-    popup->setOpen(true);
-
-    addForm(move(popup));*/
-
-    addForm(make_unique<pmgui::TextEditorForm>("text_editor", "Code a random", "1"));
+    addForm(make_unique<pmgui::TextEditorForm>("text_editor", "Code a random", "1"));*/
     m_showImguiDemoWindow = true;
 }
 

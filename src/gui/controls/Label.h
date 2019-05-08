@@ -6,7 +6,7 @@
 #define PMGUI_LABEL_H
 
 #include "Control.h"
-#include "imgui/imgui.h"
+
 namespace pmgui
 {
     enum class LabelType : unsigned

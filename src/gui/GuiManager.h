@@ -5,12 +5,12 @@
 #ifndef PMGUI_GUIMANAGER_H
 #define PMGUI_GUIMANAGER_H
 
-#include <imgui/imgui.h>
-#include <imgui/imgui_internal.h>
+#include "../imgui/imgui.h"
+#include "../imgui/imgui_internal.h"
 #include "themes/Theme.h"
-#include "imgui-SFML.h"
+#include "../imgui/imgui-SFML.h"
 
-#include "fmt/format.h"
+#include "../fmt/format.h"
 
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/System/Clock.hpp"
@@ -18,7 +18,6 @@
 #include "../EventManager.h"
 
 #include "forms/Form.h"
-#include "controls/GuiFactory.h"
 #include "forms/TextEditorForm.h"
 
 using namespace std;

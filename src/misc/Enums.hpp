@@ -2,11 +2,11 @@
 // Created by robin on 12.08.17.
 //
 
-#ifndef EMU_JUKPMGUI_C2ENUMS_H
-#define EMU_JUKPMGUI_C2ENUMS_H
+#ifndef PMGUI_ENUMS_H
+#define PMGUI_ENUMS_H
 
 #include "EnumBitflags.hpp"
-#include <imgui/imgui.h>
+#include "../imgui/imgui.h"
 
 namespace pmgui
 {

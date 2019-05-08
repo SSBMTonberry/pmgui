@@ -11,7 +11,7 @@
 #include "SFML/Main.hpp"
 #include "../src/gui/forms/Form.h"
 #include "../src/gui/controls/Textbox.h"
-#include "imgui/imgui-SFML.h"
+#include "../src/pmgui.h"
 
 namespace pmgui
 {

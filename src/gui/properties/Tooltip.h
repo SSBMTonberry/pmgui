@@ -6,9 +6,9 @@
 #define PMGUI_TOOLTIP_H
 
 #include <iostream>
-#include <fmt/format.h>
-#include <imgui/imgui.h>
-#include "imgui/imgui-SFML.h"
+#include "../../fmt/format.h"
+#include "../../imgui/imgui.h"
+#include "../../imgui/imgui-SFML.h"
 
 namespace pmgui
 {

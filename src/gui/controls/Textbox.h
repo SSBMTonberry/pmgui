@@ -6,7 +6,7 @@
 #define PMGUI_TEXTBOX_H
 
 #include "Control.h"
-#include "imgui/misc/cpp/imgui_stdlib.h"
+#include "../../imgui/misc/cpp/imgui_stdlib.h"
 
 namespace pmgui
 {

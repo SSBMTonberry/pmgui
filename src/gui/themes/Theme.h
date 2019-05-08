@@ -5,7 +5,7 @@
 #ifndef PMGUI_THEME_H
 #define PMGUI_THEME_H
 
-#include <imgui/imgui.h>
+#include "../../imgui/imgui.h"
 #include <map>
 #include "SFML/Main.hpp"
 namespace pmgui

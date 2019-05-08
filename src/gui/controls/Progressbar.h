@@ -6,7 +6,6 @@
 #define PMGUI_PROGRESSBAR_H
 
 #include "Control.h"
-#include <fmt/format.h>
 namespace pmgui
 {
     class Progressbar : public Control
