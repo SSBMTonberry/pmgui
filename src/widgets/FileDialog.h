@@ -51,20 +51,20 @@ namespace pmgui
 
     enum class DialogType : unsigned
     {
-            OpenDirectory = 0,
-            SaveDirectory = 1,
-            OpenFile = 2,
-            SaveFile = 3
+        OpenDirectory = 0,
+        SaveDirectory = 1,
+        OpenFile = 2,
+        SaveFile = 3
     };
 
     enum class FileTypeMode : unsigned
     {
-            None = 0,
-            EmuFiles = 1,
-            Sprites = 2,
-            Folder = 3,
-            EmuPlaylists = 4,
-            SoundFiles = 5
+        None = 0,
+        EmuFiles = 1,
+        Sprites = 2,
+        Folder = 3,
+        EmuPlaylists = 4,
+        SoundFiles = 5
     };
 
     class FileDialog : public pmgui::Popup
