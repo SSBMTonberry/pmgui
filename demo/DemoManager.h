@@ -40,6 +40,8 @@ namespace pmgui
             Form m_demoForm {"demo_form", "PmGui Demo"};
             Textbox *m_demoText1 = nullptr;
 
+            FileDialog m_fileDialogFile { DialogType::OpenFile, "main_file_dialog_file", "Choose a file", "main_file_dialog_file"};
+
     };
 }
 

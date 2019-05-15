@@ -14,7 +14,8 @@ namespace pmgui
     {
         public:
             FileTypeCollection() = default;
-            FileTypeCollection(std::string name, std::initializer_list<FileType*> filetypes);
+            FileTypeCollection(std::string name, const std::initializer_list<FileType*> &filetypes);
+            FileTypeCollection(std::string name, const std::vector<FileType*> &filetypes);
 
             void setName(const std::string &name);
 

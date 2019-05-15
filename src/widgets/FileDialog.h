@@ -57,15 +57,15 @@ namespace pmgui
         SaveFile = 3
     };
 
-    enum class FileTypeMode : unsigned
-    {
-        None = 0,
-        EmuFiles = 1,
-        Sprites = 2,
-        Folder = 3,
-        EmuPlaylists = 4,
-        SoundFiles = 5
-    };
+    //enum class FileTypeMode : unsigned
+    //{
+    //    None = 0,
+    //    EmuFiles = 1,
+    //    Sprites = 2,
+    //    Folder = 3,
+    //    EmuPlaylists = 4,
+    //    SoundFiles = 5
+    //};
 
     class FileDialog : public pmgui::Popup
     {
@@ -83,7 +83,7 @@ namespace pmgui
             //bool draw() override;
             void handleEvents() override;
 
-            void setFileTypes(const pmgui::FileTypeMode &mode);
+            void setFileTypeCollection(const std::string &name, bool includeAllFilesOption); //(const pmgui::FileTypeMode &mode);
             void setFilename(const std::string &filename);
             void setUseFileIcons(bool useFileIcons);
 

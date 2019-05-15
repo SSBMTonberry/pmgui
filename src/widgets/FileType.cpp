@@ -30,9 +30,9 @@ void pmgui::FileType::setName(const std::string &name)
     m_name = name;
 }
 
-const pmgui::Image &pmgui::FileType::getImage() const
+pmgui::Image *pmgui::FileType::getImage()
 {
-    return m_image;
+    return &m_image;
 }
 
 void pmgui::FileType::setImage(const pmgui::Image &image)

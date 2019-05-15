@@ -23,7 +23,7 @@ namespace pmgui
 
             const std::string &getExtension() const;
             const std::string &getName() const;
-            const Image &getImage() const;
+            Image *getImage();
 
         private:
             std::string m_extension;

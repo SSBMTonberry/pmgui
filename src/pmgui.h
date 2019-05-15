@@ -58,4 +58,7 @@
 #include "misc/Enums.hpp"
 #include "misc/Tools.hpp"
 
+//Widgets
+#include "widgets/FileDialog.h"
+
 #endif //PMGUI_PMGUI_H

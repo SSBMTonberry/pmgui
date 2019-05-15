@@ -5,13 +5,14 @@
 #ifndef PMGUI_FILETABLE_H
 #define PMGUI_FILETABLE_H
 
-#include "../../EmuJukpmguiConfig.h"
+#include "../../PmguiConfig.h"
 #include "../gui/controls/DataTable.h"
 #include "../files_mapper.h"
+#include "FileTypeCollection.h"
 
 #include <map>
-#include <cpplinq.hpp>
-#include <fmt/time.h>
+#include "../cpplinq.hpp"
+#include "../fmt/time.h"
 #include <ctime>
 #include <iostream>
 #include <chrono>
@@ -44,7 +45,7 @@ namespace fs = std::filesystem;
 #endif
 #endif
 
-namespace fm = files_mapper;
+namespace fm = pmgui::files_mapper;
 using namespace cpplinq;
 
 #if MSVC
@@ -61,7 +62,7 @@ namespace pmgui
             FileTable(const std::string &id, const std::string &label, bool useFileIcons = true);
 
             void listFilesByDirectory(const fs::path &path, const fs::path &parentDirectory);
-            std::pair<const unsigned char *, size_t> getFileIcon(const std::string &key);
+            //std::pair<const unsigned char *, size_t> getFileIcon(const std::string &key);
             pmgui::Image *getImgFileIcon(const std::string &key);
 
             void sort();
@@ -70,6 +71,9 @@ namespace pmgui
 
             void resetPathOpeningCall();
             void resetRowChangeCall();
+
+            void addFileType(const FileType &fileType);
+            void createFileTypeCollection(const std::string &name, const std::initializer_list<std::string> &fileExtensions);
 
             void setFileFilter(const std::string &filter);
             void setUseFileIcons(bool useFileIcons);
@@ -96,12 +100,16 @@ namespace pmgui
 #endif
             void onRowMarked(DataRow *row) override;
 
-            const std::string generatePathId(const DataRow &row) const ;
+            const std::string generatePathId(const DataRow &row) const;
 
-            void initializeFilemap();
-            void initializeImgFilemap();
-            std::map<std::string, std::pair<const unsigned char *, size_t>> m_fileMap;
-            std::map<std::string, pmgui::Image> m_imgFileMap;
+            void createDefaultFileTypes();
+            void createDefaultFileTypesCollection();
+
+            //void initializeImgFilemap();
+            std::vector<FileType*> getFileTypesByExtensions(const std::initializer_list<std::string> &fileExtensions);
+
+            //std::map<std::string, std::pair<const unsigned char *, size_t>> m_fileMap;
+            //std::map<std::string, pmgui::Image> m_imgFileMap;
             std::map<std::string, fs::path> m_pathMap;
             std::pair<std::string, bool> m_previousSortAction = {"filename", false}; //first: columnName, second: orderDesc
 
@@ -114,6 +122,9 @@ namespace pmgui
             bool m_useFileIcons = true;
             std::string m_fileFilter = "*.*"; //Shows all as standard
             float m_scaleFactor = 1.f;
+
+            std::vector<FileTypeCollection> m_fileCollections;
+            std::map<std::string, pmgui::FileType> m_fileTypes;
 
             fs::path m_lastOpenedPath;
             fs::path m_pathToOpen;

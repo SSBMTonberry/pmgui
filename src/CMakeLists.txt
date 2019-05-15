@@ -32,6 +32,8 @@ set(SOURCE_FILES gui/controls/Button.cpp gui/controls/Button.h gui/controls/Chec
         gui/forms/MessagePopup.cpp gui/forms/MessagePopup.h gui/forms/Popup.cpp gui/forms/Popup.h
         gui/forms/TextEditorForm.cpp gui/forms/TextEditorForm.h gui/properties/RadioData.cpp gui/properties/RadioData.h
         gui/properties/Tooltip.cpp gui/properties/Tooltip.h gui/themes/Theme.cpp gui/themes/Theme.h
-        gui/TextEditor.cpp gui/TextEditor.h pmgui.h cpplinq.hpp EventManager.h EventManager.cpp gui/GuiManager.h gui/GuiManager.cpp widgets/FileType.cpp widgets/FileType.h widgets/FileTypeCollection.cpp widgets/FileTypeCollection.h)
+        gui/TextEditor.cpp gui/TextEditor.h pmgui.h cpplinq.hpp EventManager.h EventManager.cpp gui/GuiManager.h gui/GuiManager.cpp
+        widgets/FileDialog.h widgets/FileDialog.cpp widgets/FileTable.h widgets/FileTable.cpp
+        widgets/FileType.cpp widgets/FileType.h widgets/FileTypeCollection.cpp widgets/FileTypeCollection.h)
 
 add_library(pmgui STATIC ${SOURCE_FILES} ${IMGUI_SOURCE_FILES} ${FMT_SOURCE_FILES})
