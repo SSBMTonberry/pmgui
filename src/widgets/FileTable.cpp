@@ -150,56 +150,7 @@ void pmgui::FileTable::listFilesByDirectory(const fs::path &path,const fs::path 
     sort();
 }
 
-void pmgui::FileTable::createDefaultFileTypes()
-{
-    addFileType({".as", ".as", pmgui::Image("img_as",fm::gui::filetypes::_ACTIONSCRIPT_PNG, fm::gui::filetypes::_ACTIONSCRIPT_PNG_SIZE)});
-    addFileType({".avi", ".avi", pmgui::Image("img_avi",fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE)});
-    addFileType({".c", ".c", pmgui::Image("img_c",fm::gui::filetypes::_C_PNG, fm::gui::filetypes::_C_PNG_SIZE)});
-    addFileType({".cpp", ".cpp", pmgui::Image("img_cpp",fm::gui::filetypes::_CPP_PNG, fm::gui::filetypes::_CPP_PNG_SIZE)});
-    addFileType({".csv", ".csv", pmgui::Image("img_csv",fm::gui::filetypes::_CSV_PNG, fm::gui::filetypes::_CSV_PNG_SIZE)});
-    addFileType({".flv", ".flv", pmgui::Image("img_flv",fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE)});
-    addFileType({".gif", ".gif", pmgui::Image("img_gif",fm::gui::filetypes::_IMAGE_PNG, fm::gui::filetypes::_IMAGE_PNG_SIZE)});
-    addFileType({".h", ".h", pmgui::Image("img_h",fm::gui::filetypes::_HH_PNG, fm::gui::filetypes::_HH_PNG_SIZE)});
-    addFileType({".hpp", ".hpp", pmgui::Image("img_hpp",fm::gui::filetypes::_HH_PNG, fm::gui::filetypes::_HH_PNG_SIZE)});
-    addFileType({".html", ".html", pmgui::Image("img_html",fm::gui::filetypes::_HTML_PNG, fm::gui::filetypes::_HTML_PNG_SIZE)});
-    addFileType({".js", ".js", pmgui::Image("img_js",fm::gui::filetypes::_JS_PNG, fm::gui::filetypes::_JS_PNG_SIZE)});
-    addFileType({".json", ".json", pmgui::Image("img_json",fm::gui::filetypes::_JSON_PNG, fm::gui::filetypes::_JSON_PNG_SIZE)});
-    addFileType({".jpg", "Joint Photographic Experts Group (*.jpg)", pmgui::Image("img_jpg",fm::gui::filetypes::_IMAGE_PNG, fm::gui::filetypes::_IMAGE_PNG_SIZE)});
-    addFileType({".lua", ".lua", pmgui::Image("img_lua",fm::gui::filetypes::_LUA_PNG, fm::gui::filetypes::_LUA_PNG_SIZE)});
-    addFileType({".log", ".log", pmgui::Image("img_log",fm::gui::filetypes::_LOG_PNG, fm::gui::filetypes::_LOG_PNG_SIZE)});
-    addFileType({".mov", ".mov", pmgui::Image("img_mov",fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE)});
-    addFileType({".mp3", ".mp3", pmgui::Image("img_mp3",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".mp4", ".mp4", pmgui::Image("img_mp4",fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE)});
-    addFileType({".mpeg", ".mpeg", pmgui::Image("img_mpeg",fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE)});
-    addFileType({".ogg", "OGG/Vorbis (*.ogg)", pmgui::Image("img_ogg",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".pdf", ".pdf", pmgui::Image("img_pdf",fm::gui::filetypes::_PDF_PNG, fm::gui::filetypes::_PDF_PNG_SIZE)});
-    addFileType({".pmgui", ".pmgui", pmgui::Image("img_pmgui",fm::gui::misc::_APPLICATION_PNG, fm::gui::misc::_APPLICATION_PNG_SIZE)});
-    addFileType({".png", "Portable Network Graphics (*.png)", pmgui::Image("img_png",fm::gui::filetypes::_IMAGE_PNG, fm::gui::filetypes::_IMAGE_PNG_SIZE)});
-    addFileType({".sh", ".sh", pmgui::Image("img_sh",fm::gui::filetypes::_SHELL_PNG, fm::gui::filetypes::_SHELL_PNG_SIZE)});
-    addFileType({".txt", ".txt", pmgui::Image("img_txt",fm::gui::filetypes::_TEXT_PNG, fm::gui::filetypes::_TEXT_PNG_SIZE)});
-    addFileType({".wav", "Wave (*.wav)", pmgui::Image("img_wav",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".wmv", ".wmv", pmgui::Image("img_wmv",fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE)});
-    addFileType({".xml", ".xml", pmgui::Image("img_xml",fm::gui::filetypes::_XML_PNG, fm::gui::filetypes::_XML_PNG_SIZE)});
-    addFileType({".ay", "ZX Spectrum/Amstrad CPC (*.ay)", pmgui::Image("img_ay",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".gbs", "Nintendo Game Boy (*.gbs)", pmgui::Image("img_gbs",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".gym", "Sega Genesis/Mega Drive (*.gym)", pmgui::Image("img_gym",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".hes", "NEC TurboGrafx-16/PC Engine (*.hes)", pmgui::Image("img_hes",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".kss", "MSX Home Computer/other Z80 systems (*.kss)", pmgui::Image("img_kss",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".nsf", "Nintendo NES/Famicom (*.nsf)", pmgui::Image("img_nsf",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".nsfe", "Nintendo NES/Famicom Extended (*.nsfe)", pmgui::Image("img_nsfe",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".sap", "Atari systems (*.sap)", pmgui::Image("img_sap",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".spc", "Super Nintendo/Super Famicom (*.spc)", pmgui::Image("img_spc",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    addFileType({".vgm", "Videogame Music (*.vgm)", pmgui::Image("img_vgm",fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE)});
-    //Non
-    addFileType({"default", "", pmgui::Image("img_default", fm::gui::filetypes::_BLANK_PNG, fm::gui::filetypes::_BLANK_PNG_SIZE)});
-    addFileType({"directory", "Folder", pmgui::Image("img_directory", fm::gui::folders::blue::_FOLDER_CLOSED_PNG, fm::gui::folders::blue::_FOLDER_CLOSED_PNG_SIZE)});
-}
 
-void pmgui::FileTable::createDefaultFileTypesCollection()
-{
-    createFileTypeCollection("images", {".png", ".jpg", ".jpeg", ".bmp", ".gif" });
-    createFileTypeCollection("music", {".mp3", ".ogg", ".wav"});
-}
 
 //void pmgui::FileTable::initializeImgFilemap()
 //{
@@ -255,13 +206,7 @@ void pmgui::FileTable::createDefaultFileTypesCollection()
 //        return m_fileMap["default"];
 //}
 
-pmgui::Image *pmgui::FileTable::getImgFileIcon(const std::string &key)
-{
-    if(m_fileTypes.count(key) > 0)
-        return m_fileTypes[key].getImage();
-    else
-        return nullptr;
-}
+
 
 
 void pmgui::FileTable::onHeaderColumnClicked(const std::string &id)
@@ -431,30 +376,6 @@ void pmgui::FileTable::setScaleFactor(float scaleFactor)
     m_scaleFactor = scaleFactor;
 }
 
-void pmgui::FileTable::addFileType(const pmgui::FileType &fileType)
-{
-    m_fileTypes[fileType.getExtension()] = fileType;
-}
-
-void pmgui::FileTable::createFileTypeCollection(const std::string &name, const std::initializer_list<std::string> &fileExtensions)
-{
-    std::vector<pmgui::FileType*> fileTypes = getFileTypesByExtensions(fileExtensions);
-    m_fileCollections.emplace_back(name, fileTypes);
-}
-
-std::vector<pmgui::FileType*> pmgui::FileTable::getFileTypesByExtensions(const std::initializer_list<std::string> &fileExtensions)
-{
-    std::vector<pmgui::FileType*> fileTypes;
-    for(const auto &extension : fileExtensions)
-    {
-        for(auto &[extension, fileType] : m_fileTypes)
-        {
-            if(fileType.getExtension() == extension)
-                fileTypes.push_back(&fileType);
-        }
-    }
-    return fileTypes;
-}
 
 #if APPLE
 std::string pmgui::FileTable::getOsxTimeStampString(const fs::path &path)

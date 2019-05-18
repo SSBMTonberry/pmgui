@@ -63,7 +63,7 @@ namespace pmgui
 
             void listFilesByDirectory(const fs::path &path, const fs::path &parentDirectory);
             //std::pair<const unsigned char *, size_t> getFileIcon(const std::string &key);
-            pmgui::Image *getImgFileIcon(const std::string &key);
+            //pmgui::Image *getImgFileIcon(const std::string &key);
 
             void sort();
             void sort(const std::string &columnName, bool sortDesc = false);
@@ -72,8 +72,7 @@ namespace pmgui
             void resetPathOpeningCall();
             void resetRowChangeCall();
 
-            void addFileType(const FileType &fileType);
-            void createFileTypeCollection(const std::string &name, const std::initializer_list<std::string> &fileExtensions);
+
 
             void setFileFilter(const std::string &filter);
             void setUseFileIcons(bool useFileIcons);
@@ -102,11 +101,9 @@ namespace pmgui
 
             const std::string generatePathId(const DataRow &row) const;
 
-            void createDefaultFileTypes();
-            void createDefaultFileTypesCollection();
 
             //void initializeImgFilemap();
-            std::vector<FileType*> getFileTypesByExtensions(const std::initializer_list<std::string> &fileExtensions);
+
 
             //std::map<std::string, std::pair<const unsigned char *, size_t>> m_fileMap;
             //std::map<std::string, pmgui::Image> m_imgFileMap;
@@ -123,8 +120,7 @@ namespace pmgui
             std::string m_fileFilter = "*.*"; //Shows all as standard
             float m_scaleFactor = 1.f;
 
-            std::vector<FileTypeCollection> m_fileCollections;
-            std::map<std::string, pmgui::FileType> m_fileTypes;
+
 
             fs::path m_lastOpenedPath;
             fs::path m_pathToOpen;

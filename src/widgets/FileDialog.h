@@ -83,9 +83,13 @@ namespace pmgui
             //bool draw() override;
             void handleEvents() override;
 
+            void addFileType(const FileType &fileType);
+            void createFileTypeCollection(const std::string &name, const std::initializer_list<std::string> &fileExtensions);
+
             void setFileTypeCollection(const std::string &name, bool includeAllFilesOption); //(const pmgui::FileTypeMode &mode);
             void setFilename(const std::string &filename);
             void setUseFileIcons(bool useFileIcons);
+            pmgui::Image *getImgFileIcon(const std::string &key);
 
             void registerOnFileChosenCallback(const func_path &cb);
             void registerOnCancelCallback(const func_void &cb);
@@ -103,12 +107,19 @@ namespace pmgui
             void initializePopups();
             void handleFileChosen();
 
+            void createDefaultFileTypes();
+            void createDefaultFileTypesCollection();
+            std::vector<FileType*> getFileTypesByExtensions(const std::initializer_list<std::string> &fileExtensions);
+
             bool customDraw() override;
 
             //void getHomeEnvironmentVariable();
             std::string getOkBtnText() const;
 
             unordered_map<string, string> *m_environmentMap = nullptr;
+
+            std::vector<FileTypeCollection> m_fileCollections;
+            std::map<std::string, pmgui::FileType> m_fileTypes;
 
             FileTable m_fileTable {"filetable", "Filetable!"};
 
