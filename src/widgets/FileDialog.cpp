@@ -31,7 +31,8 @@ void pmgui::FileDialog::initialize(const std::optional<sf::Vector2<int>> &positi
 
     //registerOnFileChosenCallback(std::bind(&ProgramManager::onChosenNewProject, this, std::placeholders::_1));
     initializePopups();
-
+    createDefaultFileTypes();
+    createDefaultFileTypesCollection();
     createLayout();
     update();
 }
