@@ -27,6 +27,7 @@ void pmgui::FileDialog::initialize(const std::optional<sf::Vector2<int>> &positi
     setFormFlags(pmgui::FormFlags::NoResize | pmgui::FormFlags::NoCollapse | pmgui::FormFlags::AlwaysAutoResize);// | pmgui::FormFlags::NoScrollbar);
 
     setPath(fs::current_path());
+    m_fileTable.setFileTypes(&m_fileTypes);
 
     //registerOnFileChosenCallback(std::bind(&ProgramManager::onChosenNewProject, this, std::placeholders::_1));
     initializePopups();
@@ -389,15 +390,24 @@ void pmgui::FileDialog::setFileTypeCollection(const std::string &name, bool incl
 
     m_fileTypeCombo.clear();
 
-    #error Find the collection
+    //#error Find the collection
 
-    if(includeAllFilesOption)
+    auto collection = std::find_if(m_fileCollections.begin(), m_fileCollections.end(), [&](const FileTypeCollection &collection) { return collection.getName() == name; });
+
+    if(collection != m_fileCollections.end())
     {
-        auto all = std::find_if(m_fileTypes.begin(), m_fileTypes.end(), [](const FileType &fileType) { return fileType.getExtension() == "*.*"; });
-        if(all != m_fileTypes.end())
-            m_fileTypeCombo.addValue(all->second.getName());
-    }
+        for(auto const &filetype : collection->getFileTypes())
+        {
+            m_fileTypeCombo.addValue(filetype->getName());
+        }
 
+        if (includeAllFilesOption)
+        {
+            auto all = std::find_if(m_fileTypes.begin(), m_fileTypes.end(), [](const auto &fileType) { return fileType.second.getExtension() == "*.*"; });
+            if (all != m_fileTypes.end())
+                m_fileTypeCombo.addValue(all->second.getName());
+        }
+    }
 
 
     //switch(mode)

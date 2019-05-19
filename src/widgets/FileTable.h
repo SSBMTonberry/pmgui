@@ -72,7 +72,7 @@ namespace pmgui
             void resetPathOpeningCall();
             void resetRowChangeCall();
 
-
+            void setFileTypes(std::map<std::string, pmgui::FileType> *fileTypes);
 
             void setFileFilter(const std::string &filter);
             void setUseFileIcons(bool useFileIcons);
@@ -86,6 +86,7 @@ namespace pmgui
             bool useFileIcons() const;
             bool canCallRowChangeEvent() const;
             float getScaleFactor() const;
+            pmgui::Image *getImgFileIcon(const std::string &key);
 
         protected:
             void create();
@@ -107,8 +108,10 @@ namespace pmgui
 
             //std::map<std::string, std::pair<const unsigned char *, size_t>> m_fileMap;
             //std::map<std::string, pmgui::Image> m_imgFileMap;
+            std::map<std::string, pmgui::FileType> *m_fileTypes;
             std::map<std::string, fs::path> m_pathMap;
             std::pair<std::string, bool> m_previousSortAction = {"filename", false}; //first: columnName, second: orderDesc
+            FileType m_defaultFiletype = {"", "default"};
 
             std::string m_selectedFile = "";
 

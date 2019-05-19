@@ -11,8 +11,8 @@ pmgui::FileTable::FileTable(const std::string &id, const std::string &label, boo
 
 void pmgui::FileTable::create()
 {
-    initializeFilemap();
-    initializeImgFilemap();
+    //initializeFilemap();
+    //initializeImgFilemap();
     addColumn("filename", "Filename");
     addColumn("size", "Size");
     addColumn("type", "Type");
@@ -374,6 +374,19 @@ float pmgui::FileTable::getScaleFactor() const
 void pmgui::FileTable::setScaleFactor(float scaleFactor)
 {
     m_scaleFactor = scaleFactor;
+}
+
+void pmgui::FileTable::setFileTypes(std::map<std::string, pmgui::FileType> *fileTypes)
+{
+    m_fileTypes = fileTypes;
+}
+
+pmgui::Image *pmgui::FileTable::getImgFileIcon(const std::string &key)
+{
+    if(m_fileTypes != nullptr && m_fileTypes->count(key) > 0)
+        return m_fileTypes->at(key).getImage();
+
+    return m_defaultFiletype.getImage();
 }
 
 
