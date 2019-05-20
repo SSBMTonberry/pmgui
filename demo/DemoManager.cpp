@@ -58,6 +58,7 @@ void pmgui::DemoManager::update()
 void pmgui::DemoManager::handleEvents()
 {
     m_demoForm.handleEvents();
+    m_fileDialogFile.handleEvents();
 }
 
 void pmgui::DemoManager::draw()
@@ -65,6 +66,7 @@ void pmgui::DemoManager::draw()
     ImGui::ShowDemoWindow();
 
     m_demoForm.draw();
+    m_fileDialogFile.draw();
     ImGui::SFML::Render(m_window);
 }
 
@@ -72,4 +74,7 @@ void pmgui::DemoManager::createDemo()
 {
     m_demoText1 = m_demoForm.create<pmgui::Textbox>("demo_text_1", "Demo text 1");
     m_demoText1->setValue("Hello there!");
+
+    m_fileDialogFile.setFileTypeCollection("images", true);
+    m_fileDialogFile.setOpen(true);
 }

@@ -394,125 +394,45 @@ void pmgui::FileDialog::setFileTypeCollection(const std::string &name, bool incl
     //#error Find the collection
 
     auto collection = std::find_if(m_fileCollections.begin(), m_fileCollections.end(), [&](const FileTypeCollection &collection) { return collection.getName() == name; });
-
+    bool valueIsSet = false;
     if(collection != m_fileCollections.end())
     {
         for(auto const &filetype : collection->getFileTypes())
         {
             m_fileTypeCombo.addValue(filetype->getName());
-        }
-
-        if (includeAllFilesOption)
-        {
-            auto all = std::find_if(m_fileTypes.begin(), m_fileTypes.end(), [](const auto &fileType) { return fileType.second.getExtension() == "*.*"; });
-            if (all != m_fileTypes.end())
-                m_fileTypeCombo.addValue(all->second.getName());
+            m_filetypeFilter[filetype->getName()] = filetype->getExtension();
+            if(!valueIsSet)
+            {
+                m_fileTypeCombo.setValue(filetype->getName());
+                valueIsSet = true;
+            }
         }
     }
 
-
-    //switch(mode)
-    //{
-    //    case FileTypeMode::None:
-    //        m_fileTypeCombo.clear();
-    //        break;
-//
-    //    case FileTypeMode::EmuFiles:
-    //    {
-    //        m_fileTypeCombo.clear();
-    //        m_fileTypeCombo.addValue("All (*.*)");
-    //        m_fileTypeCombo.addValue("ZX Spectrum/Amstrad CPC (*.ay)");
-    //        m_fileTypeCombo.addValue("Nintendo Game Boy (*.gbs)");
-    //        m_fileTypeCombo.addValue("Sega Genesis/Mega Drive (*.gym)");
-    //        m_fileTypeCombo.addValue("NEC TurboGrafx-16/PC Engine (*.hes)");
-    //        m_fileTypeCombo.addValue("MSX Home Computer/other Z80 systems (*.kss)");
-    //        m_fileTypeCombo.addValue("Nintendo NES/Famicom (*.nsf)");
-    //        m_fileTypeCombo.addValue("Nintendo NES/Famicom Extended (*.nsfe)");
-    //        m_fileTypeCombo.addValue("Atari systems (*.sap)");
-    //        m_fileTypeCombo.addValue("Super Nintendo/Super Famicom (*.spc)");
-    //        m_fileTypeCombo.addValue("Videogame Music (*.vgm)");
-//
-    //        m_filetypeFilter["All (*.*)"] = "*.*";
-    //        m_filetypeFilter["ZX Spectrum/Amstrad CPC (*.ay)"] = ".ay";
-    //        m_filetypeFilter["Nintendo Game Boy (*.gbs)"] = ".gbs";
-    //        m_filetypeFilter["Sega Genesis/Mega Drive (*.gym)"] = ".gym";
-    //        m_filetypeFilter["NEC TurboGrafx-16/PC Engine (*.hes)"] = ".hes";
-    //        m_filetypeFilter["MSX Home Computer/other Z80 systems (*.kss)"] = ".kss";
-    //        m_filetypeFilter["Nintendo NES/Famicom (*.nsf)"] = ".nsf";
-    //        m_filetypeFilter["Nintendo NES/Famicom Extended (*.nsfe)"] = ".nsfe";
-    //        m_filetypeFilter["Atari systems (*.sap)"] = ".sap";
-    //        m_filetypeFilter["Super Nintendo/Super Famicom (*.spc)"] = ".spc";
-    //        m_filetypeFilter["Videogame Music (*.vgm)"] = ".vgm";
-    //        m_fileTypeCombo.setValue(0);
-    //        std::string filter = m_filetypeFilter[m_fileTypeCombo.getValue()];
-    //        m_fileTable.setFileFilter(filter);
-    //    }
-    //        break;
-//
-    //    case FileTypeMode::Sprites:
-    //    {
-    //        m_fileTypeCombo.clear();
-    //        m_fileTypeCombo.addValue("Portable Network Graphics (*.png)");
-    //        m_fileTypeCombo.addValue("Joint Photographic Experts Group (*.jpg)");
-    //        m_fileTypeCombo.addValue("Bitmap (*.bmp)");
-    //        m_fileTypeCombo.addValue("All (*.*)");
-    //        m_filetypeFilter["Portable Network Graphics (*.png)"] = ".png";
-    //        m_filetypeFilter["Joint Photographic Experts Group (*.jpg)"] = ".jpg";
-    //        m_filetypeFilter["Bitmap (*.bmp)"] = ".bmp";
-    //        m_filetypeFilter["All (*.*)"] = "*.*";
-    //        m_fileTypeCombo.setValue(0);
-    //        std::string filter = m_filetypeFilter[m_fileTypeCombo.getValue()];
-    //        m_fileTable.setFileFilter(filter);
-    //    }
-    //        break;
-//
-    //    case FileTypeMode::Folder:
-    //    {
-    //        m_fileTypeCombo.clear();
-    //        m_fileTypeCombo.addValue("Folder");
-    //        m_filetypeFilter["Folder"] = "folder";
-    //        m_fileTypeCombo.setValue(0);
-    //        std::string filter = m_filetypeFilter[m_fileTypeCombo.getValue()];
-    //        m_fileTable.setFileFilter(filter);
-    //    }
-    //        break;
-//
-    //    case FileTypeMode::EmuPlaylists:
-    //    {
-    //        m_fileTypeCombo.clear();
-    //        m_fileTypeCombo.addValue("Emu Playlist (*.epl)");
-    //        m_filetypeFilter["Emu Playlist (*.epl)"] = ".epl";
-    //        m_fileTypeCombo.setValue(0);
-    //        std::string filter = m_filetypeFilter[m_fileTypeCombo.getValue()];
-    //        m_fileTable.setFileFilter(filter);
-    //    }
-    //        break;
-//
-    //    case FileTypeMode::SoundFiles:
-    //    {
-    //        m_fileTypeCombo.clear();
-    //        m_fileTypeCombo.addValue("OGG/Vorbis (*.ogg)");
-    //        m_fileTypeCombo.addValue("FLAC (Free Lossless Audio Codec) (*.FLAC)");
-    //        m_fileTypeCombo.addValue("Wave (*.wav)");
-    //        m_filetypeFilter["OGG/Vorbis (*.ogg)"] = ".ogg";
-    //        m_filetypeFilter["FLAC (Free Lossless Audio Codec) (*.FLAC)"] = ".FLAC";
-    //        m_filetypeFilter["Wave (*.wav)"] = ".wav";
-    //        m_fileTypeCombo.setValue(0);
-    //        std::string filter = m_filetypeFilter[m_fileTypeCombo.getValue()];
-    //        m_fileTable.setFileFilter(filter);
-    //    }
-    //        break;
-    //}
+    if (includeAllFilesOption)
+    {
+        auto all = std::find_if(m_fileTypes.begin(), m_fileTypes.end(), [](const auto &fileType) { return fileType.second.getExtension() == "*.*"; });
+        if (all != m_fileTypes.end())
+        {
+            m_fileTypeCombo.addValue(all->second.getName());
+            m_filetypeFilter[all->second.getName()] = all->second.getExtension();
+            if(!valueIsSet)
+            {
+                m_fileTypeCombo.setValue(all->second.getName());
+                valueIsSet = true;
+            }
+        }
+    }
 }
 
 std::vector<pmgui::FileType*> pmgui::FileDialog::getFileTypesByExtensions(const std::initializer_list<std::string> &fileExtensions)
 {
     std::vector<pmgui::FileType*> fileTypes;
-    for(const auto &extension : fileExtensions)
+    for(const auto &fileext : fileExtensions)
     {
         for(auto &[extension, fileType] : m_fileTypes)
         {
-            if(fileType.getExtension() == extension)
+            if(fileType.getExtension() == fileext)
                 fileTypes.push_back(&fileType);
         }
     }

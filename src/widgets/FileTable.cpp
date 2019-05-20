@@ -151,64 +151,6 @@ void pmgui::FileTable::listFilesByDirectory(const fs::path &path,const fs::path 
 }
 
 
-
-//void pmgui::FileTable::initializeImgFilemap()
-//{
-    //m_imgFileMap[".as"] = {".as", fm::gui::filetypes::_ACTIONSCRIPT_PNG, fm::gui::filetypes::_ACTIONSCRIPT_PNG_SIZE};
-    //m_imgFileMap[".avi"] = {".avi", fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE};
-    //m_imgFileMap[".c"] = {".c", fm::gui::filetypes::_C_PNG, fm::gui::filetypes::_C_PNG_SIZE};
-    //m_imgFileMap[".cpp"] = {".cpp", fm::gui::filetypes::_CPP_PNG, fm::gui::filetypes::_CPP_PNG_SIZE};
-    //m_imgFileMap[".csv"] = {".csv", fm::gui::filetypes::_CSV_PNG, fm::gui::filetypes::_CSV_PNG_SIZE};
-    //m_imgFileMap[".flv"] = {".flv", fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE};
-    //m_imgFileMap[".gif"] = {".gif", fm::gui::filetypes::_IMAGE_PNG, fm::gui::filetypes::_IMAGE_PNG_SIZE};
-    //m_imgFileMap[".h"] = {".h", fm::gui::filetypes::_HH_PNG, fm::gui::filetypes::_HH_PNG_SIZE};
-    //m_imgFileMap[".hpp"] = {".hpp", fm::gui::filetypes::_HH_PNG, fm::gui::filetypes::_HH_PNG_SIZE};
-    //m_imgFileMap[".html"] = {".html", fm::gui::filetypes::_HTML_PNG, fm::gui::filetypes::_HTML_PNG_SIZE};
-    //m_imgFileMap[".js"] = {".js", fm::gui::filetypes::_JS_PNG, fm::gui::filetypes::_JS_PNG_SIZE};
-    //m_imgFileMap[".json"] = {".json", fm::gui::filetypes::_JSON_PNG, fm::gui::filetypes::_JSON_PNG_SIZE};
-    //m_imgFileMap[".jpg"] = {".jpg", fm::gui::filetypes::_IMAGE_PNG, fm::gui::filetypes::_IMAGE_PNG_SIZE};
-    //m_imgFileMap[".lua"] = {".lua", fm::gui::filetypes::_LUA_PNG, fm::gui::filetypes::_LUA_PNG_SIZE};
-    //m_imgFileMap[".log"] = {".log", fm::gui::filetypes::_LOG_PNG, fm::gui::filetypes::_LOG_PNG_SIZE};
-    //m_imgFileMap[".mov"] = {".mov", fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE};
-    //m_imgFileMap[".mp3"] = {".mp3", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".mp4"] = {".mp4", fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE};
-    //m_imgFileMap[".mpeg"] = {".mpeg", fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE};
-    //m_imgFileMap[".ogg"] = {".ogg", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".pdf"] = {".pdf", fm::gui::filetypes::_PDF_PNG, fm::gui::filetypes::_PDF_PNG_SIZE};
-    //m_imgFileMap[".pmgui"] = {".pmgui", fm::gui::misc::_APPLICATION_PNG, fm::gui::misc::_APPLICATION_PNG_SIZE};
-    //m_imgFileMap[".png"] = {".png", fm::gui::filetypes::_IMAGE_PNG, fm::gui::filetypes::_IMAGE_PNG_SIZE};
-    //m_imgFileMap[".sh"] = {".sh", fm::gui::filetypes::_SHELL_PNG, fm::gui::filetypes::_SHELL_PNG_SIZE};
-    //m_imgFileMap[".txt"] = {".txt", fm::gui::filetypes::_TEXT_PNG, fm::gui::filetypes::_TEXT_PNG_SIZE};
-    //m_imgFileMap[".wav"] = {".wav", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".wmv"] = {".wmv", fm::gui::filetypes::_VIDEO_PNG, fm::gui::filetypes::_VIDEO_PNG_SIZE};
-    //m_imgFileMap[".xml"] = {".xml", fm::gui::filetypes::_XML_PNG, fm::gui::filetypes::_XML_PNG_SIZE};
-    //m_imgFileMap[".ay"] = {".ay", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".gbs"] = {".gbs", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".gym"] = {".gym", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".hes"] = {".hes", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".kss"] = {".kss", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".nsf"] = {".nsf", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".nsfe"] = {".nsfe", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".sap"] = {".sap", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".spc"] = {".spc", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".vgm"] = {".vgm", fm::gui::filetypes::_AUDIO_PNG, fm::gui::filetypes::_AUDIO_PNG_SIZE};
-    //m_imgFileMap[".epl"] = {".epl", fm::gui::actions::_QUICKLIST_PNG, fm::gui::actions::_QUICKLIST_PNG_SIZE};
-    ////Non
-    //m_imgFileMap["default"] = {"default", fm::gui::filetypes::_BLANK_PNG, fm::gui::filetypes::_BLANK_PNG_SIZE};
-    //m_imgFileMap["directory"] = {"directory", fm::gui::folders::blue::_FOLDER_CLOSED_PNG, fm::gui::folders::blue::_FOLDER_CLOSED_PNG_SIZE};
-//}
-
-//std::pair<const unsigned char *, size_t> pmgui::FileTable::getFileIcon(const std::string &key)
-//{
-//    if(m_fileTypes.count(key) > 0)
-//        return m_fileMap[key];
-//    else
-//        return m_fileMap["default"];
-//}
-
-
-
-
 void pmgui::FileTable::onHeaderColumnClicked(const std::string &id)
 {
     if(id == "filename" || id == "type")
