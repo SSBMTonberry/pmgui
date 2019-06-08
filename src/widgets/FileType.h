@@ -14,8 +14,8 @@ namespace pmgui
     {
         public:
             FileType() = default;
-            FileType(std::string extension, std::string name, const Image &img = Image("filetype_img", files_mapper::gui::filetypes::_BLANK_PNG,
-                                                                                                       files_mapper::gui::filetypes::_BLANK_PNG_SIZE));
+            FileType(std::string extension, std::string name, const Image &img = Image("filetype_img", pmgui_files_mapper::gui::filetypes::_BLANK_PNG,
+                                                                                                       pmgui_files_mapper::gui::filetypes::_BLANK_PNG_SIZE));
 
             void setExtension(const std::string &extension);
             void setName(const std::string &name);
@@ -28,7 +28,7 @@ namespace pmgui
         private:
             std::string m_extension;
             std::string m_name;
-            Image m_image; //{"filetype_img", files_mapper::gui::filetypes::_BLANK_PNG, files_mapper::gui::filetypes::_BLANK_PNG_SIZE};
+            Image m_image; //{"filetype_img", pmgui_files_mapper::gui::filetypes::_BLANK_PNG, pmgui_files_mapper::gui::filetypes::_BLANK_PNG_SIZE};
     };
 }
 

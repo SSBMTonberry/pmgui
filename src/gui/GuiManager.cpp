@@ -285,7 +285,7 @@ void pmgui::GuiManager::addTestForm()
     datatable->addColumn("crønsj", "Crønsj");
 
     DataRow *newrow1 = datatable->newRow();
-    newrow1->setImage("img", files::folders::blue::_FOLDER_OPENED_PNG, files::folders::blue::_FOLDER_OPENED_PNG_SIZE);
+    newrow1->setImage("img", pmgui_files::folders::blue::_FOLDER_OPENED_PNG, pmgui_files::folders::blue::_FOLDER_OPENED_PNG_SIZE);
     newrow1->setValue("live", "Kreeeem");
     newrow1->setValue("cargo", "Kjør biiil");
     newrow1->setValue("lynsj", "Svosh!");

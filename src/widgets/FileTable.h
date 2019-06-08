@@ -11,7 +11,7 @@
 #include "FileTypeCollection.h"
 
 #include <map>
-#include "../cpplinq.hpp"
+#include "../managers/cpplinq.hpp"
 #include "../fmt/time.h"
 #include <ctime>
 #include <iostream>
@@ -45,7 +45,7 @@ namespace fs = std::filesystem;
 #endif
 #endif
 
-namespace fm = pmgui::files_mapper;
+namespace fm = pmgui_files_mapper;
 using namespace cpplinq;
 
 #if MSVC

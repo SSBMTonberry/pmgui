@@ -15,7 +15,7 @@
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/System/Clock.hpp"
 #include "SFML/Window/Event.hpp"
-#include "../EventManager.h"
+#include "../managers/EventManager.h"
 
 #include "forms/Form.h"
 #include "forms/TextEditorForm.h"

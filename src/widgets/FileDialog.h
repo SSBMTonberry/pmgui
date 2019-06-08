@@ -42,7 +42,7 @@ namespace fs = std::experimental::filesystem;
 
 using namespace std;
 using namespace pmgui;
-namespace fm = files_mapper;
+namespace fm = pmgui_files_mapper;
 
 namespace pmgui
 {
@@ -137,7 +137,7 @@ namespace pmgui
 
             pmgui::Label m_upperLabel {"upper_label", "", "Path: "};
             pmgui::Textbox m_filepathtext {"filepathtext", "filepath", 0};//MAX_FILE_PATH_LENGTH};
-            pmgui::ImageButton m_refreshbtn {"refresh_img", files_mapper::gui::actions::_REFRESH_PNG, files_mapper::gui::actions::_REFRESH_PNG_SIZE};
+            pmgui::ImageButton m_refreshbtn {"refresh_img", pmgui_files_mapper::gui::actions::_REFRESH_PNG, pmgui_files_mapper::gui::actions::_REFRESH_PNG_SIZE};
             pmgui::Label m_filenameLabel {"file_name_lbl", "", "File name: "};
             pmgui::Label m_filetypeLabel {"file_type_lbl", "", "File type: "};
             pmgui::Textbox m_filenametext {"file_name_text", "File name text", 0};//50};
