@@ -34,7 +34,7 @@ namespace fs = std::experimental::filesystem;
 #include "../gui/forms/Popup.h"
 #include "../gui/controls/ImageButton.h"
 #include "FileTable.h"
-#include "../files_mapper.h"
+#include "../pmgui_files/files_mapper.h"
 #include <map>
 #include "../gui/forms/MessagePopup.h"
 #include "../gui/controls/Combobox.h"

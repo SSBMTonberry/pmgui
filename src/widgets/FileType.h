@@ -7,7 +7,7 @@
 
 #include <string>
 #include "../gui/controls/Image.h"
-#include "../files_mapper.h"
+#include "../pmgui_files/files_mapper.h"
 namespace pmgui
 {
     class FileType

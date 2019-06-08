@@ -7,7 +7,7 @@
 
 #include "../../PmguiConfig.h"
 #include "../gui/controls/DataTable.h"
-#include "../files_mapper.h"
+#include "../pmgui_files/files_mapper.h"
 #include "FileTypeCollection.h"
 
 #include <map>
