@@ -24,6 +24,8 @@ namespace pmgui
             template <typename T, typename... Args>
             T * create(Args &&... args);
 
+            void clear();
+
             void add(std::unique_ptr<pmgui::Control> control);
             void addReference(pmgui::Control *ref);
             //void update(); //not used, for now
@@ -57,6 +59,8 @@ namespace pmgui
             T * getControl(const std::string &id);
             template <typename T>
             T * getControlReference(const std::string &id);
+
+            std::vector<std::unique_ptr<Control>> *getControls();
 
             bool isOpen() const;
             bool isVisible() const;

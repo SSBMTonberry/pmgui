@@ -225,3 +225,14 @@ void pmgui::Form::setScaleFactor(float scaleFactor)
     m_positionHasBeenChanged = true;
 }
 
+std::vector<std::unique_ptr<pmgui::Control>> *pmgui::Form::getControls()
+{
+    return &m_controls;
+}
+
+void pmgui::Form::clear()
+{
+    m_controls.clear();
+    m_controlRefs.clear();
+}
+
