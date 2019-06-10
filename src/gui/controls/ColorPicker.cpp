@@ -17,11 +17,13 @@ bool pmgui::ColorPicker::process()
     bool valueChanged = false;
     if(Control::process())
     {
+        pushWidth();
         if (processByPickerType())
         {
             setColor(m_values);
             valueChanged = true;
         }
+        popWidth();
     }
 
     return valueChanged;

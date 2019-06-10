@@ -19,6 +19,7 @@ bool pmgui::TreeNode::process()
         switch(m_nodeType)
         {
             case NodeType::CollapsingHeader:
+                pushWidth();
                 if(ImGui::CollapsingHeader(m_label.c_str()))
                 {
                     ImGui::PushID(m_label.c_str());
@@ -38,9 +39,11 @@ bool pmgui::TreeNode::process()
                     }
                     ImGui::PopID();
                 }
+                popWidth();
                 break;
 
             case NodeType::TreeNode:
+                pushWidth();
                 if(ImGui::TreeNode(m_label.c_str()))
                 {
                     for (const auto &item : m_controls)
@@ -59,6 +62,7 @@ bool pmgui::TreeNode::process()
                     }
                     ImGui::TreePop();
                 }
+                popWidth();
                 break;
         }
     }

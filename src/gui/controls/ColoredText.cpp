@@ -26,7 +26,9 @@ bool pmgui::ColoredText::process()
     if(Control::process())
     {
         ImGui::PushStyleColor(0, m_color);
+        pushWidth();
         ImGui::Text(m_label.c_str());
+        popWidth();
         ImGui::PopStyleColor(1);
         return true;
     }

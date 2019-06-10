@@ -119,3 +119,32 @@ void pmgui::Control::setSpacing(float spacing)
     m_spacing = spacing;
 }
 
+float pmgui::Control::getWidth() const
+{
+    return m_width;
+}
+
+void pmgui::Control::setWidth(float width)
+{
+    m_width = width;
+}
+
+
+
+/*!
+ * Pushes width to item if width is defined as 1 or greater (Must remember to use pop width after control to activate)
+ */
+void pmgui::Control::pushWidth()
+{
+    if(m_width >= 1.f)
+        ImGui::PushItemWidth(m_width);
+}
+
+/*!
+ * Pops width to item if width is defined as 1 or greater (must be called after a pushWidth)
+ */
+void pmgui::Control::popWidth()
+{
+    if(m_width >= 1.f)
+        ImGui::PopItemWidth();
+}

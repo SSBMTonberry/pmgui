@@ -74,6 +74,8 @@ bool pmgui::Textbox::process()
 
         if(!m_hasLabel && !m_disablePushItemWidth)
             ImGui::PushItemWidth(-1);
+        else
+            pushWidth();
 
         std::string id;
         if(m_imguiId > -1)
@@ -112,6 +114,8 @@ bool pmgui::Textbox::process()
         
         if(!m_hasLabel && !m_disablePushItemWidth)
             ImGui::PopItemWidth();
+        else
+            popWidth();
 
         if(m_size > 0)
             m_text = buf.get();

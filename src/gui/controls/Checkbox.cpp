@@ -30,8 +30,9 @@ bool pmgui::Checkbox::process()
 {
     if(Control::process())
     {
+        pushWidth();
         bool action = ImGui::Checkbox(m_label.c_str(), &m_isChecked);
-
+        popWidth();
         if(ImGui::IsItemHovered() && m_tooltip.has_value())
             m_tooltip->show();
 

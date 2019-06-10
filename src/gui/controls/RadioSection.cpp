@@ -28,7 +28,9 @@ bool pmgui::RadioSection::process()
         {
             bool sameLine = (!m_isHorizontal) ? false : isSameLine(i);
 
+            pushWidth();
             bool action = ImGui::RadioButton(item.getLabel().c_str(), &m_chosenItem, item.getId());
+            popWidth();
 
             if(action)
                 anythingPressed = true;

@@ -24,11 +24,13 @@ bool pmgui::DragFloat::process()
     bool isChanged = false;
     if(Control::process())
     {
+        pushWidth();
         if(processDrag())
         {
             performValueValidation();
             isChanged = true;
         }
+        popWidth();
     }
 
     return isChanged;

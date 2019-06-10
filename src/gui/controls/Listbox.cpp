@@ -24,6 +24,8 @@ bool pmgui::Listbox::process()
         //auto localItems = getLocalItems();
         if(!m_hasLabel)
             ImGui::PushItemWidth(-1);
+        else
+            pushWidth();
 
         ImGui::ListBoxHeader(m_label.c_str(), m_itemSpace, m_heightInItems);
         bool anythingPressed = false;
@@ -42,6 +44,8 @@ bool pmgui::Listbox::process()
 
         if(!m_hasLabel)
             ImGui::PopItemWidth();
+        else
+            popWidth();
 
         return anythingPressed;
     }

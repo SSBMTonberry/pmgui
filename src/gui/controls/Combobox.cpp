@@ -28,6 +28,8 @@ bool pmgui::Combobox::process()
         m_valueHasBeenChosen = false;
         if(!m_hasLabel && !m_disablePushItemWidth)
             ImGui::PushItemWidth(-1);
+        else
+            pushWidth();
 
         std::string id = (!m_hasLabel && m_disablePushItemWidth) ? fmt::format("###{0}", m_id) : m_label;
 
@@ -50,6 +52,8 @@ bool pmgui::Combobox::process()
 
         if(!m_hasLabel && !m_disablePushItemWidth)
             ImGui::PopItemWidth();
+        else
+            popWidth();
 
         if (popColors && !m_useDefaultColor)
         {

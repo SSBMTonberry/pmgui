@@ -30,10 +30,12 @@ bool pmgui::SliderInt::process()
     bool isChanged = false;
     if(Control::process())
     {
+        pushWidth();
         if(processSlider())
         {
             isChanged = true;
         }
+        popWidth();
     }
 
     return isChanged;

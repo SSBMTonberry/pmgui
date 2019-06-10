@@ -27,8 +27,9 @@ bool pmgui::TreeList::process()
             m_eraseItems.clear();
             //SystemLog::get()->addDebug(fmt::format("Erased {0} from {1} ({2} items)", erasedCount, getId(), m_items.size()));
         }
+        pushWidth();
         m_isOpen = (m_hasParentNode) ? ImGui::TreeNode(m_label.c_str()) : true;
-
+        popWidth();
         if(m_isOpen)
         {
             processMouseEvents();

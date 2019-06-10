@@ -34,7 +34,9 @@ bool pmgui::Progressbar::process()
     {
         m_title = fmt::format(m_label, m_currentProgress, m_maximum);
         float progress = m_currentProgress / m_maximum;
+        pushWidth();
         ImGui::ProgressBar(progress, m_size, m_title.c_str());
+        popWidth();
 
         return true;
     }

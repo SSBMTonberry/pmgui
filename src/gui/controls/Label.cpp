@@ -53,17 +53,23 @@ bool pmgui::Label::process()
 
         if(m_labelType == LabelType::OnlyLabel)
         {
+            pushWidth();
             ImGui::Text(m_label.c_str());
+            popWidth();
         }
         else
         {
             if (!m_hasTitle)
                 ImGui::PushItemWidth(-1);
+            else
+                pushWidth();
 
             ImGui::LabelText(m_label.c_str(), m_text.c_str());
 
             if (!m_hasTitle)
                 ImGui::PopItemWidth();
+            else
+                popWidth();
         }
 
         if (popColors && !m_useDefaultColor)

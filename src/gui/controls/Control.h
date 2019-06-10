@@ -75,6 +75,7 @@ namespace pmgui
             void setTooltip(const std::optional<Tooltip> &tooltip);
             void setIsVisible(bool isVisible);
             void setSpacing(float spacing);
+            void setWidth(float width);
 
             void createBasicTooltip(const std::string &text);
 
@@ -87,10 +88,12 @@ namespace pmgui
             const std::string &getLabel() const;
             ControlType getType() const;
             float getSpacing() const;
+            float getWidth() const;
 
         protected:
             virtual void assignColors();
-
+            void pushWidth();
+            void popWidth();
             bool m_isVisible = true;
 
             std::string m_id;
@@ -102,6 +105,7 @@ namespace pmgui
             bool m_colorIsChanged = false;
             bool m_useDefaultColor = false; //Forces default color set by the theme
             bool m_putOnSameLine = false;
+            float m_width = 0.f; //RBP - New 2019-06-10 - Used to force a item width if value is above 0;
     };
 }
 

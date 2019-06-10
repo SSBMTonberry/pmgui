@@ -36,12 +36,13 @@ bool pmgui::InputFloat::process()
     bool isChanged = false;
     if(Control::process())
     {
+        pushWidth();
         if(ImGui::InputFloat(m_label.c_str(), &m_value, m_step, m_stepFast))
         {
             performValueValidation();
             isChanged = true;
         }
-
+        popWidth();
     }
 
     return isChanged;

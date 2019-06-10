@@ -17,9 +17,10 @@ bool pmgui::Column::process()
     {
         for(const auto &item : m_items)
         {
+            pushWidth();
             if(item->process())
                 anyItemActivated = true;
-
+            popWidth();
         }
     }
     return anyItemActivated;
