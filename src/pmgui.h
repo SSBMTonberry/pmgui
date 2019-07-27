@@ -58,6 +58,18 @@
 #include "misc/Enums.hpp"
 #include "misc/Tools.hpp"
 
+//Fmt
+#include "fmt/format.h"
+#include "fmt/posix.h"
+#include "fmt/chrono.h"
+#include "fmt/color.h"
+#include "fmt/core.h"
+#include "fmt/time.h"
+#include "fmt/locale.h"
+#include "fmt/printf.h"
+#include "fmt/ostream.h"
+#include "fmt/ranges.h"
+
 //Widgets
 #include "widgets/FileDialog.h"
 
