@@ -69,6 +69,10 @@ void pmgui::FileTable::listFilesByDirectory(const fs::path &path,const fs::path 
                 //auto timeEntry = fs::last_write_time(entry);
                 //time_t cftime = chrono::system_clock::to_time_t(timeEntry);
                 std::string timefmt = getOsxTimeStampString(entry); //"<not supported by Clang!>";//fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
+                #elif __GNUC__ > 8
+                    //auto timeEntry = fs::last_write_time(entry);
+                    //time_t cftime = std::chrono::system_clock::to_time_t(timeEntry);
+                    std::string timefmt = "<Missing for GCC9>"; //fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
                 #else
                     auto timeEntry = fs::last_write_time(entry);
                     time_t cftime = std::chrono::system_clock::to_time_t(timeEntry);
@@ -98,6 +102,10 @@ void pmgui::FileTable::listFilesByDirectory(const fs::path &path,const fs::path 
                     //std::time_t cftime = decltype(timeEntry)::clock::to_time_t(timeEntry);
                     //time_t cftime = chrono::system_clock::to_time_t(timeEntry);
                     std::string timefmt = getOsxTimeStampString(entry);//"<not supported by Clang!>";//fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
+#elif __GNUC__ > 8
+                    //auto timeEntry = fs::last_write_time(entry);
+                    //time_t cftime = std::chrono::system_clock::to_time_t(timeEntry);
+                    std::string timefmt = "<Missing for GCC9>"; //fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
 #else
                     auto timeEntry = fs::last_write_time(entry);
                     time_t cftime = std::chrono::system_clock::to_time_t(timeEntry);
