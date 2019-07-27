@@ -897,14 +897,14 @@ const char* getClipboadText(void* /*userData*/) {
 void loadMouseCursor(ImGuiMouseCursor imguiCursorType,
                      sf::Cursor::Type sfmlCursorType) {
     s_mouseCursors[imguiCursorType] = new sf::Cursor();
-    s_mouseCursorLoaded[imguiCursorType] =
-        s_mouseCursors[imguiCursorType]->loadFromSystem(sfmlCursorType);
+    s_mouseCursorLoaded[imguiCursorType] = s_mouseCursors[imguiCursorType]->loadFromSystem(sfmlCursorType);
 }
 
 void updateMouseCursor(sf::Window& window) {
     ImGuiIO& io = ImGui::GetIO();
     if ((io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange) == 0) {
         ImGuiMouseCursor cursor = ImGui::GetMouseCursor();
+
         if (io.MouseDrawCursor || cursor == ImGuiMouseCursor_None) {
             window.setMouseCursorVisible(false);
         } else {
@@ -913,7 +913,12 @@ void updateMouseCursor(sf::Window& window) {
             sf::Cursor& c = s_mouseCursorLoaded[cursor]
                                 ? *s_mouseCursors[cursor]
                                 : *s_mouseCursors[ImGuiMouseCursor_Arrow];
-            window.setMouseCursor(c);
+            //sf::Cursor cr;
+            if(cursor == ImGuiMouseCursor_Arrow || cursor == ImGuiMouseCursor_ResizeNWSE || cursor == ImGuiMouseCursor_ResizeNESW)
+                window.setMouseCursor(sf::Cursor());
+            else
+                window.setMouseCursor(c);
+
         }
     }
 }
