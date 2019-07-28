@@ -58,7 +58,7 @@ const float *pmgui::DragFloat::getValues() const
 bool pmgui::DragFloat::processDrag()
 {
     std::string format = (m_hideNumber) ? "" : m_format;
-    ImGui::PushItemWidth(m_width);
+    //ImGui::PushItemWidth(m_width);
     bool result = false;
     switch (m_dragSize)
     {
@@ -71,7 +71,7 @@ bool pmgui::DragFloat::processDrag()
         case DragFloatSize::Four:
             result = ImGui::DragFloat4(m_imguiId.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
     }
-    ImGui::PopItemWidth();
+    //ImGui::PopItemWidth();
 
     return result;
 }
@@ -153,12 +153,12 @@ void pmgui::DragFloat::setSpeed(float speed)
     m_speed = speed;
 }
 
-float pmgui::DragFloat::getWidth() const
-{
-    return m_width;
-}
-
-void pmgui::DragFloat::setWidth(float width)
-{
-    m_width = width;
-}
+//float pmgui::DragFloat::getWidth() const
+//{
+//    return m_width;
+//}
+//
+//void pmgui::DragFloat::setWidth(float width)
+//{
+//    m_width = width;
+//}

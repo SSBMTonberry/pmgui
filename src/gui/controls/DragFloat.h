@@ -28,12 +28,12 @@ namespace pmgui
             void setValues(const std::initializer_list<float> &values);
             void setHideNumber(bool hideNumber);
             void setSpeed(float speed);
-            void setWidth(float width);
+            //void setWidth(float width);
 
             const float * getValues() const;
             bool getHideNumber() const;
             float getSpeed() const;
-            float getWidth() const;
+            //float getWidth() const;
 
         protected:
             bool processDrag();
@@ -49,7 +49,7 @@ namespace pmgui
 
             int m_decimals = 2;
             std::string m_format;
-            float m_width = 100.f;
+            //float m_width = 100.f;
 
         private:
             void initialize();

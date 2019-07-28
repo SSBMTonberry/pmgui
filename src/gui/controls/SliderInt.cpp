@@ -81,21 +81,22 @@ void pmgui::SliderInt::initialize()
 bool pmgui::SliderInt::processSlider()
 {
     std::string format = (m_hideNumber) ? "" : "%.0f";
+    bool result = false;
     switch (m_sliderType)
     {
         case SliderIntType::H_One:
-            return ImGui::SliderInt(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            result = ImGui::SliderInt(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderIntType::H_Two:
-            return ImGui::SliderInt2(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            result = ImGui::SliderInt2(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderIntType::H_Three:
-            return ImGui::SliderInt3(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            result = ImGui::SliderInt3(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderIntType::H_Four:
-            return ImGui::SliderInt4(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            result = ImGui::SliderInt4(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderIntType::Vertical:
-            return ImGui::VSliderInt(m_imguiId.c_str(), m_size, m_values.get(), m_minimum, m_maximum, format.c_str());
+            result = ImGui::VSliderInt(m_imguiId.c_str(), m_size, m_values.get(), m_minimum, m_maximum, format.c_str());
     }
 
-    return false;
+    return result;
 }
 
 void pmgui::SliderInt::setValues(const std::initializer_list<int> &values)

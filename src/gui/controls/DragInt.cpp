@@ -72,7 +72,7 @@ void pmgui::DragInt::initialize()
 bool pmgui::DragInt::processDrag()
 {
     std::string format = (m_hideNumber) ? "" : "%.0f";
-    ImGui::PushItemWidth(m_width);
+    //ImGui::PushItemWidth(m_width);
     bool result = false;
     switch (m_dragSize)
     {
@@ -85,7 +85,7 @@ bool pmgui::DragInt::processDrag()
         case DragIntSize::Four:
             result = ImGui::DragInt4(m_label.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
     }
-    ImGui::PopItemWidth();
+    //ImGui::PopItemWidth();
 
     return result;
 }
