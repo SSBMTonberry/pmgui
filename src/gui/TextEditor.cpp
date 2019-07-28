@@ -24,7 +24,7 @@ bool equals(InputIt1 first1, InputIt1 last1,
     return first1 == last1 && first2 == last2;
 }
 
-TextEditor::TextEditor()
+pmgui::TextEditor::TextEditor()
         : mLineSpacing(1.0f)
         , mUndoIndex(0)
         , mTabSize(4)
@@ -46,7 +46,7 @@ TextEditor::TextEditor()
         , mHandleKeyboardInputs(true)
         , mHandleMouseInputs(true)
         , mIgnoreImGuiChild(false)
-        , mShowWhitespaces(true)
+        , mShowWhitespaces(false)
         , mStartTime(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count())
 {
     SetPalette(GetDarkPalette());
@@ -54,11 +54,11 @@ TextEditor::TextEditor()
     mLines.push_back(Line());
 }
 
-TextEditor::~TextEditor()
+pmgui::TextEditor::~TextEditor()
 {
 }
 
-void TextEditor::SetLanguageDefinition(const LanguageDefinition & aLanguageDef)
+void pmgui::TextEditor::SetLanguageDefinition(const LanguageDefinition & aLanguageDef)
 {
     mLanguageDefinition = aLanguageDef;
     mRegexList.clear();
@@ -69,12 +69,12 @@ void TextEditor::SetLanguageDefinition(const LanguageDefinition & aLanguageDef)
     Colorize();
 }
 
-void TextEditor::SetPalette(const Palette & aValue)
+void pmgui::TextEditor::SetPalette(const Palette & aValue)
 {
     mPaletteBase = aValue;
 }
 
-std::string TextEditor::GetText(const Coordinates & aStart, const Coordinates & aEnd) const
+std::string pmgui::TextEditor::GetText(const Coordinates & aStart, const Coordinates & aEnd) const
 {
     std::string result;
 
@@ -111,12 +111,12 @@ std::string TextEditor::GetText(const Coordinates & aStart, const Coordinates & 
     return result;
 }
 
-TextEditor::Coordinates TextEditor::GetActualCursorCoordinates() const
+pmgui::TextEditor::Coordinates pmgui::TextEditor::GetActualCursorCoordinates() const
 {
     return SanitizeCoordinates(mState.mCursorPosition);
 }
 
-TextEditor::Coordinates TextEditor::SanitizeCoordinates(const Coordinates & aValue) const
+pmgui::TextEditor::Coordinates pmgui::TextEditor::SanitizeCoordinates(const Coordinates & aValue) const
 {
     auto line = aValue.mLine;
     auto column = aValue.mColumn;
@@ -143,7 +143,7 @@ TextEditor::Coordinates TextEditor::SanitizeCoordinates(const Coordinates & aVal
 
 // https://en.wikipedia.org/wiki/UTF-8
 // We assume that the char is a standalone character (<128) or a leading byte of an UTF-8 code sequence (non-10xxxxxx code)
-static int UTF8CharLength(TextEditor::Char c)
+static int UTF8CharLength(pmgui::TextEditor::Char c)
 {
     if ((c & 0xFE) == 0xFC)
         return 6;
@@ -196,7 +196,7 @@ static inline int ImTextCharToUtf8(char* buf, int buf_size, unsigned int c)
     }
 }
 
-void TextEditor::Advance(Coordinates & aCoordinates) const
+void pmgui::TextEditor::Advance(Coordinates & aCoordinates) const
 {
     if (aCoordinates.mLine < (int)mLines.size())
     {
@@ -217,7 +217,7 @@ void TextEditor::Advance(Coordinates & aCoordinates) const
     }
 }
 
-void TextEditor::DeleteRange(const Coordinates & aStart, const Coordinates & aEnd)
+void pmgui::TextEditor::DeleteRange(const Coordinates & aStart, const Coordinates & aEnd)
 {
     assert(aEnd >= aStart);
     assert(!mReadOnly);
@@ -257,7 +257,7 @@ void TextEditor::DeleteRange(const Coordinates & aStart, const Coordinates & aEn
     mTextChanged = true;
 }
 
-int TextEditor::InsertTextAt(Coordinates& /* inout */ aWhere, const char * aValue)
+int pmgui::TextEditor::InsertTextAt(Coordinates& /* inout */ aWhere, const char * aValue)
 {
     assert(!mReadOnly);
 
@@ -306,7 +306,7 @@ int TextEditor::InsertTextAt(Coordinates& /* inout */ aWhere, const char * aValu
     return totalLines;
 }
 
-void TextEditor::AddUndo(UndoRecord& aValue)
+void pmgui::TextEditor::AddUndo(UndoRecord& aValue)
 {
     assert(!mReadOnly);
     //printf("AddUndo: (@%d.%d) +\'%s' [%d.%d .. %d.%d], -\'%s', [%d.%d .. %d.%d] (@%d.%d)\n",
@@ -321,7 +321,7 @@ void TextEditor::AddUndo(UndoRecord& aValue)
     ++mUndoIndex;
 }
 
-TextEditor::Coordinates TextEditor::ScreenPosToCoordinates(const ImVec2& aPosition) const
+pmgui::TextEditor::Coordinates pmgui::TextEditor::ScreenPosToCoordinates(const ImVec2& aPosition) const
 {
     ImVec2 origin = ImGui::GetCursorScreenPos();
     ImVec2 local(aPosition.x - origin.x, aPosition.y - origin.y);
@@ -373,7 +373,7 @@ TextEditor::Coordinates TextEditor::ScreenPosToCoordinates(const ImVec2& aPositi
     return SanitizeCoordinates(Coordinates(lineNo, columnCoord));
 }
 
-TextEditor::Coordinates TextEditor::FindWordStart(const Coordinates & aFrom) const
+pmgui::TextEditor::Coordinates pmgui::TextEditor::FindWordStart(const Coordinates & aFrom) const
 {
     Coordinates at = aFrom;
     if (at.mLine >= (int)mLines.size())
@@ -407,7 +407,7 @@ TextEditor::Coordinates TextEditor::FindWordStart(const Coordinates & aFrom) con
     return Coordinates(at.mLine, GetCharacterColumn(at.mLine, cindex));
 }
 
-TextEditor::Coordinates TextEditor::FindWordEnd(const Coordinates & aFrom) const
+pmgui::TextEditor::Coordinates pmgui::TextEditor::FindWordEnd(const Coordinates & aFrom) const
 {
     Coordinates at = aFrom;
     if (at.mLine >= (int)mLines.size())
@@ -440,7 +440,7 @@ TextEditor::Coordinates TextEditor::FindWordEnd(const Coordinates & aFrom) const
     return Coordinates(aFrom.mLine, GetCharacterColumn(aFrom.mLine, cindex));
 }
 
-TextEditor::Coordinates TextEditor::FindNextWord(const Coordinates & aFrom) const
+pmgui::TextEditor::Coordinates pmgui::TextEditor::FindNextWord(const Coordinates & aFrom) const
 {
     Coordinates at = aFrom;
     if (at.mLine >= (int)mLines.size())
@@ -490,7 +490,7 @@ TextEditor::Coordinates TextEditor::FindNextWord(const Coordinates & aFrom) cons
     return at;
 }
 
-int TextEditor::GetCharacterIndex(const Coordinates& aCoordinates) const
+int pmgui::TextEditor::GetCharacterIndex(const Coordinates& aCoordinates) const
 {
     if (aCoordinates.mLine >= mLines.size())
         return -1;
@@ -508,7 +508,7 @@ int TextEditor::GetCharacterIndex(const Coordinates& aCoordinates) const
     return i;
 }
 
-int TextEditor::GetCharacterColumn(int aLine, int aIndex) const
+int pmgui::TextEditor::GetCharacterColumn(int aLine, int aIndex) const
 {
     if (aLine >= mLines.size())
         return 0;
@@ -527,7 +527,7 @@ int TextEditor::GetCharacterColumn(int aLine, int aIndex) const
     return col;
 }
 
-int TextEditor::GetLineCharacterCount(int aLine) const
+int pmgui::TextEditor::GetLineCharacterCount(int aLine) const
 {
     if (aLine >= mLines.size())
         return 0;
@@ -538,7 +538,7 @@ int TextEditor::GetLineCharacterCount(int aLine) const
     return c;
 }
 
-int TextEditor::GetLineMaxColumn(int aLine) const
+int pmgui::TextEditor::GetLineMaxColumn(int aLine) const
 {
     if (aLine >= mLines.size())
         return 0;
@@ -556,7 +556,7 @@ int TextEditor::GetLineMaxColumn(int aLine) const
     return col;
 }
 
-bool TextEditor::IsOnWordBoundary(const Coordinates & aAt) const
+bool pmgui::TextEditor::IsOnWordBoundary(const Coordinates & aAt) const
 {
     if (aAt.mLine >= (int)mLines.size() || aAt.mColumn == 0)
         return true;
@@ -572,7 +572,7 @@ bool TextEditor::IsOnWordBoundary(const Coordinates & aAt) const
     return isspace(line[cindex].mChar) != isspace(line[cindex - 1].mChar);
 }
 
-void TextEditor::RemoveLine(int aStart, int aEnd)
+void pmgui::TextEditor::RemoveLine(int aStart, int aEnd)
 {
     assert(!mReadOnly);
     assert(aEnd >= aStart);
@@ -603,7 +603,7 @@ void TextEditor::RemoveLine(int aStart, int aEnd)
     mTextChanged = true;
 }
 
-void TextEditor::RemoveLine(int aIndex)
+void pmgui::TextEditor::RemoveLine(int aIndex)
 {
     assert(!mReadOnly);
     assert(mLines.size() > 1);
@@ -633,7 +633,7 @@ void TextEditor::RemoveLine(int aIndex)
     mTextChanged = true;
 }
 
-TextEditor::Line& TextEditor::InsertLine(int aIndex)
+pmgui::TextEditor::Line& pmgui::TextEditor::InsertLine(int aIndex)
 {
     assert(!mReadOnly);
 
@@ -652,13 +652,13 @@ TextEditor::Line& TextEditor::InsertLine(int aIndex)
     return result;
 }
 
-std::string TextEditor::GetWordUnderCursor() const
+std::string pmgui::TextEditor::GetWordUnderCursor() const
 {
     auto c = GetCursorPosition();
     return GetWordAt(c);
 }
 
-std::string TextEditor::GetWordAt(const Coordinates & aCoords) const
+std::string pmgui::TextEditor::GetWordAt(const Coordinates & aCoords) const
 {
     auto start = FindWordStart(aCoords);
     auto end = FindWordEnd(aCoords);
@@ -674,7 +674,7 @@ std::string TextEditor::GetWordAt(const Coordinates & aCoords) const
     return r;
 }
 
-ImU32 TextEditor::GetGlyphColor(const Glyph & aGlyph) const
+ImU32 pmgui::TextEditor::GetGlyphColor(const Glyph & aGlyph) const
 {
     if (!mColorizerEnabled)
         return mPalette[(int)PaletteIndex::Default];
@@ -695,7 +695,7 @@ ImU32 TextEditor::GetGlyphColor(const Glyph & aGlyph) const
     return color;
 }
 
-void TextEditor::HandleKeyboardInputs()
+void pmgui::TextEditor::HandleKeyboardInputs()
 {
     ImGuiIO& io = ImGui::GetIO();
     auto shift = io.KeyShift;
@@ -775,7 +775,7 @@ void TextEditor::HandleKeyboardInputs()
     }
 }
 
-void TextEditor::HandleMouseInputs()
+void pmgui::TextEditor::HandleMouseInputs()
 {
     ImGuiIO& io = ImGui::GetIO();
     auto shift = io.KeyShift;
@@ -851,7 +851,7 @@ void TextEditor::HandleMouseInputs()
     }
 }
 
-void TextEditor::Render()
+void pmgui::TextEditor::Render()
 {
     /* Compute mCharAdvance regarding to scaled font size (Ctrl + mouse wheel)*/
     const float fontSize = ImGui::GetFont()->CalcTextSizeA(ImGui::GetFontSize(), FLT_MAX, -1.0f, "#", nullptr, nullptr).x;
@@ -1118,7 +1118,7 @@ void TextEditor::Render()
     }
 }
 
-void TextEditor::Render(const char* aTitle, const ImVec2& aSize, bool aBorder)
+void pmgui::TextEditor::Render(const char* aTitle, const ImVec2& aSize, bool aBorder)
 {
     mWithinRender = true;
     mTextChanged = false;
@@ -1153,7 +1153,7 @@ void TextEditor::Render(const char* aTitle, const ImVec2& aSize, bool aBorder)
     mWithinRender = false;
 }
 
-void TextEditor::SetText(const std::string & aText)
+void pmgui::TextEditor::SetText(const std::string & aText)
 {
     mLines.clear();
     mLines.emplace_back(Line());
@@ -1180,7 +1180,7 @@ void TextEditor::SetText(const std::string & aText)
     Colorize();
 }
 
-void TextEditor::SetTextLines(const std::vector<std::string> & aLines)
+void pmgui::TextEditor::SetTextLines(const std::vector<std::string> & aLines)
 {
     mLines.clear();
 
@@ -1211,7 +1211,7 @@ void TextEditor::SetTextLines(const std::vector<std::string> & aLines)
     Colorize();
 }
 
-void TextEditor::EnterCharacter(ImWchar aChar, bool aShift)
+void pmgui::TextEditor::EnterCharacter(ImWchar aChar, bool aShift)
 {
     assert(!mReadOnly);
 
@@ -1271,7 +1271,7 @@ void TextEditor::EnterCharacter(ImWchar aChar, bool aShift)
                 }
                 else
                 {
-                    line.insert(line.begin(), Glyph('\t', TextEditor::PaletteIndex::Background));
+                    line.insert(line.begin(), Glyph('\t', pmgui::TextEditor::PaletteIndex::Background));
                     modified = true;
                 }
             }
@@ -1384,17 +1384,17 @@ void TextEditor::EnterCharacter(ImWchar aChar, bool aShift)
     EnsureCursorVisible();
 }
 
-void TextEditor::SetReadOnly(bool aValue)
+void pmgui::TextEditor::SetReadOnly(bool aValue)
 {
     mReadOnly = aValue;
 }
 
-void TextEditor::SetColorizerEnable(bool aValue)
+void pmgui::TextEditor::SetColorizerEnable(bool aValue)
 {
     mColorizerEnabled = aValue;
 }
 
-void TextEditor::SetCursorPosition(const Coordinates & aPosition)
+void pmgui::TextEditor::SetCursorPosition(const Coordinates & aPosition)
 {
     if (mState.mCursorPosition != aPosition)
     {
@@ -1404,21 +1404,21 @@ void TextEditor::SetCursorPosition(const Coordinates & aPosition)
     }
 }
 
-void TextEditor::SetSelectionStart(const Coordinates & aPosition)
+void pmgui::TextEditor::SetSelectionStart(const Coordinates & aPosition)
 {
     mState.mSelectionStart = SanitizeCoordinates(aPosition);
     if (mState.mSelectionStart > mState.mSelectionEnd)
         std::swap(mState.mSelectionStart, mState.mSelectionEnd);
 }
 
-void TextEditor::SetSelectionEnd(const Coordinates & aPosition)
+void pmgui::TextEditor::SetSelectionEnd(const Coordinates & aPosition)
 {
     mState.mSelectionEnd = SanitizeCoordinates(aPosition);
     if (mState.mSelectionStart > mState.mSelectionEnd)
         std::swap(mState.mSelectionStart, mState.mSelectionEnd);
 }
 
-void TextEditor::SetSelection(const Coordinates & aStart, const Coordinates & aEnd, SelectionMode aMode)
+void pmgui::TextEditor::SetSelection(const Coordinates & aStart, const Coordinates & aEnd, SelectionMode aMode)
 {
     auto oldSelStart = mState.mSelectionStart;
     auto oldSelEnd = mState.mSelectionEnd;
@@ -1430,16 +1430,16 @@ void TextEditor::SetSelection(const Coordinates & aStart, const Coordinates & aE
 
     switch (aMode)
     {
-        case TextEditor::SelectionMode::Normal:
+        case pmgui::TextEditor::SelectionMode::Normal:
             break;
-        case TextEditor::SelectionMode::Word:
+        case pmgui::TextEditor::SelectionMode::Word:
         {
             mState.mSelectionStart = FindWordStart(mState.mSelectionStart);
             if (!IsOnWordBoundary(mState.mSelectionEnd))
                 mState.mSelectionEnd = FindWordEnd(FindWordStart(mState.mSelectionEnd));
             break;
         }
-        case TextEditor::SelectionMode::Line:
+        case pmgui::TextEditor::SelectionMode::Line:
         {
             const auto lineNo = mState.mSelectionEnd.mLine;
             const auto lineSize = (size_t)lineNo < mLines.size() ? mLines[lineNo].size() : 0;
@@ -1456,17 +1456,17 @@ void TextEditor::SetSelection(const Coordinates & aStart, const Coordinates & aE
         mCursorPositionChanged = true;
 }
 
-void TextEditor::SetTabSize(int aValue)
+void pmgui::TextEditor::SetTabSize(int aValue)
 {
     mTabSize = std::max(0, std::min(32, aValue));
 }
 
-void TextEditor::InsertText(const std::string & aValue)
+void pmgui::TextEditor::InsertText(const std::string & aValue)
 {
     InsertText(aValue.c_str());
 }
 
-void TextEditor::InsertText(const char * aValue)
+void pmgui::TextEditor::InsertText(const char * aValue)
 {
     if (aValue == nullptr)
         return;
@@ -1482,7 +1482,7 @@ void TextEditor::InsertText(const char * aValue)
     Colorize(start.mLine - 1, totalLines + 2);
 }
 
-void TextEditor::DeleteSelection()
+void pmgui::TextEditor::DeleteSelection()
 {
     assert(mState.mSelectionEnd >= mState.mSelectionStart);
 
@@ -1496,7 +1496,7 @@ void TextEditor::DeleteSelection()
     Colorize(mState.mSelectionStart.mLine, 1);
 }
 
-void TextEditor::MoveUp(int aAmount, bool aSelect)
+void pmgui::TextEditor::MoveUp(int aAmount, bool aSelect)
 {
     auto oldPos = mState.mCursorPosition;
     mState.mCursorPosition.mLine = std::max(0, mState.mCursorPosition.mLine - aAmount);
@@ -1522,7 +1522,7 @@ void TextEditor::MoveUp(int aAmount, bool aSelect)
     }
 }
 
-void TextEditor::MoveDown(int aAmount, bool aSelect)
+void pmgui::TextEditor::MoveDown(int aAmount, bool aSelect)
 {
     assert(mState.mCursorPosition.mColumn >= 0);
     auto oldPos = mState.mCursorPosition;
@@ -1555,7 +1555,7 @@ static bool IsUTFSequence(char c)
     return (c & 0xC0) == 0x80;
 }
 
-void TextEditor::MoveLeft(int aAmount, bool aSelect, bool aWordMode)
+void pmgui::TextEditor::MoveLeft(int aAmount, bool aSelect, bool aWordMode)
 {
     if (mLines.empty())
         return;
@@ -1621,7 +1621,7 @@ void TextEditor::MoveLeft(int aAmount, bool aSelect, bool aWordMode)
     EnsureCursorVisible();
 }
 
-void TextEditor::MoveRight(int aAmount, bool aSelect, bool aWordMode)
+void pmgui::TextEditor::MoveRight(int aAmount, bool aSelect, bool aWordMode)
 {
     auto oldPos = mState.mCursorPosition;
 
@@ -1672,7 +1672,7 @@ void TextEditor::MoveRight(int aAmount, bool aSelect, bool aWordMode)
     EnsureCursorVisible();
 }
 
-void TextEditor::MoveTop(bool aSelect)
+void pmgui::TextEditor::MoveTop(bool aSelect)
 {
     auto oldPos = mState.mCursorPosition;
     SetCursorPosition(Coordinates(0, 0));
@@ -1690,7 +1690,7 @@ void TextEditor::MoveTop(bool aSelect)
     }
 }
 
-void TextEditor::TextEditor::MoveBottom(bool aSelect)
+void pmgui::TextEditor::MoveBottom(bool aSelect)
 {
     auto oldPos = GetCursorPosition();
     auto newPos = Coordinates((int)mLines.size() - 1, 0);
@@ -1705,7 +1705,7 @@ void TextEditor::TextEditor::MoveBottom(bool aSelect)
     SetSelection(mInteractiveStart, mInteractiveEnd);
 }
 
-void TextEditor::MoveHome(bool aSelect)
+void pmgui::TextEditor::MoveHome(bool aSelect)
 {
     auto oldPos = mState.mCursorPosition;
     SetCursorPosition(Coordinates(mState.mCursorPosition.mLine, 0));
@@ -1730,7 +1730,7 @@ void TextEditor::MoveHome(bool aSelect)
     }
 }
 
-void TextEditor::MoveEnd(bool aSelect)
+void pmgui::TextEditor::MoveEnd(bool aSelect)
 {
     auto oldPos = mState.mCursorPosition;
     SetCursorPosition(Coordinates(mState.mCursorPosition.mLine, GetLineMaxColumn(oldPos.mLine)));
@@ -1755,7 +1755,7 @@ void TextEditor::MoveEnd(bool aSelect)
     }
 }
 
-void TextEditor::Delete()
+void pmgui::TextEditor::Delete()
 {
     assert(!mReadOnly);
 
@@ -1813,7 +1813,7 @@ void TextEditor::Delete()
     AddUndo(u);
 }
 
-void TextEditor::Backspace()
+void pmgui::TextEditor::Backspace()
 {
     assert(!mReadOnly);
 
@@ -1891,23 +1891,23 @@ void TextEditor::Backspace()
     AddUndo(u);
 }
 
-void TextEditor::SelectWordUnderCursor()
+void pmgui::TextEditor::SelectWordUnderCursor()
 {
     auto c = GetCursorPosition();
     SetSelection(FindWordStart(c), FindWordEnd(c));
 }
 
-void TextEditor::SelectAll()
+void pmgui::TextEditor::SelectAll()
 {
     SetSelection(Coordinates(0, 0), Coordinates((int)mLines.size(), 0));
 }
 
-bool TextEditor::HasSelection() const
+bool pmgui::TextEditor::HasSelection() const
 {
     return mState.mSelectionEnd > mState.mSelectionStart;
 }
 
-void TextEditor::Copy()
+void pmgui::TextEditor::Copy()
 {
     if (HasSelection())
     {
@@ -1926,7 +1926,7 @@ void TextEditor::Copy()
     }
 }
 
-void TextEditor::Cut()
+void pmgui::TextEditor::Cut()
 {
     if (IsReadOnly())
     {
@@ -1951,7 +1951,7 @@ void TextEditor::Cut()
     }
 }
 
-void TextEditor::Paste()
+void pmgui::TextEditor::Paste()
 {
     if (IsReadOnly())
         return;
@@ -1981,29 +1981,29 @@ void TextEditor::Paste()
     }
 }
 
-bool TextEditor::CanUndo() const
+bool pmgui::TextEditor::CanUndo() const
 {
     return !mReadOnly && mUndoIndex > 0;
 }
 
-bool TextEditor::CanRedo() const
+bool pmgui::TextEditor::CanRedo() const
 {
     return !mReadOnly && mUndoIndex < (int)mUndoBuffer.size();
 }
 
-void TextEditor::Undo(int aSteps)
+void pmgui::TextEditor::Undo(int aSteps)
 {
     while (CanUndo() && aSteps-- > 0)
         mUndoBuffer[--mUndoIndex].Undo(this);
 }
 
-void TextEditor::Redo(int aSteps)
+void pmgui::TextEditor::Redo(int aSteps)
 {
     while (CanRedo() && aSteps-- > 0)
         mUndoBuffer[mUndoIndex++].Redo(this);
 }
 
-const TextEditor::Palette & TextEditor::GetDarkPalette()
+const pmgui::TextEditor::Palette & pmgui::TextEditor::GetDarkPalette()
 {
     const static Palette p = { {
                                        0xff7f7f7f,	// Default
@@ -2031,7 +2031,7 @@ const TextEditor::Palette & TextEditor::GetDarkPalette()
     return p;
 }
 
-const TextEditor::Palette & TextEditor::GetLightPalette()
+const pmgui::TextEditor::Palette & pmgui::TextEditor::GetLightPalette()
 {
     const static Palette p = { {
                                        0xff7f7f7f,	// None
@@ -2059,7 +2059,7 @@ const TextEditor::Palette & TextEditor::GetLightPalette()
     return p;
 }
 
-const TextEditor::Palette & TextEditor::GetRetroBluePalette()
+const pmgui::TextEditor::Palette & pmgui::TextEditor::GetRetroBluePalette()
 {
     const static Palette p = { {
                                        0xff00ffff,	// None
@@ -2088,12 +2088,12 @@ const TextEditor::Palette & TextEditor::GetRetroBluePalette()
 }
 
 
-std::string TextEditor::GetText() const
+std::string pmgui::TextEditor::GetText() const
 {
     return GetText(Coordinates(), Coordinates((int)mLines.size(), 0));
 }
 
-std::vector<std::string> TextEditor::GetTextLines() const
+std::vector<std::string> pmgui::TextEditor::GetTextLines() const
 {
     std::vector<std::string> result;
 
@@ -2114,12 +2114,12 @@ std::vector<std::string> TextEditor::GetTextLines() const
     return result;
 }
 
-std::string TextEditor::GetSelectedText() const
+std::string pmgui::TextEditor::GetSelectedText() const
 {
     return GetText(mState.mSelectionStart, mState.mSelectionEnd);
 }
 
-std::string TextEditor::GetCurrentLineText()const
+std::string pmgui::TextEditor::GetCurrentLineText()const
 {
     auto lineLength = GetLineMaxColumn(mState.mCursorPosition.mLine);
     return GetText(
@@ -2127,11 +2127,11 @@ std::string TextEditor::GetCurrentLineText()const
             Coordinates(mState.mCursorPosition.mLine, lineLength));
 }
 
-void TextEditor::ProcessInputs()
+void pmgui::TextEditor::ProcessInputs()
 {
 }
 
-void TextEditor::Colorize(int aFromLine, int aLines)
+void pmgui::TextEditor::Colorize(int aFromLine, int aLines)
 {
     int toLine = aLines == -1 ? (int)mLines.size() : std::min((int)mLines.size(), aFromLine + aLines);
     mColorRangeMin = std::min(mColorRangeMin, aFromLine);
@@ -2141,7 +2141,7 @@ void TextEditor::Colorize(int aFromLine, int aLines)
     mCheckComments = true;
 }
 
-void TextEditor::ColorizeRange(int aFromLine, int aToLine)
+void pmgui::TextEditor::ColorizeRange(int aFromLine, int aToLine)
 {
     if (mLines.empty() || aFromLine >= aToLine)
         return;
@@ -2246,7 +2246,7 @@ void TextEditor::ColorizeRange(int aFromLine, int aToLine)
     }
 }
 
-void TextEditor::ColorizeInternal()
+void pmgui::TextEditor::ColorizeInternal()
 {
     if (mLines.empty() || !mColorizerEnabled)
         return;
@@ -2389,7 +2389,7 @@ void TextEditor::ColorizeInternal()
     }
 }
 
-float TextEditor::TextDistanceToLineStart(const Coordinates& aFrom) const
+float pmgui::TextEditor::TextDistanceToLineStart(const Coordinates& aFrom) const
 {
     auto& line = mLines[aFrom.mLine];
     float distance = 0.0f;
@@ -2418,7 +2418,7 @@ float TextEditor::TextDistanceToLineStart(const Coordinates& aFrom) const
     return distance;
 }
 
-void TextEditor::EnsureCursorVisible()
+void pmgui::TextEditor::EnsureCursorVisible()
 {
     if (!mWithinRender)
     {
@@ -2451,21 +2451,21 @@ void TextEditor::EnsureCursorVisible()
         ImGui::SetScrollX(std::max(0.0f, len + mTextStart + 4 - width));
 }
 
-int TextEditor::GetPageSize() const
+int pmgui::TextEditor::GetPageSize() const
 {
     auto height = ImGui::GetWindowHeight() - 20.0f;
     return (int)floor(height / mCharAdvance.y);
 }
 
-TextEditor::UndoRecord::UndoRecord(
+pmgui::TextEditor::UndoRecord::UndoRecord(
         const std::string& aAdded,
-        const TextEditor::Coordinates aAddedStart,
-        const TextEditor::Coordinates aAddedEnd,
+        const pmgui::TextEditor::Coordinates aAddedStart,
+        const pmgui::TextEditor::Coordinates aAddedEnd,
         const std::string& aRemoved,
-        const TextEditor::Coordinates aRemovedStart,
-        const TextEditor::Coordinates aRemovedEnd,
-        TextEditor::EditorState& aBefore,
-        TextEditor::EditorState& aAfter)
+        const pmgui::TextEditor::Coordinates aRemovedStart,
+        const pmgui::TextEditor::Coordinates aRemovedEnd,
+        pmgui::TextEditor::EditorState& aBefore,
+        pmgui::TextEditor::EditorState& aAfter)
         : mAdded(aAdded)
         , mAddedStart(aAddedStart)
         , mAddedEnd(aAddedEnd)
@@ -2479,7 +2479,7 @@ TextEditor::UndoRecord::UndoRecord(
     assert(mRemovedStart <= mRemovedEnd);
 }
 
-void TextEditor::UndoRecord::Undo(TextEditor * aEditor)
+void pmgui::TextEditor::UndoRecord::Undo(TextEditor * aEditor)
 {
     if (!mAdded.empty())
     {
@@ -2499,7 +2499,7 @@ void TextEditor::UndoRecord::Undo(TextEditor * aEditor)
 
 }
 
-void TextEditor::UndoRecord::Redo(TextEditor * aEditor)
+void pmgui::TextEditor::UndoRecord::Redo(TextEditor * aEditor)
 {
     if (!mRemoved.empty())
     {
@@ -2735,7 +2735,7 @@ static bool TokenizeCStylePunctuation(const char * in_begin, const char * in_end
     return false;
 }
 
-const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::CPlusPlus()
+const pmgui::TextEditor::LanguageDefinition& pmgui::TextEditor::LanguageDefinition::CPlusPlus()
 {
     static bool inited = false;
     static LanguageDefinition langDef;
@@ -2804,7 +2804,7 @@ const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::CPlusPlus(
     return langDef;
 }
 
-const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::HLSL()
+const pmgui::TextEditor::LanguageDefinition& pmgui::TextEditor::LanguageDefinition::HLSL()
 {
     static bool inited = false;
     static LanguageDefinition langDef;
@@ -2876,7 +2876,7 @@ const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::HLSL()
     return langDef;
 }
 
-const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::GLSL()
+const pmgui::TextEditor::LanguageDefinition& pmgui::TextEditor::LanguageDefinition::GLSL()
 {
     static bool inited = false;
     static LanguageDefinition langDef;
@@ -2925,7 +2925,7 @@ const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::GLSL()
     return langDef;
 }
 
-const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::C()
+const pmgui::TextEditor::LanguageDefinition& pmgui::TextEditor::LanguageDefinition::C()
 {
     static bool inited = false;
     static LanguageDefinition langDef;
@@ -2991,7 +2991,7 @@ const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::C()
     return langDef;
 }
 
-const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::SQL()
+const pmgui::TextEditor::LanguageDefinition& pmgui::TextEditor::LanguageDefinition::SQL()
 {
     static bool inited = false;
     static LanguageDefinition langDef;
@@ -3055,7 +3055,7 @@ const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::SQL()
     return langDef;
 }
 
-const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::AngelScript()
+const pmgui::TextEditor::LanguageDefinition& pmgui::TextEditor::LanguageDefinition::AngelScript()
 {
     static bool inited = false;
     static LanguageDefinition langDef;
@@ -3105,7 +3105,7 @@ const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::AngelScrip
     return langDef;
 }
 
-const TextEditor::LanguageDefinition& TextEditor::LanguageDefinition::Lua()
+const pmgui::TextEditor::LanguageDefinition& pmgui::TextEditor::LanguageDefinition::Lua()
 {
     static bool inited = false;
     static LanguageDefinition langDef;

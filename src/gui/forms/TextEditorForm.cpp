@@ -111,7 +111,7 @@ bool pmgui::TextEditorForm::draw()
     return m_isVisible;
 }
 
-TextEditor *pmgui::TextEditorForm::getEditor()
+pmgui::TextEditor *pmgui::TextEditorForm::getEditor()
 {
     return &m_textEditor;
 }
