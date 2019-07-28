@@ -104,7 +104,7 @@ bool pmgui::TextEditorForm::draw()
                     m_textEditor.IsOverwrite() ? "Ovr" : "Ins",
                     m_textEditor.CanUndo() ? "*" : " ",
                     m_textEditor.GetLanguageDefinition().mName.c_str());
-        m_textEditor.Render("TextEditor");
+        m_textEditor.Render(getImguiId().c_str());
         ImGui::End();
     }
 

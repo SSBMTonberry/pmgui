@@ -1,5 +1,5 @@
-#ifndef ASSET_GENERATOR_FILES_FILE_MAPPER
-#define ASSET_GENERATOR_FILES_FILE_MAPPER
+#ifndef PMGUI_FILES_FILE_MAPPER
+#define PMGUI_FILES_FILE_MAPPER
 #include "files.h"
 
 namespace pmgui_files_mapper
@@ -1010,4 +1010,4 @@ namespace pmgui_files_mapper
 		static const size_t _USE_BUFFER_PNG_SIZE = pmgui_files::gui::folders::green::_USE_BUFFER_PNG_SIZE;
 	}
 }
-#endif //ASSET_GENERATOR_FILES_FILE_MAPPER
+#endif //PMGUI_FILES_FILE_MAPPER

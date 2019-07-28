@@ -39,10 +39,12 @@ namespace pmgui
             sf::Clock m_deltaClock;
             sf::Color m_backgroundColor = {35, 65, 90, 255};
 
+            TextEditorForm m_codeEditor {"code_editor", "Code Editor"};
             Form m_demoForm {"demo_form", "PmGui Demo"};
             Textbox *m_demoText1 = nullptr;
             Button *m_openFileOpenDialogBtn = nullptr;
             Button *m_openFileSaveDialogBtn = nullptr;
+            Button *m_openCodeEditorBtn = nullptr;
 
             FileDialog m_fileDialogFile { DialogType::OpenFile, "main_file_dialog_file", "Choose a file"}; //, "main_file_dialog_file"};
             FileDialog m_fileDialogSave { DialogType::SaveFile, "main_file_dialog_save_file", "Save a file"}; //, "main_file_dialog_file"};
