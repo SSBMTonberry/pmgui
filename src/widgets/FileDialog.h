@@ -42,7 +42,7 @@ namespace fs = std::experimental::filesystem;
 
 using namespace std;
 using namespace pmgui;
-namespace fm = pmgui_files_mapper;
+namespace pmgui_fm = pmgui_files_mapper;
 
 namespace pmgui
 {
