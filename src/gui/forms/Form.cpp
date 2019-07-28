@@ -74,7 +74,7 @@ bool pmgui::Form::draw()
             anyItemChanged = true;
 
     }
-    customDraw();
+    onDraw();
     ImGui::End();
 
     return anyItemChanged;
@@ -187,12 +187,13 @@ void pmgui::Form::setPosition(const sf::Vector2<int> &position)
     m_position = position;
 }
 
-//bool pmgui::Form::hasImguiId() const
-//{
-//    return m_id.empty() ? false : true;
-//}
-
-bool pmgui::Form::customDraw()
+/*!
+ * Override this if you want to have total control of the drawing of own controls
+ * in a derived class. It's recommended to override this rather than overriding the actual draw() function, as it handles
+ * some stuff you really shouldn't care about duplicating.
+ * @return
+ */
+bool pmgui::Form::onDraw()
 {
     return false;
 }

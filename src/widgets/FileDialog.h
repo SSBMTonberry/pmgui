@@ -111,7 +111,7 @@ namespace pmgui
             void createDefaultFileTypesCollection();
             std::vector<FileType*> getFileTypesByExtensions(const std::initializer_list<std::string> &fileExtensions);
 
-            bool customDraw() override;
+            bool onDraw() override;
 
             //void getHomeEnvironmentVariable();
             std::string getOkBtnText() const;
