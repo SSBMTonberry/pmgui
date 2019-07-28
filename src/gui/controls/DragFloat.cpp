@@ -58,19 +58,22 @@ const float *pmgui::DragFloat::getValues() const
 bool pmgui::DragFloat::processDrag()
 {
     std::string format = (m_hideNumber) ? "" : m_format;
+    ImGui::PushItemWidth(m_width);
+    bool result = false;
     switch (m_dragSize)
     {
         case DragFloatSize::One:
-            return ImGui::DragFloat(m_label.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            result = ImGui::DragFloat(m_imguiId.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
         case DragFloatSize::Two:
-            return ImGui::DragFloat2(m_label.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            result = ImGui::DragFloat2(m_imguiId.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
         case DragFloatSize::Three:
-            return ImGui::DragFloat3(m_label.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            result = ImGui::DragFloat3(m_imguiId.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
         case DragFloatSize::Four:
-            return ImGui::DragFloat4(m_label.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            result = ImGui::DragFloat4(m_imguiId.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
     }
+    ImGui::PopItemWidth();
 
-    return false;
+    return result;
 }
 
 bool pmgui::DragFloat::performValueValidation()
@@ -148,4 +151,14 @@ float pmgui::DragFloat::getSpeed() const
 void pmgui::DragFloat::setSpeed(float speed)
 {
     m_speed = speed;
+}
+
+float pmgui::DragFloat::getWidth() const
+{
+    return m_width;
+}
+
+void pmgui::DragFloat::setWidth(float width)
+{
+    m_width = width;
 }

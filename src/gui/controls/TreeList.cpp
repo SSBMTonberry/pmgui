@@ -28,7 +28,7 @@ bool pmgui::TreeList::process()
             //SystemLog::get()->addDebug(fmt::format("Erased {0} from {1} ({2} items)", erasedCount, getId(), m_items.size()));
         }
         pushWidth();
-        m_isOpen = (m_hasParentNode) ? ImGui::TreeNode(m_label.c_str()) : true;
+        m_isOpen = (m_hasParentNode) ? ImGui::TreeNode(m_imguiId.c_str()) : true;
         popWidth();
         if(m_isOpen)
         {
@@ -46,7 +46,7 @@ bool pmgui::TreeList::process()
         }
         else
         {
-            ImGui::PushID(m_label.c_str());
+            ImGui::PushID(m_imguiId.c_str());
             {
                 processMouseEvents();
             }

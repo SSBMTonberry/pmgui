@@ -84,15 +84,15 @@ bool pmgui::SliderInt::processSlider()
     switch (m_sliderType)
     {
         case SliderIntType::H_One:
-            return ImGui::SliderInt(m_label.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            return ImGui::SliderInt(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderIntType::H_Two:
-            return ImGui::SliderInt2(m_label.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            return ImGui::SliderInt2(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderIntType::H_Three:
-            return ImGui::SliderInt3(m_label.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            return ImGui::SliderInt3(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderIntType::H_Four:
-            return ImGui::SliderInt4(m_label.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            return ImGui::SliderInt4(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderIntType::Vertical:
-            return ImGui::VSliderInt(m_label.c_str(), m_size, m_values.get(), m_minimum, m_maximum, format.c_str());
+            return ImGui::VSliderInt(m_imguiId.c_str(), m_size, m_values.get(), m_minimum, m_maximum, format.c_str());
     }
 
     return false;

@@ -14,7 +14,7 @@ namespace pmgui
         public:
             Combobox(const std::string &id, const std::string &label);
 
-            virtual bool process();
+            virtual bool process() override;
 
             void addValue(const std::string &value);
             void addValueRange(const std::initializer_list<std::string> &values);

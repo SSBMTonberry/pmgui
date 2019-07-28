@@ -108,15 +108,15 @@ bool pmgui::SliderFloat::processSlider()
     switch (m_sliderSize)
     {
         case SliderFloatType::H_One:
-            return ImGui::SliderFloat(m_label.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            return ImGui::SliderFloat(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderFloatType::H_Two:
-            return ImGui::SliderFloat2(m_label.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            return ImGui::SliderFloat2(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderFloatType::H_Three:
-            return ImGui::SliderFloat3(m_label.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            return ImGui::SliderFloat3(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderFloatType::H_Four:
-            return ImGui::SliderFloat4(m_label.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            return ImGui::SliderFloat4(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
         case SliderFloatType::Vertical:
-            return ImGui::VSliderFloat(m_label.c_str(), m_size, m_values.get(), m_minimum, m_maximum, format.c_str());
+            return ImGui::VSliderFloat(m_imguiId.c_str(), m_size, m_values.get(), m_minimum, m_maximum, format.c_str());
 
     }
     return false;

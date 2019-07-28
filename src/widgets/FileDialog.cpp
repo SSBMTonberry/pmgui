@@ -4,16 +4,16 @@
 
 #include "FileDialog.h"
 
-pmgui::FileDialog::FileDialog(const DialogType &dialogType, std::string id, std::string title, std::string imguiId) :
-        Popup(std::move(id), std::move(title), std::move(imguiId))
+pmgui::FileDialog::FileDialog(const DialogType &dialogType, std::string id, std::string title) : //, std::string imguiId) :
+        Popup(std::move(id), std::move(title)) //, std::move(imguiId))
 {
     m_dialogType = dialogType;
     initialize();
 }
 
 pmgui::FileDialog::FileDialog(const DialogType &dialogType, const sf::Vector2<int> &position, const sf::Vector2<int> &size,
-                            std::string id, std::string title, std::string imguiId) : Popup(position, size, std::move(id), std::move(title),
-                                                                                            std::move(imguiId))
+                            std::string id, std::string title) //, std::string imguiId)
+                            : Popup(position, size, std::move(id), std::move(title)) //, std::move(imguiId))
 {
     m_dialogType = dialogType;
     initialize(m_position, m_size);
@@ -28,6 +28,10 @@ void pmgui::FileDialog::initialize(const std::optional<sf::Vector2<int>> &positi
 
     setPath(fs::current_path());
     m_fileTable.setFileTypes(&m_fileTypes);
+
+    m_msgPopup.setParentId(m_id);
+    m_msgPopupNoFileChosen.setParentId(m_id);
+    m_msgPopupFileDoesNotExist.setParentId(m_id);
 
     //registerOnFileChosenCallback(std::bind(&ProgramManager::onChosenNewProject, this, std::placeholders::_1));
     initializePopups();

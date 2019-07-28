@@ -37,11 +37,10 @@ namespace pmgui
     {
         typedef std::function<void(pmgui::Button *, pmgui::MessagePopupResponse)> func_msg_response; //OnPressed(), for instance
         public:
-            MessagePopup(std::string id, std::string title, const MessagePopupType &popupType,
-                         std::string imguiId);
+            MessagePopup(std::string id, std::string title, const MessagePopupType &popupType);//, std::string imguiId);
 
             MessagePopup(const sf::Vector2<int> &position, const sf::Vector2<int> &size, std::string id,
-                         std::string title, const MessagePopupType &popupType, std::string imguiId);
+                         std::string title, const MessagePopupType &popupType);//, std::string imguiId);
 
             bool draw() override;
 

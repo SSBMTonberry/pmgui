@@ -72,10 +72,10 @@ namespace pmgui
         public:
             static const int MAX_FILE_PATH_LENGTH = 512;
 
-            FileDialog(const DialogType &dialogType, std::string id, std::string title, std::string imguiId = "");
+            FileDialog(const DialogType &dialogType, std::string id, std::string title); //, std::string imguiId = "");
 
             FileDialog(const DialogType &dialogType, const sf::Vector2<int> &position, const sf::Vector2<int> &size,
-                       std::string id, std::string title, std::string imguiId = "");
+                       std::string id, std::string title); //, std::string imguiId = "");
 
             void assignEnvironmentMap(unordered_map<string, string> *env);
             void assignDefaults();
@@ -156,9 +156,9 @@ namespace pmgui
             fs::path m_path;
             fs::path m_chosenFile;
 
-            MessagePopup m_msgPopup {"msg_popup_file_exists", "File already exists!", MessagePopupType::YesNo, "1"}; //Since the file dialog has the ###0, this one must have another (using: ###1)
-            MessagePopup m_msgPopupNoFileChosen {"msg_popup_no_file_chosen", "No file chosen!", MessagePopupType::Ok, "2"};
-            MessagePopup m_msgPopupFileDoesNotExist {"msg_popup_file_does_not_exist", "File does not exist!", MessagePopupType::Ok, "3"};
+            MessagePopup m_msgPopup {"msg_popup_file_exists", "File already exists!", MessagePopupType::YesNo}; //Since the file dialog has the ###0, this one must have another (using: ###1)
+            MessagePopup m_msgPopupNoFileChosen {"msg_popup_no_file_chosen", "No file chosen!", MessagePopupType::Ok};
+            MessagePopup m_msgPopupFileDoesNotExist {"msg_popup_file_does_not_exist", "File does not exist!", MessagePopupType::Ok};
 
             vector<func_path> m_callbackOnFileChosen;
             vector<func_void> m_callbackOnClose;

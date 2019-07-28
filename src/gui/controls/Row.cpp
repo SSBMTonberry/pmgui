@@ -16,7 +16,7 @@ bool pmgui::Row::process()
     {
         if(m_columns.size() > 0)
         {
-            ImGui::Columns(m_columns.size(), m_label.c_str(), m_hasVerticalBorders);
+            ImGui::Columns(m_columns.size(), m_imguiId.c_str(), m_hasVerticalBorders);
             for (const auto &column : m_columns)
             {
                 if(column->hasWidth())

@@ -59,6 +59,7 @@ void pmgui::DemoManager::handleEvents()
 {
     m_demoForm.handleEvents();
     m_fileDialogFile.handleEvents();
+    m_fileDialogSave.handleEvents();
 }
 
 void pmgui::DemoManager::draw()
@@ -67,6 +68,7 @@ void pmgui::DemoManager::draw()
 
     m_demoForm.draw();
     m_fileDialogFile.draw();
+    m_fileDialogSave.draw();
     ImGui::SFML::Render(m_window);
 }
 
@@ -74,7 +76,19 @@ void pmgui::DemoManager::createDemo()
 {
     m_demoText1 = m_demoForm.create<pmgui::Textbox>("demo_text_1", "Demo text 1");
     m_demoText1->setValue("Hello there!");
+    m_openFileOpenDialogBtn = m_demoForm.create<pmgui::Button>("demo_open_dialog", "File Open Dialog", sf::Vector2i(140, 30));
+    m_openFileSaveDialogBtn = m_demoForm.create<pmgui::Button>("demo_save_dialog", "File Save Dialog", sf::Vector2i(140, 30));
+    m_openFileSaveDialogBtn->setOnSameLine(true);
+
+    m_openFileOpenDialogBtn->registerOnPressedCallback(std::bind(&DemoManager::onButtonPressed, this, std::placeholders::_1));
+    m_openFileSaveDialogBtn->registerOnPressedCallback(std::bind(&DemoManager::onButtonPressed, this, std::placeholders::_1));
 
     m_fileDialogFile.setFileTypeCollection("images", true);
-    m_fileDialogFile.setOpen(true);
+    m_fileDialogSave.setFileTypeCollection("images", true);
+}
+
+void DemoManager::onButtonPressed(const pmgui::Button *btn)
+{
+    if      (btn->getId() == "demo_open_dialog") m_fileDialogFile.setOpen(true);
+    else if (btn->getId() == "demo_save_dialog") m_fileDialogSave.setOpen(true);
 }

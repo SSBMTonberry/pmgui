@@ -20,6 +20,7 @@ void pmgui::Checkbox::initialize(const std::string &id, const std::string &label
     m_id = id;
     m_label = label;
     m_isChecked = isChecked;
+    updateImguiId();
 }
 
 /*!
@@ -31,7 +32,7 @@ bool pmgui::Checkbox::process()
     if(Control::process())
     {
         pushWidth();
-        bool action = ImGui::Checkbox(m_label.c_str(), &m_isChecked);
+        bool action = ImGui::Checkbox(m_imguiId.c_str(), &m_isChecked);
         popWidth();
         if(ImGui::IsItemHovered() && m_tooltip.has_value())
             m_tooltip->show();

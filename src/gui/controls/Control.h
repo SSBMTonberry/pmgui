@@ -56,7 +56,7 @@ namespace pmgui
     class Control
     {
         public:
-            Control();
+            Control() = default;
 
             explicit Control(std::string id);
             Control(const std::string &id, const std::string &label);
@@ -76,6 +76,7 @@ namespace pmgui
             void setIsVisible(bool isVisible);
             void setSpacing(float spacing);
             void setWidth(float width);
+            void setParentId(const std::string &parentId);
 
             void createBasicTooltip(const std::string &text);
 
@@ -89,8 +90,11 @@ namespace pmgui
             ControlType getType() const;
             float getSpacing() const;
             float getWidth() const;
+            const std::string &getParentId() const;
+            const std::string &getImguiId() const;
 
         protected:
+            void updateImguiId(int index = -1);
             virtual void assignColors();
             void pushWidth();
             void popWidth();
@@ -98,6 +102,8 @@ namespace pmgui
 
             std::string m_id;
             std::string m_label;
+            std::string m_parentId;
+            std::string m_imguiId; //<m_label>###<m_id>_<m_parentId>
             std::optional<pmgui::Tooltip> m_tooltip = std::nullopt;
             ControlType m_type = ControlType::Unassigned;
             float m_spacing = -1.f;

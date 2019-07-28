@@ -40,7 +40,7 @@ bool pmgui::MenuItem::process()
             ImGui::SameLine();
         }
 
-        if(ImGui::MenuItem(m_label.c_str(), m_shortcut.c_str(), m_isSelected, m_isEnabled))
+        if(ImGui::MenuItem(m_imguiId.c_str(), m_shortcut.c_str(), m_isSelected, m_isEnabled))
         {
             /*m_isPressed = true;
             for (auto &callback : m_callbackOnChosen)

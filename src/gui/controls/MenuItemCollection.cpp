@@ -14,7 +14,7 @@ bool pmgui::MenuItemCollection::process()
     m_isPressed = false;
     if(Control::process())
     {
-        if(ImGui::BeginMenu(m_label.c_str(), m_isEnabled))
+        if(ImGui::BeginMenu(m_imguiId.c_str(), m_isEnabled))
         {
             m_isPressed = true;
             processMenuItems();

@@ -31,7 +31,7 @@ bool pmgui::Combobox::process()
         else
             pushWidth();
 
-        std::string id = (!m_hasLabel && m_disablePushItemWidth) ? fmt::format("###{0}", m_id) : m_label;
+        std::string id = (!m_hasLabel && m_disablePushItemWidth) ? fmt::format("###{0}_{1}", m_id, m_parentId) : m_imguiId;
 
         if (ImGui::BeginCombo(id.c_str(), m_currentItem))
         {

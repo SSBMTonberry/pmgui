@@ -17,9 +17,9 @@ namespace pmgui
     class Form
     {
         public:
-            Form(std::string id, std::string title, std::string imguiId = "");
+            Form(std::string id, std::string title); //, std::string imguiId = "");
             Form(const sf::Vector2<int> &position, const sf::Vector2<int> &size, std::string id,
-                 std::string title, std::string imguiId);
+                 std::string title);//, std::string imguiId);
 
             template <typename T, typename... Args>
             T * create(Args &&... args);
@@ -27,7 +27,7 @@ namespace pmgui
             void clear();
 
             void add(std::unique_ptr<pmgui::Control> control);
-            void addReference(pmgui::Control *ref);
+            void addReference(pmgui::Control *ref, bool setThisAsParent = true);
             //void update(); //not used, for now
             virtual bool draw();
             virtual void handleEvents();
@@ -37,6 +37,10 @@ namespace pmgui
             void setSize(const sf::Vector2<int> &size);
             void setPosition(const sf::Vector2<int> &position);
             virtual void setScaleFactor(float scaleFactor);
+
+            const std::string &getParentId() const;
+
+            void setParentId(const std::string &parentId);
 
             //Flags
             void setFormFlags(const FormFlags &formFlags);
@@ -48,11 +52,12 @@ namespace pmgui
             FormFlags getFormFlags() const;
             std::string getImguiId();
             const std::string &getId() const;
+            const std::string &getTitle() const;
             const sf::Vector2<int> &getSize() const;
             const sf::Vector2<int> &getPosition() const;
             const sf::Vector2<size_t> &getCurrentWindowSize() const;
             const sf::Vector2<size_t> &getCurrentWindowPosition() const;
-            bool hasImguiId() const;
+            //bool hasImguiId() const;
             float getScaleFactor() const;
 
             template <typename T>
@@ -82,13 +87,16 @@ namespace pmgui
             FormFlags m_flags = FormFlags::None;
             std::string m_id;
             std::string m_title;
+            std::string m_parentId;
             float m_scaleFactor = 1.f;
 
             /*!
              * 2018-10-08 - ImGuiID should never have been a number, as it behaves like a string.
              * This string is appended after a m_title and ### when calling getImguiId().
+             *
+             * 2019-07-28 - Removed. ID is handled as ImGui ID now.
              */
-            std::string m_imguiId;
+            //std::string m_imguiId;
             sf::Vector2<int> m_position;
             sf::Vector2<int> m_size;
             sf::Vector2<int> m_scaledSize;
@@ -141,6 +149,8 @@ namespace pmgui
     T *pmgui::Form::create(Args &&... args)
     {
         m_controls.emplace_back(new T(args...));
+        m_controls[m_controls.size() - 1]->setParentId(m_id);
+
         return static_cast<T*>(m_controls[m_controls.size() - 1].get());
     }
 

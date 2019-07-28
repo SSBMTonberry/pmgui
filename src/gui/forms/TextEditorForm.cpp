@@ -4,14 +4,15 @@
 
 #include "TextEditorForm.h"
 
-pmgui::TextEditorForm::TextEditorForm(std::string id, std::string title, std::string imguiId) : pmgui::Form(std::move(id), std::move(title), std::move(imguiId))
+pmgui::TextEditorForm::TextEditorForm(std::string id, std::string title) //, std::string imguiId)
+                    : pmgui::Form(std::move(id), std::move(title)) //, std::move(imguiId))
 {
     initialize();
 }
 
 pmgui::TextEditorForm::TextEditorForm(const sf::Vector2<int> &position, const sf::Vector2<int> &size,
-                                    std::string id, std::string title, std::string imguiId)
-        : Form(position, size, std::move(id), std::move(title), std::move(imguiId))
+                                    std::string id, std::string title)//, std::string imguiId)
+        : Form(position, size, std::move(id), std::move(title)) //, std::move(imguiId))
 {
     initialize();
 }

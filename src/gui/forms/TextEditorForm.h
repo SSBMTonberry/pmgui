@@ -13,8 +13,8 @@ namespace pmgui
     class TextEditorForm : public Form
     {
         public:
-            TextEditorForm(std::string id, std::string title, std::string imguiId = "");
-            TextEditorForm(const sf::Vector2<int> &position, const sf::Vector2<int> &size, std::string id, std::string title, std::string imguiId = "");
+            TextEditorForm(std::string id, std::string title); //, std::string imguiId = "");
+            TextEditorForm(const sf::Vector2<int> &position, const sf::Vector2<int> &size, std::string id, std::string title); //, std::string imguiId = "");
             bool draw() override;
 
             TextEditor *getEditor();

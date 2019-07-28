@@ -24,7 +24,7 @@ bool pmgui::CheckboxSection::process()
         {
             bool sameLine = (!m_isHorizontal) ? false : isSameLine(i);
 
-            bool action = ImGui::Checkbox(item->getLabel().c_str(), item->getChecked());
+            bool action = ImGui::Checkbox(item->getImguiId().c_str(), item->getChecked());
             if(action)
                 hasAnythinngBeenChecked = action;
 

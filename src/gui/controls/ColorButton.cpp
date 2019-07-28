@@ -18,7 +18,7 @@ bool pmgui::ColorButton::process()
     if(Control::process())
     {
         pushWidth();
-        if(ImGui::ColorButton(m_label.c_str(), m_color, 0, m_size))
+        if(ImGui::ColorButton(m_imguiId.c_str(), m_color, 0, m_size))
         {
             m_isClicked = true;
         }

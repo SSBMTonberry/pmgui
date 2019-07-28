@@ -27,7 +27,7 @@ bool pmgui::Child::process()
     bool anyItemActivated = false;
     if(Control::process())
     {
-        ImGui::BeginChild(getId().c_str(), m_size, m_hasBorder, getFlagsAsImGuiFlags());
+        ImGui::BeginChild(m_imguiId.c_str(), m_size, m_hasBorder, getFlagsAsImGuiFlags());
         for(const auto &item : m_items)
         {
             if(item->process())

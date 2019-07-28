@@ -27,7 +27,7 @@ bool pmgui::ColoredText::process()
     {
         ImGui::PushStyleColor(0, m_color);
         pushWidth();
-        ImGui::Text(m_label.c_str());
+        ImGui::Text(m_label.c_str()); //Just uses the direct text, as it holds no ImGui state
         popWidth();
         ImGui::PopStyleColor(1);
         return true;

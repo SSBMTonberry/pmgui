@@ -34,15 +34,15 @@ bool pmgui::ColorPicker::processByPickerType()
     switch (m_pickerType)
     {
         case ColorPickerType::ColorEdit3:
-            return ImGui::ColorEdit3(m_label.c_str(), (float *) &m_values);
+            return ImGui::ColorEdit3(m_imguiId.c_str(), (float *) &m_values);
         case ColorPickerType::ColorEdit4:
-            return ImGui::ColorEdit4(m_label.c_str(), (float *) &m_values);
+            return ImGui::ColorEdit4(m_imguiId.c_str(), (float *) &m_values);
         case ColorPickerType::ColorPicker3:
             //Use ColorEdit till the bug causing crash between ColorPicker and Textbox is fixed.
-            return ImGui::ColorEdit3(m_label.c_str(), (float *) &m_values); //ImGui::ColorPicker3(m_label.c_str(), (float *) &m_values);
+            return ImGui::ColorEdit3(m_imguiId.c_str(), (float *) &m_values); //ImGui::ColorPicker3(m_imguiId.c_str(), (float *) &m_values);
         case ColorPickerType::ColorPicker4:
             //Use ColorEdit till the bug causing crash between ColorPicker and Textbox is fixed.
-            return ImGui::ColorEdit4(m_label.c_str(), (float *) &m_values); //ImGui::ColorPicker4(m_label.c_str(), (float *)&m_values);
+            return ImGui::ColorEdit4(m_imguiId.c_str(), (float *) &m_values); //ImGui::ColorPicker4(m_imguiId.c_str(), (float *)&m_values);
 
     }
 

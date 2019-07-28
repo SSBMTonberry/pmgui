@@ -37,7 +37,7 @@ bool pmgui::InputFloat::process()
     if(Control::process())
     {
         pushWidth();
-        if(ImGui::InputFloat(m_label.c_str(), &m_value, m_step, m_stepFast))
+        if(ImGui::InputFloat(m_imguiId.c_str(), &m_value, m_step, m_stepFast))
         {
             performValueValidation();
             isChanged = true;

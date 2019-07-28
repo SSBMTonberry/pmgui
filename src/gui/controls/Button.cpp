@@ -32,6 +32,7 @@ void pmgui::Button::create(const std::string &label, const sf::Vector2<int> &siz
 {
     m_label = label;
     m_size = size;
+    updateImguiId();
 }
 
 /*!
@@ -51,7 +52,7 @@ bool pmgui::Button::process()
             popColors = true;
         }
 
-        if (ImGui::Button(m_label.c_str(), ImVec2(m_size)))
+        if (ImGui::Button(m_imguiId.c_str(), ImVec2(m_size)))
         {
             m_isPressed = true;
             toReturn = true;

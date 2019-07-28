@@ -5,10 +5,10 @@
 //
 // Created by robin on 27.12.17.
 
-pmgui::Control::Control() : m_id {"unnamed"}, m_label {""}
-{
-
-}
+//pmgui::Control::Control() //: m_id {"unnamed"}, m_label {""}
+//{
+//
+//}
 
 /*!
  * A bare minimum implementation of Control.
@@ -18,12 +18,14 @@ pmgui::Control::Control() : m_id {"unnamed"}, m_label {""}
 pmgui::Control::Control(std::string id) : m_id {std::move(id)}
 {
     m_label = "";
+    updateImguiId();
 }
 
 pmgui::Control::Control(const std::string &id, const std::string &label) : m_id {id}, m_label {label}
 {
     //m_id = id;
     //m_propertyTitle = label;
+    updateImguiId();
 }
 
 const std::string & pmgui::Control::getLabel() const
@@ -34,6 +36,7 @@ const std::string & pmgui::Control::getLabel() const
 void pmgui::Control::setLabel(const std::string &label)
 {
     m_label = label;
+    updateImguiId();
 }
 
 pmgui::ControlType pmgui::Control::getType() const
@@ -107,6 +110,7 @@ void pmgui::Control::setIsVisible(bool isVisible)
 void pmgui::Control::setId(const std::string &id)
 {
     m_id = id;
+    updateImguiId();
 }
 
 float pmgui::Control::getSpacing() const
@@ -147,4 +151,43 @@ void pmgui::Control::popWidth()
 {
     if(m_width >= 1.f)
         ImGui::PopItemWidth();
+}
+
+/*!
+ * Updates the ImGuiId based on existing variables.
+ * The possible IDs generated:
+ * 1. <label>###<id>_<parent_id> if they both have a value.
+ * 2. <id>###<id>_<parent_id> if label is not set
+ * 3. <label>###<label>_<parent_id> if no ID exists
+ * 4. Left blank...
+ *
+ * Adds index number on the end if it is larger than -1.
+ */
+void pmgui::Control::updateImguiId(int index)
+{
+    if(!m_id.empty() && !m_label.empty())
+        m_imguiId = fmt::format("{0}###{1}_{2}", m_label, m_id, m_parentId);
+    else if(!m_id.empty() && m_label.empty())
+        m_imguiId = fmt::format("{0}###{1}_{2}", m_id, m_id, m_parentId);
+    else if(m_id.empty() && !m_label.empty())
+        m_imguiId = fmt::format("{0}###{1}_{2}", m_label, m_label, m_parentId);
+
+    if(!m_imguiId.empty() && index > -1)
+        m_imguiId = fmt::format("{0}_{1}", m_imguiId, index);
+}
+
+const std::string &pmgui::Control::getParentId() const
+{
+    return m_parentId;
+}
+
+void pmgui::Control::setParentId(const std::string &parentId)
+{
+    m_parentId = parentId;
+    updateImguiId();
+}
+
+const std::string &pmgui::Control::getImguiId() const
+{
+    return m_imguiId;
 }

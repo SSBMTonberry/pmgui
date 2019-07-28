@@ -4,8 +4,8 @@
 
 #include "MessagePopup.h"
 
-pmgui::MessagePopup::MessagePopup(std::string id, std::string title, const MessagePopupType &popupType,
-                                std::string imguiId) : Popup(std::move(id), std::move(title), std::move(imguiId)),
+pmgui::MessagePopup::MessagePopup(std::string id, std::string title, const MessagePopupType &popupType)//, std::string imguiId)
+                                : Popup(std::move(id), std::move(title)),//, std::move(imguiId)),
                                 m_messagePopupType {popupType}
 {
     initialize();
@@ -13,8 +13,8 @@ pmgui::MessagePopup::MessagePopup(std::string id, std::string title, const Messa
 }
 
 pmgui::MessagePopup::MessagePopup(const sf::Vector2<int> &position, const sf::Vector2<int> &size, std::string id,
-                                std::string title, const MessagePopupType &popupType,
-                                std::string imguiId) : Popup(position, size, std::move(id), std::move(title), std::move(imguiId)),
+                                std::string title, const MessagePopupType &popupType) //, std::string imguiId)
+                                : Popup(position, size, std::move(id), std::move(title)), //, std::move(imguiId)),
                                 m_messagePopupType {popupType}
 {
     initialize();

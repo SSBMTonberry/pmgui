@@ -4,15 +4,15 @@
 
 #include "Form.h"
 
-pmgui::Form::Form(std::string id, std::string title, std::string imguiId) :
-                m_id {std::move(id)}, m_title {std::move(title)}, m_imguiId {std::move(imguiId)}
+pmgui::Form::Form(std::string id, std::string title) ://, std::string imguiId) :
+                m_id {std::move(id)}, m_title {std::move(title)}//, m_imguiId {std::move(imguiId)}
 {
 
 }
 
 pmgui::Form::Form(const sf::Vector2<int> &position, const sf::Vector2<int> &size, std::string id,
-                std::string title, std::string imguiId) :
-                m_position {position}, m_size {size}, m_scaledSize {size}, m_id {std::move(id)}, m_title {std::move(title)}, m_imguiId {std::move(imguiId)},
+                std::string title) ://, std::string imguiId) :
+                m_position {position}, m_size {size}, m_scaledSize {size}, m_id {std::move(id)}, m_title {std::move(title)}, //m_imguiId {std::move(imguiId)},
                 m_positionHasBeenChanged {true}
 {
 
@@ -91,16 +91,20 @@ void pmgui::Form::handleEvents()
  */
 std::string pmgui::Form::getImguiId()
 {
-    return (!m_imguiId.empty()) ? fmt::format("{0}###{1}", m_title, m_imguiId) : m_title;
+    return (!m_id.empty()) ? fmt::format("{0}###{1}_{2}", m_title, m_id, m_parentId) : m_title;
 }
 
 void pmgui::Form::add(std::unique_ptr<pmgui::Control> control)
 {
+    control->setParentId(m_id);
     m_controls.push_back(std::move(control));
 }
 
-void pmgui::Form::addReference(pmgui::Control *ref)
+void pmgui::Form::addReference(pmgui::Control *ref, bool setThisAsParent)
 {
+    if(setThisAsParent)
+        ref->setParentId(m_id);
+
     m_controlRefs.push_back(ref);
 }
 
@@ -183,10 +187,10 @@ void pmgui::Form::setPosition(const sf::Vector2<int> &position)
     m_position = position;
 }
 
-bool pmgui::Form::hasImguiId() const
-{
-    return m_imguiId.empty() ? false : true;
-}
+//bool pmgui::Form::hasImguiId() const
+//{
+//    return m_id.empty() ? false : true;
+//}
 
 bool pmgui::Form::customDraw()
 {
@@ -234,5 +238,20 @@ void pmgui::Form::clear()
 {
     m_controls.clear();
     m_controlRefs.clear();
+}
+
+const std::string &pmgui::Form::getParentId() const
+{
+    return m_parentId;
+}
+
+void pmgui::Form::setParentId(const std::string &parentId)
+{
+    m_parentId = parentId;
+}
+
+const std::string &pmgui::Form::getTitle() const
+{
+    return m_title;
 }
 

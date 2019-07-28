@@ -24,11 +24,11 @@ pmgui::Textbox::Textbox(std::string id) : Control(std::move(id))
  * @param imguiId When in the same form, this ID MUST be unique, or the Textboxes will have the same state, and will be
  * recognized by ImGui as the physically same textbox.
  */
-pmgui::Textbox::Textbox(const std::string &id, const std::string &label, size_t size, int imguiId) :
-        Control(id, label), m_size {size}, m_imguiId {imguiId}
+pmgui::Textbox::Textbox(const std::string &id, const std::string &label, size_t size, int index) :
+        Control(id, label), m_size {size}, m_index {index}
 {
     m_type = ControlType::Textbox;
-
+    updateImguiId(m_index);
     //m_size = size;
 }
 
@@ -38,11 +38,12 @@ pmgui::Textbox::Textbox(const std::string &id, const std::string &label, size_t 
  * @param size 0 = unlimited. Otherwise the size of the characters.
  * @param imguiId
  */
-void pmgui::Textbox::create(const std::string &label, size_t size, int imguiId)
+void pmgui::Textbox::create(const std::string &label, size_t size, int index)
 {
     m_label = label;
     m_size = size;
-    m_imguiId = imguiId;
+    m_index = index;
+    updateImguiId(m_index);
 }
 
 /*!
@@ -78,10 +79,10 @@ bool pmgui::Textbox::process()
             pushWidth();
 
         std::string id;
-        if(m_imguiId > -1)
-            id = (!m_hasLabel) ? fmt::format("###{0}", getImguiId()) : getImguiId();
+        if(m_index > -1)
+            id = (!m_hasLabel) ? fmt::format("###{0}_{1}_{2}", m_id, m_parentId, m_index) : getImguiId();
         else
-            id = m_label;
+            id = m_imguiId; //m_label;
 
         if(m_size > 0)
         {
@@ -216,10 +217,10 @@ void pmgui::Textbox::setHasLabel(bool hasLabel, bool disablePushItemWidth)
     m_disablePushItemWidth = disablePushItemWidth;
 }
 
-std::string pmgui::Textbox::getImguiId()
-{
-    return fmt::format("{0}###{1}", m_label, m_imguiId);
-}
+//std::string pmgui::Textbox::getImguiId()
+//{
+//    return fmt::format("{0}###{1}", m_label, m_imguiId);
+//}
 
 void pmgui::Textbox::setChanged()
 {

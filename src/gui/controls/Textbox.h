@@ -14,9 +14,9 @@ namespace pmgui
     {
         public:
             explicit Textbox(std::string id);
-            Textbox(const std::string &id, const std::string &label, size_t size = 0, int imguiId = -1);
+            Textbox(const std::string &id, const std::string &label, size_t size = 0, int index = -1);
 
-            void create(const std::string &label, size_t size = 0, int imguiId = -1);
+            void create(const std::string &label, size_t size = 0, int index = -1);
 
             bool process() override;
 
@@ -44,7 +44,7 @@ namespace pmgui
             void removeTextboxFlag(const TextboxFlags &textboxFlag);
             bool hasTextboxFlag(const TextboxFlags &textboxFlag);
 
-            std::string getImguiId();
+            //std::string getImguiId();
 
         protected:
             void assignColors() override;
@@ -52,7 +52,7 @@ namespace pmgui
             std::string m_text;
             TextboxFlags m_flags = TextboxFlags::None;
             size_t m_size = 0;
-            int m_imguiId = -1;
+            int m_index = -1;
             bool m_isChanged = false;
             bool m_hasLabel = true;
             bool m_disablePushItemWidth = false;

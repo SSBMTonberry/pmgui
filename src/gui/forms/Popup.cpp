@@ -4,15 +4,15 @@
 
 #include "Popup.h"
 
-pmgui::Popup::Popup(std::string id, std::string title, std::string imguiId)
-        : Form(std::move(id), std::move(title), std::move(imguiId))
+pmgui::Popup::Popup(std::string id, std::string title) //, std::string imguiId)
+        : Form(std::move(id), std::move(title)) //, std::move(imguiId))
 {
     m_open = false;
 }
 
 pmgui::Popup::Popup(const sf::Vector2<int> &position, const sf::Vector2<int> &size,
-                  std::string id, std::string title, std::string imguiId)
-                  : Form(position, size, std::move(id), std::move(title), std::move(imguiId))
+                  std::string id, std::string title) //, std::string imguiId)
+                  : Form(position, size, std::move(id), std::move(title))//, std::move(imguiId))
 {
     m_open = false;
 }

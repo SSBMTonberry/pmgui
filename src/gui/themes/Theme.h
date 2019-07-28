@@ -67,49 +67,6 @@ namespace pmgui
                 NavWindowingHighlight = ImGuiCol_NavWindowingHighlight,     // Highlight window when using CTRL+TAB
                 NavWindowingDimBg = ImGuiCol_NavWindowingDimBg,             // Darken/colorize entire screen behind the CTRL+TAB window list, when active
                 ModalWindowDimBg = ImGuiCol_ModalWindowDimBg                // Darken/colorize entire screen behind a modal window, when one is active
-                /*Text = 0,
-                TextDisabled,
-                WindowBg,              // Background of normal windows
-                ChildBg,               // Background of child windows
-                PopupBg,               // Background of popups, menus, tooltips windows
-                Border,
-                BorderShadow,
-                FrameBg,               // Background of checkbox, radio button, plot, slider, text input
-                FrameBgHovered,
-                FrameBgActive,
-                TitleBg,
-                TitleBgActive,
-                TitleBgCollapsed,
-                MenuBarBg,
-                ScrollbarBg,
-                ScrollbarGrab,
-                ScrollbarGrabHovered,
-                ScrollbarGrabActive,
-                CheckMark,
-                SliderGrab,
-                SliderGrabActive,
-                Button,
-                ButtonHovered,
-                ButtonActive,
-                Header,
-                HeaderHovered,
-                HeaderActive,
-                Separator,
-                SeparatorHovered,
-                SeparatorActive,
-                ResizeGrip,
-                ResizeGripHovered,
-                ResizeGripActive,
-                CloseButton,
-                CloseButtonHovered,
-                CloseButtonActive,
-                PlotLines,
-                PlotLinesHovered,
-                PlotHistogram,
-                PlotHistogramHovered,
-                TextSelectedBg,
-                ModalWindowDarkening,  // darken entire screen when a modal window is active
-                DragDropTarget,*/
             };
 
             Theme();

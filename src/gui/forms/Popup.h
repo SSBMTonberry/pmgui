@@ -15,10 +15,10 @@ namespace pmgui
     class Popup : public Form
     {
         public:
-            Popup(std::string id, std::string title, std::string imguiId = "");
+            Popup(std::string id, std::string title); //, std::string imguiId = "");
 
             Popup(const sf::Vector2<int> &position, const sf::Vector2<int> &size, std::string id,
-                  std::string title, std::string imguiId = "");
+                  std::string title); //, std::string imguiId = "");
 
             bool draw() override;
             void handleEvents() override;

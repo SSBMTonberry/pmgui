@@ -27,7 +27,7 @@ bool pmgui::Listbox::process()
         else
             pushWidth();
 
-        ImGui::ListBoxHeader(m_label.c_str(), m_itemSpace, m_heightInItems);
+        ImGui::ListBoxHeader(m_imguiId.c_str(), m_itemSpace, m_heightInItems);
         bool anythingPressed = false;
         for (const auto & [pos, item] : m_items)
         {

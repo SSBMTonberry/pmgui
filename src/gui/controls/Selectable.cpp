@@ -105,11 +105,11 @@ bool pmgui::Selectable::process()
 
         if (m_hasSize)
         {
-            if (ImGui::Selectable(m_label.c_str(), m_isSelected, 0, m_size)) {};
+            if (ImGui::Selectable(m_imguiId.c_str(), m_isSelected, 0, m_size)) {};
         }
         else
         {
-            if (ImGui::Selectable(m_label.c_str(), m_isSelected)) {};
+            if (ImGui::Selectable(m_imguiId.c_str(), m_isSelected)) {};
         }
 
         //if(m_setFocused)
@@ -147,7 +147,7 @@ bool pmgui::Selectable::process()
 bool pmgui::Selectable::processMouseEvents()
 {
     bool isPressed = false;
-    ImGui::PushID(m_label.c_str());
+    ImGui::PushID(m_imguiId.c_str());
     {
 
         if(ImGui::IsItemClicked(0))
