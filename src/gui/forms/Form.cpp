@@ -87,11 +87,18 @@ void pmgui::Form::handleEvents()
 
 /*!
  *
- * @return m_title + ### + m_imguiId
+ * @return m_title + ### + m_imguiId + parentId (if exists)
  */
 std::string pmgui::Form::getImguiId()
 {
-    return (!m_id.empty()) ? fmt::format("{0}###{1}_{2}", m_title, m_id, m_parentId) : m_title;
+    std::string id;
+    if(!m_id.empty() && !m_parentId.empty())
+        id = fmt::format("{0}###{1}_{2}", m_title, m_id, m_parentId);
+    else if(!m_id.empty() && m_parentId.empty())
+        id = fmt::format("{0}###{1}", m_title, m_id);
+    else
+        id = m_title;
+    return id;
 }
 
 void pmgui::Form::add(std::unique_ptr<pmgui::Control> control)
