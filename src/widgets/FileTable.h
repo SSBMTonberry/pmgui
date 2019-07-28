@@ -45,7 +45,7 @@ namespace fs = std::filesystem;
 #endif
 #endif
 
-namespace fm = pmgui_files_mapper;
+namespace pmgui_fm = pmgui_files_mapper;
 using namespace cpplinq;
 
 #if MSVC
