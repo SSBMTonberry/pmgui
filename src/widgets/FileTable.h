@@ -52,6 +52,9 @@ using namespace cpplinq;
 #include <Windows.h>
 #endif
 
+#if __GNUC__ > 8
+    #include "date.h"
+#endif
 
 
 namespace pmgui
@@ -93,6 +96,8 @@ namespace pmgui
             void create();
             void onHeaderColumnClicked(const std::string &id) override;
             void onRowDoubleClicked(DataRow *row) override;
+
+            std::string getFileTimeString(const fs::directory_entry & entry);
 
 #if MSVC
             std::string getWindowsTimeStampString(const fs::path &path);
