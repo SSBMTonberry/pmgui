@@ -141,12 +141,13 @@ std::string pmgui::FileTable::getFileTimeString(const fs::directory_entry & entr
         //std::string timefmt = "<Missing for GCC9>"; //fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
 
         std::filesystem::file_time_type timeEntry = fs::last_write_time(entry);
+
         //auto now = std::filesystem::file_time_type::clock::now() + timeEntry.time_since_epoch();
         //auto time = date::make_time(timeEntry);
 
         //auto year = date::year_month_day(date::make_time<int64_t, std::ratio<31556952>>(timeEntry.time_since_epoch()));
+
         std::string timefmt = "<Missing for GCC9>";
-        //std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&time));
     #else
         auto timeEntry = fs::last_write_time(entry);
                         time_t cftime = std::chrono::system_clock::to_time_t(timeEntry);

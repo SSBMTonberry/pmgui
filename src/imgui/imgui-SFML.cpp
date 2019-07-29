@@ -913,7 +913,8 @@ void updateMouseCursor(sf::Window& window) {
             sf::Cursor& c = s_mouseCursorLoaded[cursor]
                                 ? *s_mouseCursors[cursor]
                                 : *s_mouseCursors[ImGuiMouseCursor_Arrow];
-            //sf::Cursor cr;
+
+            //Force normal cursor in certain states
             if(cursor == ImGuiMouseCursor_Arrow || cursor == ImGuiMouseCursor_ResizeNWSE || cursor == ImGuiMouseCursor_ResizeNESW)
                 window.setMouseCursor(sf::Cursor());
             else
