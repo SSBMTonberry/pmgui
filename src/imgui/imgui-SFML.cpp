@@ -256,15 +256,21 @@ void Init(sf::Window& window, sf::RenderTarget& target, bool loadDefaultFont) {
         s_mouseCursorLoaded[i] = false;
     }
 
-    loadMouseCursor(ImGuiMouseCursor_Arrow, sf::Cursor::Arrow);
+    #if __linux__
+        loadMouseCursor(ImGuiMouseCursor_Arrow, sf::Cursor::ArrowWait);
+        loadMouseCursor(ImGuiMouseCursor_ResizeNESW,sf::Cursor::SizeAll);
+        loadMouseCursor(ImGuiMouseCursor_ResizeNWSE,sf::Cursor::SizeAll);
+    #else
+        loadMouseCursor(ImGuiMouseCursor_Arrow, sf::Cursor::Arrow);
+        loadMouseCursor(ImGuiMouseCursor_ResizeNESW, sf::Cursor::SizeBottomLeftTopRight);
+        loadMouseCursor(ImGuiMouseCursor_ResizeNWSE, sf::Cursor::SizeTopLeftBottomRight);
+    #endif
+
     loadMouseCursor(ImGuiMouseCursor_TextInput, sf::Cursor::Text);
     loadMouseCursor(ImGuiMouseCursor_ResizeAll, sf::Cursor::SizeAll);
     loadMouseCursor(ImGuiMouseCursor_ResizeNS, sf::Cursor::SizeVertical);
     loadMouseCursor(ImGuiMouseCursor_ResizeEW, sf::Cursor::SizeHorizontal);
-    loadMouseCursor(ImGuiMouseCursor_ResizeNESW,
-                    sf::Cursor::SizeBottomLeftTopRight);
-    loadMouseCursor(ImGuiMouseCursor_ResizeNWSE,
-                    sf::Cursor::SizeTopLeftBottomRight);
+
 
     if (s_fontTexture) {  // delete previously created texture
         delete s_fontTexture;
@@ -914,12 +920,7 @@ void updateMouseCursor(sf::Window& window) {
                                 ? *s_mouseCursors[cursor]
                                 : *s_mouseCursors[ImGuiMouseCursor_Arrow];
 
-            //Force normal cursor in certain states
-            if(cursor == ImGuiMouseCursor_Arrow || cursor == ImGuiMouseCursor_ResizeNWSE || cursor == ImGuiMouseCursor_ResizeNESW)
-                window.setMouseCursor(sf::Cursor());
-            else
-                window.setMouseCursor(c);
-
+            window.setMouseCursor(c);
         }
     }
 }
