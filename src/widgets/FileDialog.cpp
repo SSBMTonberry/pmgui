@@ -277,6 +277,8 @@ void pmgui::FileDialog::update()
 
         case DialogType::OpenDirectory:
             m_filenametext.setTextboxFlags(TextboxFlags::ReadOnly);
+            setFileTypeCollection("directory", false);
+            setFileType("directory");
             break;
     }
 }
@@ -466,6 +468,7 @@ void pmgui::FileDialog::createDefaultFileTypes()
     addFileType({".mp4", ".mp4", pmgui::Image("img_mp4",pmgui_fm::gui::filetypes::_VIDEO_PNG, pmgui_fm::gui::filetypes::_VIDEO_PNG_SIZE)});
     addFileType({".mpeg", ".mpeg", pmgui::Image("img_mpeg",pmgui_fm::gui::filetypes::_VIDEO_PNG, pmgui_fm::gui::filetypes::_VIDEO_PNG_SIZE)});
     addFileType({".ogg", "OGG/Vorbis (*.ogg)", pmgui::Image("img_ogg",pmgui_fm::gui::filetypes::_AUDIO_PNG, pmgui_fm::gui::filetypes::_AUDIO_PNG_SIZE)});
+    addFileType({".FLAC", "FLAC (Free Lossless Audio Codec) (*.FLAC)", pmgui::Image("img_flac",pmgui_fm::gui::filetypes::_AUDIO_PNG, pmgui_fm::gui::filetypes::_AUDIO_PNG_SIZE)});
     addFileType({".pdf", ".pdf", pmgui::Image("img_pdf",pmgui_fm::gui::filetypes::_PDF_PNG, pmgui_fm::gui::filetypes::_PDF_PNG_SIZE)});
     addFileType({".pmgui", ".pmgui", pmgui::Image("img_pmgui",pmgui_fm::gui::misc::_APPLICATION_PNG, pmgui_fm::gui::misc::_APPLICATION_PNG_SIZE)});
     addFileType({".png", "Portable Network Graphics (*.png)", pmgui::Image("img_png",pmgui_fm::gui::filetypes::_IMAGE_PNG, pmgui_fm::gui::filetypes::_IMAGE_PNG_SIZE)});
@@ -492,7 +495,9 @@ void pmgui::FileDialog::createDefaultFileTypes()
 void pmgui::FileDialog::createDefaultFileTypesCollection()
 {
     createFileTypeCollection("images", {".png", ".jpg", ".jpeg", ".bmp", ".gif" });
-    createFileTypeCollection("music", {".mp3", ".ogg", ".wav"});
+    createFileTypeCollection("music", {".mp3", ".ogg", ".wav", ".FLAC"});
+    createFileTypeCollection("directory", {"directory"});
+    createFileTypeCollection("folder", {"directory"});
 }
 
 pmgui::Image *pmgui::FileDialog::getImgFileIcon(const std::string &key)
@@ -563,4 +568,5 @@ void FileDialog::setFileType(const std::string &filetype)
 {
     std::string name = m_fileTypes[filetype].getName();
     m_fileTypeCombo.setValue(name);
+    m_fileTable.setFileFilter(name);
 }
