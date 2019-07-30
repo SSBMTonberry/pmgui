@@ -15,13 +15,13 @@ int main()
     return 0;
 }
 
+// Just a cursor dummy application
 //int main()
 //{
 //    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
 //    // ... create window as usual ...
 //    sf::Cursor cursor;
-//
-//    if (cursor.loadFromSystem(sf::Cursor::NotAllowed))
+//    if (cursor.loadFromSystem(sf::Cursor::Arrow))
 //        window.setMouseCursor(cursor);
 //
 //    while(window.isOpen())
@@ -35,7 +35,7 @@ int main()
 //                window.close();
 //        }
 //        // Clear screen
-//        window.clear(sf::Color(0, 51, 102));
+//        window.clear();
 //        // Update the window
 //        window.display();
 //    }
