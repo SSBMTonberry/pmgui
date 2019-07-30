@@ -92,6 +92,8 @@ void pmgui::DemoManager::createDemo()
 
     m_fileDialogFile.setFileTypeCollection("images", true);
     m_fileDialogSave.setFileTypeCollection("images", true);
+
+    m_fileDialogFile.setFileType("*.*");
 }
 
 void DemoManager::onButtonPressed(const pmgui::Button *btn)

@@ -87,6 +87,7 @@ namespace pmgui
             void createFileTypeCollection(const std::string &name, const std::initializer_list<std::string> &fileExtensions);
 
             void setFileTypeCollection(const std::string &name, bool includeAllFilesOption); //(const pmgui::FileTypeMode &mode);
+            void setFileType(const std::string &filetype);
             void setFilename(const std::string &filename);
             void setUseFileIcons(bool useFileIcons);
             pmgui::Image *getImgFileIcon(const std::string &key);

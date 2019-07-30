@@ -554,3 +554,13 @@ void FileDialog::setScaleFactor(float scaleFactor)
     m_okBtn.setSize({(int)(m_scaledSize.x * 0.1f * scaleFactor), (int)(m_scaledSize.y * 0.045f * scaleFactor)});
     m_cancelBtn.setSize({(int)(m_scaledSize.x * 0.1f * scaleFactor), (int)(m_scaledSize.y * 0.045f * scaleFactor)});
 }
+
+/*!
+ * Set filetype by extension. Example ".png", ".jpg"
+ * @param filetype
+ */
+void FileDialog::setFileType(const std::string &filetype)
+{
+    std::string name = m_fileTypes[filetype].getName();
+    m_fileTypeCombo.setValue(name);
+}
