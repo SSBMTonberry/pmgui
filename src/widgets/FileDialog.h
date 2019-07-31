@@ -103,7 +103,11 @@ namespace pmgui
 
             void setScaleFactor(float scaleFactor) override;
 
+            //Static helpers
+            static fs::path getParentPath(const fs::path &path);
+
         protected:
+
             void update();
             void initializePopups();
             void handleFileChosen();

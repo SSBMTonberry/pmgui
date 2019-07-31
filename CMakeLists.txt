@@ -62,6 +62,7 @@ configure_file (
 
 add_subdirectory(src)
 add_subdirectory(demo)
+add_subdirectory(tests)
 
 #set(SOURCE_FILES main.cpp)
 #add_executable(Pixelmound ${SOURCE_FILES})

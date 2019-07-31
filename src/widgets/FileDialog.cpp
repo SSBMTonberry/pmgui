@@ -112,8 +112,8 @@ void pmgui::FileDialog::handleEvents()
 
             if (fs::exists(m_path))
             {
-                m_fileTable.listFilesByDirectory(m_path,
-                                                 (m_path.has_parent_path()) ? m_path.parent_path() : fs::path(""));
+                //m_fileTable.listFilesByDirectory(m_path,(m_path.has_parent_path()) ? m_path.parent_path() : fs::path(""));
+                m_fileTable.listFilesByDirectory(m_path, getParentPath(m_path));
             }
         }
 
@@ -125,7 +125,7 @@ void pmgui::FileDialog::handleEvents()
             {
                 m_filepathtext.setValue(pathToOpen.u8string());
                 m_path = pathToOpen;
-                fs::path parentPath = (m_path.has_parent_path()) ? m_path.parent_path() : fs::path("");
+                fs::path parentPath = getParentPath(m_path);
                 //std::string pathStr = m_path.u8string();
                 //std::string parentPathStr = parentPath.u8string();
                 m_fileTable.listFilesByDirectory(m_path, parentPath);
@@ -576,4 +576,28 @@ void FileDialog::setFileType(const std::string &filetype)
 void FileDialog::refreshFiletype()
 {
     m_fileTable.setFileFilter(m_filetypeFilter[m_fileTypeCombo.getValue()]);
+}
+
+/*!
+ * Due to a seemingly bug on one occasion with path.parent_path(), I generate
+ * the parent path myself.
+ *
+ * The bug with the actual paths tested:
+ * /home/robin/Projects -> .. ->
+ * /home/robin -> /home/robin/Music ->
+ * /home/robin/Music/NSFE -> .. ->
+ * /home/robin/Projects <------- This should have been /home/robin/Music, and uses parent_path() to get the parent path.
+ * Which makes me conclude that there is a bug in the C++ STL.
+ *
+ * @param path The path to find the parent path to
+ * @return The parent path if it has any. Else returns its own value
+ */
+fs::path FileDialog::getParentPath(const fs::path &path)
+{
+    fs::path newPath = fs::path(path.u8string()); //This rather verbose redefinition of the same path seems to fix the bug.
+    if (path.has_parent_path())
+    {
+        newPath = newPath.parent_path();
+    }
+    return newPath;
 }
