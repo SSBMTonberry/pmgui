@@ -78,12 +78,20 @@ bool pmgui::DragInt::processDrag()
     {
         case DragIntSize::One:
             result = ImGui::DragInt(m_label.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            break;
+
         case DragIntSize::Two:
             result = ImGui::DragInt2(m_label.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            break;
+
         case DragIntSize::Three:
             result = ImGui::DragInt3(m_label.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            break;
+
         case DragIntSize::Four:
             result = ImGui::DragInt4(m_label.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            break;
+
     }
     //ImGui::PopItemWidth();
 

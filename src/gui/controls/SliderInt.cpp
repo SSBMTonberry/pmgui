@@ -86,14 +86,23 @@ bool pmgui::SliderInt::processSlider()
     {
         case SliderIntType::H_One:
             result = ImGui::SliderInt(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            break;
+
         case SliderIntType::H_Two:
             result = ImGui::SliderInt2(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            break;
+
         case SliderIntType::H_Three:
             result = ImGui::SliderInt3(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            break;
+
         case SliderIntType::H_Four:
             result = ImGui::SliderInt4(m_imguiId.c_str(), m_values.get(), m_minimum, m_maximum, format.c_str());
+            break;
+
         case SliderIntType::Vertical:
             result = ImGui::VSliderInt(m_imguiId.c_str(), m_size, m_values.get(), m_minimum, m_maximum, format.c_str());
+            break;
     }
 
     return result;

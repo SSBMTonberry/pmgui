@@ -64,12 +64,20 @@ bool pmgui::DragFloat::processDrag()
     {
         case DragFloatSize::One:
             result = ImGui::DragFloat(m_imguiId.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            break;
+
         case DragFloatSize::Two:
             result = ImGui::DragFloat2(m_imguiId.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            break;
+
         case DragFloatSize::Three:
             result = ImGui::DragFloat3(m_imguiId.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            break;
+
         case DragFloatSize::Four:
             result = ImGui::DragFloat4(m_imguiId.c_str(), m_values.get(), m_speed, m_minimum, m_maximum, format.c_str());
+            break;
+
     }
     //ImGui::PopItemWidth();
 
