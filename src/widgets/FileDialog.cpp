@@ -125,9 +125,10 @@ void pmgui::FileDialog::handleEvents()
             {
                 m_filepathtext.setValue(pathToOpen.u8string());
                 m_path = pathToOpen;
-                m_fileTable.listFilesByDirectory(pathToOpen,
-                                                 (pathToOpen.has_parent_path()) ? pathToOpen.parent_path()
-                                                                                : fs::path(""));
+                fs::path parentPath = (m_path.has_parent_path()) ? m_path.parent_path() : fs::path("");
+                //std::string pathStr = m_path.u8string();
+                //std::string parentPathStr = parentPath.u8string();
+                m_fileTable.listFilesByDirectory(m_path, parentPath);
             }
             m_fileTable.resetPathOpeningCall();
         }

@@ -34,6 +34,6 @@ set(SOURCE_FILES gui/controls/Button.cpp gui/controls/Button.h gui/controls/Chec
         gui/properties/Tooltip.cpp gui/properties/Tooltip.h gui/themes/Theme.cpp gui/themes/Theme.h
         gui/TextEditor.cpp gui/TextEditor.h pmgui.h managers/cpplinq.hpp managers/EventManager.h managers/EventManager.cpp gui/GuiManager.h gui/GuiManager.cpp
         widgets/FileDialog.h widgets/FileDialog.cpp widgets/FileTable.h widgets/FileTable.cpp
-        widgets/FileType.cpp widgets/FileType.h widgets/FileTypeCollection.cpp widgets/FileTypeCollection.h widgets/date.h)
+        widgets/FileType.cpp widgets/FileType.h widgets/FileTypeCollection.cpp widgets/FileTypeCollection.h)
 
 add_library(pmgui STATIC ${SOURCE_FILES} ${IMGUI_SOURCE_FILES} ${FMT_SOURCE_FILES})

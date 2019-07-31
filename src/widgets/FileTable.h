@@ -52,10 +52,6 @@ using namespace cpplinq;
 #include <Windows.h>
 #endif
 
-#if __GNUC__ > 8
-    #include "date.h"
-#endif
-
 
 namespace pmgui
 {

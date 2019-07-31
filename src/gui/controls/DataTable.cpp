@@ -46,14 +46,7 @@ bool pmgui::DataTable::process()
 
 pmgui::DataRow *pmgui::DataTable::newRow()
 {
-
-    //unique_ptr<DataRow> row = make_unique<DataRow>(fmt::format("row_{0}", m_rowIdCounter), &m_columnDefinition);
-
-    //unique_ptr<DataRow> row = make_unique<DataRow>(m_id, &m_columnDefinition, m_rowIdCounter);
-    //DataRow row(m_id, &m_columnDefinition, m_rowIdCounter);
-    //m_rows.push_back(row);
     m_rows.emplace_back(m_id, &m_columnDefinition, m_rowIdCounter);
-    //m_rows.push_back(move(row));
     m_rowIdCounter++;
     return &m_rows[m_rows.size()-1];
 }

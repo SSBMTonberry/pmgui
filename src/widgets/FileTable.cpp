@@ -36,14 +36,7 @@ void pmgui::FileTable::listFilesByDirectory(const fs::path &path,const fs::path 
         {
             DataRow *row = newRow();
 
-            /*auto timeEntry = fs::last_write_time(parentDirectory);
-            time_t cftime = chrono::system_clock::to_time_t(timeEntry);
-
-            std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));*/
-
             row->setValue("filename", "..");
-            //auto imgData = getFileIcon("directory");
-            //row->setImage("filename", imgData.first, imgData.second);
             auto icon = getImgFileIcon("directory");
             row->setImageRef("filename", icon);
 
@@ -63,8 +56,6 @@ void pmgui::FileTable::listFilesByDirectory(const fs::path &path,const fs::path 
 
                 std::string timefmt = getFileTimeString(entry);
                 row->setValue("filename", filename.u8string());
-                //auto imgData = getFileIcon("directory");
-                //row->setImage("filename", imgData.first, imgData.second);
                 auto icon = getImgFileIcon("directory");
                 row->setImageRef("filename", icon);
                 row->setValue("type", "directory");
@@ -87,8 +78,6 @@ void pmgui::FileTable::listFilesByDirectory(const fs::path &path,const fs::path 
                     {
                         auto icon = getImgFileIcon(extension.string());
                         row->setImageRef("filename", icon);
-                        //auto imgData = getFileIcon(extension.string());
-                        //row->setImage("filename", imgData.first, imgData.second);
                     }
 
                     row->setValue("type", extension.string());
@@ -110,8 +99,6 @@ void pmgui::FileTable::listFilesByDirectory(const fs::path &path,const fs::path 
                     {
                         auto icon = getImgFileIcon(extension.string());
                         row->setImageRef("filename", icon);
-                        //auto imgData = getFileIcon(extension.string());
-                        //row->setImage("filename", imgData.first, imgData.second);
                     }
                     row->setValue("type", extension.string());
                     row->setValue("size", "0");
@@ -141,7 +128,6 @@ std::string pmgui::FileTable::getFileTimeString(const fs::directory_entry & entr
         //std::string timefmt = "<Missing for GCC9>"; //fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
 
         std::filesystem::file_time_type timeEntry = fs::last_write_time(entry);
-
         //auto now = std::filesystem::file_time_type::clock::now() + timeEntry.time_since_epoch();
         //auto time = date::make_time(timeEntry);
 
@@ -238,7 +224,8 @@ void pmgui::FileTable::onRowDoubleClicked(DataRow *row)
     std::string path = m_pathMap[generatePathId(*row)].string();
     if(m_pathMap.count(generatePathId(*row)) > 0)
     {
-        m_pathToOpen = m_pathMap[generatePathId(*row)];
+        std::string pathId = generatePathId(*row);
+        m_pathToOpen = m_pathMap[pathId];
         m_callPathOpening = true;
     }
     //Be careful to edit values of selectables on the way. It somewhat makes them unclickable after a while.
