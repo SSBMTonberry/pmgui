@@ -184,6 +184,7 @@ void pmgui::FileDialog::onOpen()
     {
         m_fileTable.listFilesByDirectory(m_path, (m_path.has_parent_path()) ? m_path.parent_path() : fs::path(""));
     }
+    refreshFiletype();
 }
 
 std::string pmgui::FileDialog::getOkBtnText() const
@@ -568,5 +569,10 @@ void FileDialog::setFileType(const std::string &filetype)
 {
     std::string name = m_fileTypes[filetype].getName();
     m_fileTypeCombo.setValue(name);
-    m_fileTable.setFileFilter(name);
+    m_fileTable.setFileFilter(m_filetypeFilter[name]);
+}
+
+void FileDialog::refreshFiletype()
+{
+    m_fileTable.setFileFilter(m_filetypeFilter[m_fileTypeCombo.getValue()]);
 }

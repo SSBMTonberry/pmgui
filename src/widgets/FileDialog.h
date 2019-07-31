@@ -107,6 +107,7 @@ namespace pmgui
             void update();
             void initializePopups();
             void handleFileChosen();
+            void refreshFiletype();
 
             void createDefaultFileTypes();
             void createDefaultFileTypesCollection();
