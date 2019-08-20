@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.12)
 project(pmgui_project)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -56,9 +56,8 @@ else()
 endif()
 
 configure_file (
-        "PmguiConfig.h.in"
-        "PmguiConfig.h"
-)
+        "${PROJECT_SOURCE_DIR}/PmguiConfig.h.in"
+        "${PROJECT_SOURCE_DIR}/PmguiConfig.h")
 
 add_subdirectory(src)
 add_subdirectory(demo)

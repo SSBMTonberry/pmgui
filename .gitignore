@@ -36,3 +36,5 @@
 cmake-build-debug/
 
 cmake-build-release/
+
+PmguiConfig\.h

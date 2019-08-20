@@ -27,23 +27,28 @@
     namespace fs = std::filesystem;
 #elif MINGW
 #if __MINGW64_VERSION_MAJOR > 6
-#include <filesystem>
-namespace fs = std::filesystem;
-#else
-    #include <experimental/filesystem>
-    namespace fs = std::experimental::filesystem;
-#endif
-#elif APPLE
-#include <experimental/filesystem>
-    namespace fs = std::experimental::filesystem;
-#else
-    #if __GNUC__ < 8 //GCC major version less than 8
+        #include <filesystem>
+        namespace fs = std::filesystem;
+    #else
         #include <experimental/filesystem>
+        namespace fs = std::experimental::filesystem;
+    #endif
+#elif APPLE
+    #if __clang_major__ < 8
+#include <experimental/filesystem>
         namespace fs = std::experimental::filesystem;
     #else
         #include <filesystem>
         namespace fs = std::filesystem;
     #endif
+#else
+#if __GNUC__ < 8 //GCC major version less than 8
+#include <experimental/filesystem>
+                namespace fs = std::experimental::filesystem;
+#else
+#include <filesystem>
+namespace fs = std::filesystem;
+#endif
 #endif
 
 namespace pmgui::tools

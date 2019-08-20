@@ -5,6 +5,7 @@
 #ifndef PMGUI_DATATABLE_H
 #define PMGUI_DATATABLE_H
 
+#include "../../misc/Tools.hpp"
 #include "Control.h"
 #include "DataColumnDefinition.h"
 #include "DataRow.h"
