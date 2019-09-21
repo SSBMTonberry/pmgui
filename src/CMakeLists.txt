@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.11)
 project(pmgui)
 
+configure_file (
+        "${PROJECT_SOURCE_DIR}/../PmguiConfig.h.in"
+        "${PROJECT_SOURCE_DIR}/../PmguiConfig.h")
+
 include_directories(../external_libs/include)
 
 set(FMT_SOURCE_FILES fmt/format.cc fmt/posix.cc)
@@ -36,4 +40,4 @@ set(SOURCE_FILES gui/controls/Button.cpp gui/controls/Button.h gui/controls/Chec
         widgets/FileDialog.h widgets/FileDialog.cpp widgets/FileTable.h widgets/FileTable.cpp
         widgets/FileType.cpp widgets/FileType.h widgets/FileTypeCollection.cpp widgets/FileTypeCollection.h)
 
-add_library(pmgui STATIC ${SOURCE_FILES} ${IMGUI_SOURCE_FILES} ${FMT_SOURCE_FILES})
+add_library(pmgui ${SOURCE_FILES} ${IMGUI_SOURCE_FILES} ${FMT_SOURCE_FILES})

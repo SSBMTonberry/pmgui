@@ -55,13 +55,25 @@ else()
     set(MINGW 0)
 endif()
 
-configure_file (
-        "${PROJECT_SOURCE_DIR}/PmguiConfig.h.in"
-        "${PROJECT_SOURCE_DIR}/PmguiConfig.h")
+option(BUILD_SHARED_LIBS "Build shared libraries." OFF)
+option(BUILD_TESTS "Build unit tests." ON)
+option(BUILD_DEMO "Build demos." ON)
+
+#configure_file (
+#        "${PROJECT_SOURCE_DIR}/PmguiConfig.h.in"
+#        "${PROJECT_SOURCE_DIR}/PmguiConfig.h")
 
 add_subdirectory(src)
-add_subdirectory(demo)
-add_subdirectory(tests)
+if(${BUILD_DEMO})
+    add_subdirectory(demo)
+endif()
+if(${BUILD_TESTS})
+    add_subdirectory(tests)
+endif()
+
+unset(BUILD_SHARED_LIBS CACHE) #Must clear the cache to detect changes in this variable
+unset(BUILD_TESTS CACHE) #Must clear the cache to detect changes in this variable
+unset(BUILD_DEMO CACHE)
 
 #set(SOURCE_FILES main.cpp)
 #add_executable(Pixelmound ${SOURCE_FILES})
