@@ -48,13 +48,15 @@ namespace pmgui
         public:
             static const int MAX_FILE_PATH_LENGTH = 512;
 
-            FileDialog(const DialogType &dialogType, std::string id, std::string title); //, std::string imguiId = "");
+            FileDialog(const DialogType &dialogType, std::string id, std::string title, bool autoInitialize = true); //, std::string imguiId = "");
 
             FileDialog(const DialogType &dialogType, const sf::Vector2<int> &position, const sf::Vector2<int> &size,
-                       std::string id, std::string title); //, std::string imguiId = "");
+                       std::string id, std::string title, bool autoInitialize = true); //, std::string imguiId = "");
 
             void assignEnvironmentMap(unordered_map<string, string> *env);
             void assignDefaults();
+
+            void initialize(const std::optional<sf::Vector2<int>> &position = std::nullopt, const std::optional<sf::Vector2<int>> &size = std::nullopt);
 
             //bool draw() override;
             void handleEvents() override;
@@ -130,7 +132,6 @@ namespace pmgui
             void onMessageResponse(const Button *btn, const MessagePopupResponse &response);
             void onOpen() override;
 
-            void initialize(const std::optional<sf::Vector2<int>> &position = std::nullopt, const std::optional<sf::Vector2<int>> &size = std::nullopt);
             void createLayout();
             std::string getEnv(const std::string_view &id);
 

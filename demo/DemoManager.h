@@ -47,9 +47,9 @@ namespace pmgui
             Button *m_openFileSaveDialogBtn = nullptr;
             Button *m_openCodeEditorBtn = nullptr;
 
-            FileDialog m_fileDialogFile { DialogType::OpenFile, "main_file_dialog_file", "Choose a file"}; //, "main_file_dialog_file"};
-            FileDialog m_fileDialogFolder { DialogType::OpenDirectory, "main_file_dialog_folder", "Choose a folder"}; //, "main_file_dialog_file"};
-            FileDialog m_fileDialogSave { DialogType::SaveFile, "main_file_dialog_save_file", "Save a file"}; //, "main_file_dialog_file"};
+            FileDialog m_fileDialogFile { DialogType::OpenFile, "main_file_dialog_file", "Choose a file", false}; //, "main_file_dialog_file"};
+            FileDialog m_fileDialogFolder { DialogType::OpenDirectory, "main_file_dialog_folder", "Choose a folder", false}; //, "main_file_dialog_file"};
+            FileDialog m_fileDialogSave { DialogType::SaveFile, "main_file_dialog_save_file", "Save a file", false}; //, "main_file_dialog_file"};
 
     };
 }

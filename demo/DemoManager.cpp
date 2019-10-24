@@ -21,6 +21,10 @@ void pmgui::DemoManager::initialize(const std::string &title, const sf::Vector2<
     //Enable docking (New in ImGui 1.66 WIP) - Downloaded 14.10.2018
     ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
+    m_fileDialogFile.initialize(std::nullopt, sf::Vector2i((int)m_window.getSize().x, (int)m_window.getSize().y));
+    m_fileDialogFolder.initialize(std::nullopt, sf::Vector2i((int)m_window.getSize().x, (int)m_window.getSize().y));
+    m_fileDialogSave.initialize(std::nullopt, sf::Vector2i((int)m_window.getSize().x, (int)m_window.getSize().y));
+
     m_window.resetGLStates(); // call it if you only process ImGui. Otherwise not needed.
 
     createDemo();

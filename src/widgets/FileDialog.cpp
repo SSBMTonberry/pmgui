@@ -4,26 +4,39 @@
 
 #include "FileDialog.h"
 
-pmgui::FileDialog::FileDialog(const DialogType &dialogType, std::string id, std::string title) : //, std::string imguiId) :
+pmgui::FileDialog::FileDialog(const DialogType &dialogType, std::string id, std::string title, bool autoInitialize) : //, std::string imguiId) :
         Popup(std::move(id), std::move(title)) //, std::move(imguiId))
 {
     m_dialogType = dialogType;
-    initialize();
+    if(autoInitialize)
+        initialize();
 }
 
 pmgui::FileDialog::FileDialog(const DialogType &dialogType, const sf::Vector2<int> &position, const sf::Vector2<int> &size,
-                            std::string id, std::string title) //, std::string imguiId)
+                            std::string id, std::string title, bool autoInitialize) //, std::string imguiId)
                             : Popup(position, size, std::move(id), std::move(title)) //, std::move(imguiId))
 {
     m_dialogType = dialogType;
-    initialize(m_position, m_size);
+    if(autoInitialize)
+        initialize(m_position, m_size);
 }
 
+/*!
+ * 
+ * @param position The position. To get it to appear in the center, just pass a std::nullopt.
+ * @param size For best result, pass in the size of the sf::RenderWindow. If not specified, sf::VideoMode::getDesktopMode() is used.
+ *             The size represents the size of the application, and the dialog itself will be 1 / 3 of this size.
+ */
 void pmgui::FileDialog::initialize(const std::optional<sf::Vector2<int>> &position, const std::optional<sf::Vector2<int>> &size)
 {
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+
     if(!size.has_value()) setSize({(int)desktop.width / 3, (int)desktop.height / 3});
+    else setSize(sf::Vector2i(size->x / 3, size->y / 3));
+
     if(!position.has_value()) setPosition({((int)desktop.width / 2) - (m_size.x / 2), ((int)desktop.height / 2) - (m_size.y / 2)});
+    else setSize(sf::Vector2i(position->x, position->y));
+
     setFormFlags(pmgui::FormFlags::NoResize | pmgui::FormFlags::NoCollapse | pmgui::FormFlags::AlwaysAutoResize);// | pmgui::FormFlags::NoScrollbar);
 
     setPath(fs::current_path());
