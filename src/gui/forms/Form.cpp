@@ -263,3 +263,13 @@ const std::string &pmgui::Form::getTitle() const
     return m_title;
 }
 
+bool pmgui::Form::isHovered() const
+{
+    return m_formIsHovered;
+}
+
+bool pmgui::Form::isActive() const
+{
+    return m_formIsActive;
+}
+

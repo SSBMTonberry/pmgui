@@ -69,6 +69,8 @@ namespace pmgui
 
             bool isOpen() const;
             bool isVisible() const;
+            bool isHovered() const;
+            bool isActive() const;
 
         protected:
             virtual bool onDraw();
