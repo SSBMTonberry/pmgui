@@ -368,6 +368,7 @@ std::string pmgui::FileTable::getWindowsTimeStampString(const fs::path &path)
     }
     return "<date not found>";
 }
+#endif
 
 /*!
  * Get file timestamp (works for all OSes)
@@ -382,6 +383,3 @@ std::string pmgui::FileTable::getTimeStampString(const fs::path &path)
 
     return timefmt;
 }
-
-
-#endif
