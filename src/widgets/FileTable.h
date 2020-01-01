@@ -78,6 +78,7 @@ namespace pmgui
 #elif APPLE
             std::string getOsxTimeStampString(const fs::path &path);
 #endif
+            std::string getTimeStampString(const fs::path &path); //Should work for ALL OSes (Windows, Linux, Mac)
             void onRowMarked(DataRow *row) override;
 
             const std::string generatePathId(const DataRow &row) const;

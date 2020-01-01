@@ -114,26 +114,34 @@ void pmgui::FileTable::listFilesByDirectory(const fs::path &path,const fs::path 
 
 std::string pmgui::FileTable::getFileTimeString(const fs::directory_entry & entry)
 {
-    #if MSVC
-        //fs::file_time_type timeEntry = fs::last_write_time(entry);
-        //std::string timefmt = getWindowsTimeStampString(entry);
-        std::filesystem::file_time_type timeEntry = fs::last_write_time(entry);
-        time_t cftime = to_time_t(timeEntry);
-        std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
-    #elif APPLE
-        //auto timeEntry = fs::last_write_time(entry);
-                        //std::time_t cftime = decltype(timeEntry)::clock::to_time_t(timeEntry);
-                        //time_t cftime = chrono::system_clock::to_time_t(timeEntry);
-                        std::string timefmt = getOsxTimeStampString(entry);//"<not supported by Clang!>";//fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
-    #elif __GNUC__ > 8
-        std::filesystem::file_time_type timeEntry = fs::last_write_time(entry);
-        time_t cftime = to_time_t(timeEntry);
-        std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
+    //#if MSVC
+    //    //fs::file_time_type timeEntry = fs::last_write_time(entry);
+    //    //std::string timefmt = getWindowsTimeStampString(entry);
+    //    std::filesystem::file_time_type timeEntry = fs::last_write_time(entry);
+    //    time_t cftime = to_time_t(timeEntry);
+    //    std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
+    //#elif APPLE
+    //    //auto timeEntry = fs::last_write_time(entry);
+    //                    //std::time_t cftime = decltype(timeEntry)::clock::to_time_t(timeEntry);
+    //                    //time_t cftime = chrono::system_clock::to_time_t(timeEntry);
+    //                    std::string timefmt = getOsxTimeStampString(entry);//"<not supported by Clang!>";//fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
+    //#elif __GNUC__ > 8
+    //    std::filesystem::file_time_type timeEntry = fs::last_write_time(entry);
+    //    time_t cftime = to_time_t(timeEntry);
+    //    std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
+//
+    //#else
+    //    auto timeEntry = fs::last_write_time(entry);
+    //                    time_t cftime = std::chrono::system_clock::to_time_t(timeEntry);
+    //                    std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
+    //#endif
 
-    #else
+    #if defined(__GNUC__) && __GNUC__ < 9
         auto timeEntry = fs::last_write_time(entry);
-                        time_t cftime = std::chrono::system_clock::to_time_t(timeEntry);
-                        std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
+        time_t cftime = std::chrono::system_clock::to_time_t(timeEntry);
+        std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
+    #else
+        std::string timefmt = getTimeStampString(entry);
     #endif
 
     return timefmt;
@@ -359,6 +367,20 @@ std::string pmgui::FileTable::getWindowsTimeStampString(const fs::path &path)
         return to_string(filetime);
     }
     return "<date not found>";
+}
+
+/*!
+ * Get file timestamp (works for all OSes)
+ * @param path
+ * @return
+ */
+std::string pmgui::FileTable::getTimeStampString(const fs::path &path)
+{
+    std::filesystem::file_time_type timeEntry = fs::last_write_time(path);
+    time_t cftime = to_time_t(timeEntry);
+    std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
+
+    return timefmt;
 }
 
 
