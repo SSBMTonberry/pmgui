@@ -11,7 +11,6 @@
 #include "../controls/Child.h"
 #include "../controls/Label.h"
 
-using namespace std;
 namespace pmgui
 {
     enum class MessagePopupType : unsigned
@@ -54,10 +53,10 @@ namespace pmgui
             void setMessage(const std::string &msg);
 
             void setCustomButtonVisibility(bool btn1Visible, bool btn2Visible, bool btn3Visible);
-            void setCustomButtonTexts(const string &btn1Text, const string &btn2Text, const string &btn3Text);
-            void setCustomButtonCommands(const string &btn1Cmd, const string &btn2Cmd, const string &btn3Cmd);
+            void setCustomButtonTexts(const std::string &btn1Text, const std::string &btn2Text, const std::string &btn3Text);
+            void setCustomButtonCommands(const std::string &btn1Cmd, const std::string &btn2Cmd, const std::string &btn3Cmd);
 
-            const string &getMessage() const;
+            const std::string &getMessage() const;
             MessagePopupResponse getLastResponse() const;
 
         protected:

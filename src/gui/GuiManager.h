@@ -20,7 +20,6 @@
 #include "forms/Form.h"
 #include "forms/TextEditorForm.h"
 
-using namespace std;
 
 namespace pmgui
 {
@@ -28,7 +27,7 @@ namespace pmgui
     {
             typedef std::function<void(void)> func_customdraw; //OnCancel(), for instance
         public:
-            enum class GuiTheme : uint
+            enum class GuiTheme : int
             {
                 Classic = 0,
                 Dark = 1,

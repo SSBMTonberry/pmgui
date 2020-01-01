@@ -16,7 +16,6 @@
 #include "../gui/controls/Combobox.h"
 #include <SFML/Window/VideoMode.hpp>
 
-using namespace std;
 using namespace pmgui;
 namespace pmgui_fm = pmgui_files_mapper;
 
@@ -53,7 +52,7 @@ namespace pmgui
             FileDialog(const DialogType &dialogType, const sf::Vector2<int> &position, const sf::Vector2<int> &size,
                        std::string id, std::string title, bool autoInitialize = true); //, std::string imguiId = "");
 
-            void assignEnvironmentMap(unordered_map<string, string> *env);
+            void assignEnvironmentMap(std::unordered_map<std::string, std::string> *env);
             void assignDefaults();
 
             void initialize(const std::optional<sf::Vector2<int>> &position = std::nullopt, const std::optional<sf::Vector2<int>> &size = std::nullopt);
@@ -100,7 +99,7 @@ namespace pmgui
             //void getHomeEnvironmentVariable();
             std::string getOkBtnText() const;
 
-            unordered_map<string, string> *m_environmentMap = nullptr;
+            std::unordered_map<std::string, std::string> *m_environmentMap = nullptr;
 
             std::vector<FileTypeCollection> m_fileCollections;
             std::map<std::string, pmgui::FileType> m_fileTypes;
@@ -143,10 +142,10 @@ namespace pmgui
             MessagePopup m_msgPopupNoFileChosen {"msg_popup_no_file_chosen", "No file chosen!", MessagePopupType::Ok};
             MessagePopup m_msgPopupFileDoesNotExist {"msg_popup_file_does_not_exist", "File does not exist!", MessagePopupType::Ok};
 
-            vector<func_path> m_callbackOnFileChosen;
-            vector<func_void> m_callbackOnClose;
+            std::vector<func_path> m_callbackOnFileChosen;
+            std::vector<func_void> m_callbackOnClose;
 
-            unordered_map<std::string, std::string> m_filetypeFilter; //first: the text displayed in dropdown of file type, second: the file extension
+            std::unordered_map<std::string, std::string> m_filetypeFilter; //first: the text displayed in dropdown of file type, second: the file extension
     };
 }
 

@@ -336,7 +336,7 @@ void pmgui::GuiManager::addTestForm()
     m_showImguiDemoWindow = true;
 }
 
-void pmgui::GuiManager::addForm(unique_ptr<pmgui::Form> form)
+void pmgui::GuiManager::addForm(std::unique_ptr<pmgui::Form> form)
 {
     m_forms.push_back(move(form));
 }

@@ -94,7 +94,7 @@ void pmgui::MessagePopup::setMessage(const std::string &msg)
     m_msgText.setLabel(m_message);
 }
 
-const string &pmgui::MessagePopup::getMessage() const
+const std::string &pmgui::MessagePopup::getMessage() const
 {
     return m_message;
 }
@@ -216,7 +216,7 @@ void pmgui::MessagePopup::setCustomButtonVisibility(bool btn1Visible, bool btn2V
     }
 }
 
-void pmgui::MessagePopup::setCustomButtonTexts(const string &btn1Text, const string &btn2Text, const string &btn3Text)
+void pmgui::MessagePopup::setCustomButtonTexts(const std::string &btn1Text, const std::string &btn2Text, const std::string &btn3Text)
 {
     if(m_messagePopupType == MessagePopupType::Custom)
     {
@@ -226,7 +226,7 @@ void pmgui::MessagePopup::setCustomButtonTexts(const string &btn1Text, const str
     }
 }
 
-void pmgui::MessagePopup::setCustomButtonCommands(const string &btn1Cmd, const string &btn2Cmd, const string &btn3Cmd)
+void pmgui::MessagePopup::setCustomButtonCommands(const std::string &btn1Cmd, const std::string &btn2Cmd, const std::string &btn3Cmd)
 {
     if(m_messagePopupType == MessagePopupType::Custom)
     {

@@ -217,7 +217,7 @@ std::string pmgui::FileDialog::getOkBtnText() const
     return "<undefined>";
 }
 
-void pmgui::FileDialog::assignEnvironmentMap(unordered_map<string, string> *env)
+void pmgui::FileDialog::assignEnvironmentMap(std::unordered_map<std::string, std::string> *env)
 {
     m_environmentMap = env;
 }
@@ -304,8 +304,8 @@ void pmgui::FileDialog::handleFileChosen()
     {
         case DialogType::SaveFile:
         {
-            string extension = m_fileTable.getFileFilter();
-            string filename = m_filenametext.getValue();
+            std::string extension = m_fileTable.getFileFilter();
+            std::string filename = m_filenametext.getValue();
 
             if(filename.length() == 0)
             {
@@ -324,7 +324,7 @@ void pmgui::FileDialog::handleFileChosen()
                 filename = filename + extension;
             }
             m_path = m_fileTable.getLastOpenedPath();
-            string path = fmt::format("{0}/{1}", m_path.string(), filename);
+            std::string path = fmt::format("{0}/{1}", m_path.string(), filename);
 
             if (fs::exists(m_path))
             {
@@ -343,8 +343,8 @@ void pmgui::FileDialog::handleFileChosen()
 
         case DialogType::OpenFile:
         {
-            string extension = m_fileTable.getFileFilter();
-            string filename = m_filenametext.getValue();
+            std::string extension = m_fileTable.getFileFilter();
+            std::string filename = m_filenametext.getValue();
 
             if(filename.length() == 0)
             {
@@ -353,7 +353,7 @@ void pmgui::FileDialog::handleFileChosen()
             }
 
             m_path = m_fileTable.getLastOpenedPath();
-            string path = fmt::format("{0}/{1}", m_path.string(), filename);
+            std::string path = fmt::format("{0}/{1}", m_path.string(), filename);
 
             if (fs::exists(m_path))
             {
