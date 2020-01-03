@@ -32,6 +32,10 @@ void pmgui::MessagePopup::initialize()
     m_btn2.setOnSameLine(true);
     m_btn3.setOnSameLine(true);
 
+    m_btn1.setParentId(m_id);
+    m_btn2.setParentId(m_id);
+    m_btn3.setParentId(m_id);
+
     m_btnChildMid.setOnSameLine(true);
     m_messageChild.setSize({-1, (int)(m_size.y * 0.65f)});
 
