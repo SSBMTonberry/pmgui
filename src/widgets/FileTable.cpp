@@ -136,7 +136,7 @@ std::string pmgui::FileTable::getFileTimeString(const fs::directory_entry & entr
     //                    std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
     //#endif
 
-    #if defined(__GNUC__) && __GNUC__ < 9
+    #if !defined (__clang__) && defined(__GNUC__) && __GNUC__ < 9
         auto timeEntry = fs::last_write_time(entry);
         time_t cftime = std::chrono::system_clock::to_time_t(timeEntry);
         std::string timefmt = fmt::format("{0:%Y.%m.%d %H:%M:%S}", *std::localtime(&cftime));
