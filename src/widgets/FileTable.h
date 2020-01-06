@@ -88,8 +88,6 @@ namespace pmgui
             std::time_t to_time_t(TP tp);
 
             //void initializeImgFilemap();
-
-
             //std::map<std::string, std::pair<const unsigned char *, size_t>> m_fileMap;
             //std::map<std::string, pmgui::Image> m_imgFileMap;
             std::map<std::string, pmgui::FileType> *m_fileTypes;
@@ -106,8 +104,6 @@ namespace pmgui
             bool m_useFileIcons = true;
             std::string m_fileFilter = "*.*"; //Shows all as standard
             float m_scaleFactor = 1.f;
-
-
 
             fs::path m_lastOpenedPath;
             fs::path m_pathToOpen;

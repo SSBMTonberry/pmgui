@@ -80,13 +80,13 @@ void pmgui::FileDialog::createLayout()
 
     m_midGroup.addReference(&m_midRightChild);
 
-    m_bottomchildleft.setSize({(int)(m_size.x * 0.1f), (int)(m_size.y * 0.18f)});
+    m_bottomchildleft.setSize({(int)(m_size.x * 0.14f), (int)(m_size.y * 0.18f)});
     m_filenameLabel.setHasTitle(false);
     m_filetypeLabel.setHasTitle(false);
     m_bottomchildleft.addReference(&m_filenameLabel);
     m_bottomchildleft.addReference(&m_filetypeLabel);
 
-    m_bottomchildmid.setSize({(int)(m_size.x * 0.74f), (int)(m_size.y * 0.18f)});
+    m_bottomchildmid.setSize({(int)(m_size.x * 0.70f), (int)(m_size.y * 0.18f)});
     m_bottomchildmid.setOnSameLine(true);
     m_filenametext.setHasLabel(false);
     m_fileTypeCombo.setHasLabel(false);
@@ -96,8 +96,8 @@ void pmgui::FileDialog::createLayout()
     m_bottomchildright.setSize({(int)(m_size.x * 0.2f), (int)(m_size.y * 0.18f)});
     m_bottomchildright.setOnSameLine(true);
     m_okBtn.setLabel(getOkBtnText());
-    m_okBtn.setSize({(int)(m_size.x * 0.1f), (int)(m_size.y * 0.045f)});
-    m_cancelBtn.setSize({(int)(m_size.x * 0.1f), (int)(m_size.y * 0.045f)});
+    m_okBtn.setSize({(int)(m_size.x * 0.1f), (int)(m_size.y * 0.060f)});
+    m_cancelBtn.setSize({(int)(m_size.x * 0.1f), (int)(m_size.y * 0.060f)});
     m_bottomchildright.addReference(&m_okBtn);
     m_bottomchildright.addReference(&m_cancelBtn);
 
