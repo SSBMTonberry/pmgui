@@ -21,13 +21,13 @@ bool pmgui::DragInt::process()
     bool isChanged = false;
     if(Control::process())
     {
-        pushWidth();
+        //pushWidth();
         if(processDrag())
         {
             performValueValidation();
             isChanged = true;
         }
-        popWidth();
+        //popWidth();
     }
 
     return isChanged;
@@ -72,7 +72,9 @@ void pmgui::DragInt::initialize()
 bool pmgui::DragInt::processDrag()
 {
     std::string format = (m_hideNumber) ? "" : "%.0f";
-    //ImGui::PushItemWidth(m_width);
+    //Not working if called through popWidth() - which does the same...
+    if(m_width >= 1.f)
+        ImGui::PushItemWidth(m_width);
     bool result = false;
     switch (m_dragSize)
     {
@@ -93,7 +95,9 @@ bool pmgui::DragInt::processDrag()
             break;
 
     }
-    //ImGui::PopItemWidth();
+
+    if(m_width >= 1.f)
+        ImGui::PopItemWidth();
 
     return result;
 }

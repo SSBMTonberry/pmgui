@@ -133,8 +133,6 @@ void pmgui::Control::setWidth(float width)
     m_width = width;
 }
 
-
-
 /*!
  * Pushes width to item if width is defined as 1 or greater (Must remember to use pop width after control to activate)
  */
