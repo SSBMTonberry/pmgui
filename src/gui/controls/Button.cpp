@@ -52,7 +52,7 @@ bool pmgui::Button::process()
             popColors = true;
         }
 
-        if (ImGui::Button(m_imguiId.c_str(), ImVec2(m_size)))
+        if (ImGui::Button(m_label.c_str(), ImVec2(m_size)))
         {
             m_isPressed = true;
             toReturn = true;
