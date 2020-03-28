@@ -59,9 +59,9 @@ option(BUILD_SHARED_LIBS "Build shared libraries." OFF)
 option(BUILD_TESTS "Build unit tests." ON)
 option(BUILD_DEMO "Build demos." ON)
 
-configure_file (
-        "${PROJECT_SOURCE_DIR}/PmguiConfig.h.in"
-        "${PROJECT_SOURCE_DIR}/src/PmguiConfig.h")
+#configure_file (
+#        "${PROJECT_SOURCE_DIR}/PmguiConfig.h.in"
+#        "${PROJECT_SOURCE_DIR}/src/PmguiConfig.h")
 
 add_subdirectory(src)
 if(${BUILD_DEMO})

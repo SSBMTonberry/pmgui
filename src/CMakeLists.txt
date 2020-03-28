@@ -3,7 +3,7 @@ project(pmgui)
 
 configure_file (
         "${PROJECT_SOURCE_DIR}/../PmguiConfig.h.in"
-        "${PROJECT_SOURCE_DIR}/../PmguiConfig.h")
+        "${PROJECT_SOURCE_DIR}/PmguiConfig.h")
 
 include_directories(../external_libs/include)
 
