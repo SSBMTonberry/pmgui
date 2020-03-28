@@ -5,7 +5,7 @@
 #ifndef PMGUI_FILEDIALOG_H
 #define PMGUI_FILEDIALOG_H
 
-#include "../../PmguiConfig.h"
+//#include "../PmguiConfig.h"
 
 #include "../gui/forms/Popup.h"
 #include "../gui/controls/ImageButton.h"

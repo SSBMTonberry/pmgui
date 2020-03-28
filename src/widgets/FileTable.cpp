@@ -331,7 +331,7 @@ pmgui::Image *pmgui::FileTable::getImgFileIcon(const std::string &key)
 }
 
 
-#if APPLE
+#if __clang__
 std::string pmgui::FileTable::getOsxTimeStampString(const fs::path &path)
 {
     auto timeEntry = fs::last_write_time(path);
@@ -342,7 +342,7 @@ std::string pmgui::FileTable::getOsxTimeStampString(const fs::path &path)
 }
 #endif
 
-#if MSVC
+#if _MSC_VER && !__INTEL_COMPILER
 std::string to_string( FILETIME ftime ) // ISO format, time zone designator Z == zero (UTC)
 {
     SYSTEMTIME utc ;

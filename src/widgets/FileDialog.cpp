@@ -22,7 +22,7 @@ pmgui::FileDialog::FileDialog(const DialogType &dialogType, const sf::Vector2<in
 }
 
 /*!
- * 
+ *
  * @param position The position. To get it to appear in the center, just pass a std::nullopt.
  * @param size For best result, pass in the size of the sf::RenderWindow. If not specified, sf::VideoMode::getDesktopMode() is used.
  *             The size represents the size of the application, and the dialog itself will be 1 / 3 of this size.

@@ -5,7 +5,7 @@
 #ifndef PMGUI_FILETABLE_H
 #define PMGUI_FILETABLE_H
 
-#include "../../PmguiConfig.h"
+//#include "../PmguiConfig.h"
 #include "../gui/controls/DataTable.h"
 #include "../pmgui_files/files_mapper.h"
 #include "FileTypeCollection.h"
@@ -26,7 +26,7 @@
 namespace pmgui_fm = pmgui_files_mapper;
 using namespace cpplinq;
 
-#if MSVC
+#if _MSC_VER && !__INTEL_COMPILER
 #include <Windows.h>
 #endif
 
@@ -73,9 +73,9 @@ namespace pmgui
 
             std::string getFileTimeString(const fs::directory_entry & entry);
 
-#if MSVC
+#if _MSC_VER && !__INTEL_COMPILER
             std::string getWindowsTimeStampString(const fs::path &path);
-#elif APPLE
+#elif __clang__
             std::string getOsxTimeStampString(const fs::path &path);
 #endif
             std::string getTimeStampString(const fs::path &path); //Should work for ALL OSes (Windows, Linux, Mac)

@@ -5,7 +5,7 @@
 #ifndef PMGUI_TOOLS_H
 #define PMGUI_TOOLS_H
 
-#include "../../PmguiConfig.h"
+#include "../PmguiConfig.h"
 
 #include <sstream>
 #include <cstdlib>
@@ -22,33 +22,33 @@
 #include <SFML/System.hpp>
 #include <codecvt>
 
-#if MSVC
-#include <filesystem>
+#if _MSC_VER && !__INTEL_COMPILER
+    #include <filesystem>
     namespace fs = std::filesystem;
-#elif MINGW
-#if __MINGW64_VERSION_MAJOR > 6
+#elif __MINGW64__
+    #if __MINGW64_VERSION_MAJOR > 6
         #include <filesystem>
         namespace fs = std::filesystem;
     #else
         #include <experimental/filesystem>
         namespace fs = std::experimental::filesystem;
     #endif
-#elif APPLE
+#elif __clang__
     #if __clang_major__ < 8
-#include <experimental/filesystem>
+        #include <experimental/filesystem>
         namespace fs = std::experimental::filesystem;
     #else
         #include <filesystem>
         namespace fs = std::filesystem;
     #endif
-#else
-#if __GNUC__ < 8 //GCC major version less than 8
-#include <experimental/filesystem>
-                namespace fs = std::experimental::filesystem;
-#else
-#include <filesystem>
-namespace fs = std::filesystem;
-#endif
+#else //Linux
+    #if __GNUC__ < 8 //GCC major version less than 8
+        #include <experimental/filesystem>
+        namespace fs = std::experimental::filesystem;
+    #else
+        #include <filesystem>
+        namespace fs = std::filesystem;
+    #endif
 #endif
 
 namespace pmgui::tools
