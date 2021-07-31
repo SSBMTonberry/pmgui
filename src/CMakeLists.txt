@@ -5,7 +5,7 @@ configure_file (
         "${PROJECT_SOURCE_DIR}/../PmguiConfig.h.in"
         "${PROJECT_SOURCE_DIR}/PmguiConfig.h")
 
-include_directories(../external_libs/include)
+include_directories(../external_libs/ ../external_libs/include ../external_libs/sfml/include)
 
 set(FMT_SOURCE_FILES fmt/format.cc fmt/posix.cc)
 

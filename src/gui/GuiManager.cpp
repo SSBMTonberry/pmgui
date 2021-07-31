@@ -44,10 +44,8 @@ bool pmgui::GuiManager::run(bool callWindowDisplay)
 
 void pmgui::GuiManager::update()
 {
-    //m_eventManager->update();
     sf::Event event;
 
-    //for(sf::Event &event : m_eventManager->getAllEvents())
     while(m_window->pollEvent(event))
     {
         ImGui::SFML::ProcessEvent(event);
@@ -57,9 +55,6 @@ void pmgui::GuiManager::update()
         }
     }
     ImGui::SFML::Update(*m_window, m_deltaClock.restart());
-
-    //for(auto const & form : m_forms)
-    //    form->update();
 }
 
 void pmgui::GuiManager::draw(bool callWindowDisplay)
@@ -88,7 +83,7 @@ void pmgui::GuiManager::addTestForm()
 
 void pmgui::GuiManager::addForm(std::unique_ptr<pmgui::Form> form)
 {
-    m_forms.push_back(move(form));
+    m_forms.push_back(std::move(form));
 }
 
 void pmgui::GuiManager::addFormReference(pmgui::Form *form)

@@ -1,18 +1,18 @@
 #include "imgui-SFML.h"
 #include "imgui.h"
 
-#include <SFML/Config.hpp>
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
-#include <SFML/OpenGL.hpp>
-#include <SFML/Window/Clipboard.hpp>
-#include <SFML/Window/Cursor.hpp>
-#include <SFML/Window/Event.hpp>
-#include <SFML/Window/Touch.hpp>
-#include <SFML/Window/Window.hpp>
+#include "sfml/include/SFML/Config.hpp"
+#include "sfml/include/SFML/Graphics/Color.hpp"
+#include "sfml/include/SFML/Graphics/RenderTarget.hpp"
+#include "sfml/include/SFML/Graphics/RenderWindow.hpp"
+#include "sfml/include/SFML/Graphics/Sprite.hpp"
+#include "sfml/include/SFML/Graphics/Texture.hpp"
+#include "sfml/include/SFML/OpenGL.hpp"
+#include "sfml/include/SFML/Window/Clipboard.hpp"
+#include "sfml/include/SFML/Window/Cursor.hpp"
+#include "sfml/include/SFML/Window/Event.hpp"
+#include "sfml/include/SFML/Window/Touch.hpp"
+#include "sfml/include/SFML/Window/Window.hpp"
 
 #include <cassert>
 #include <cmath>    // abs

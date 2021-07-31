@@ -63,6 +63,7 @@ option(BUILD_DEMO "Build demos." ON)
 #        "${PROJECT_SOURCE_DIR}/PmguiConfig.h.in"
 #        "${PROJECT_SOURCE_DIR}/src/PmguiConfig.h")
 
+add_subdirectory(external_libs/sfml)
 add_subdirectory(src)
 if(${BUILD_DEMO})
     add_subdirectory(demo)

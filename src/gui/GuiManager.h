@@ -38,10 +38,10 @@ namespace pmgui
 
             GuiManager();
 
-            explicit GuiManager(sf::RenderWindow *window); //, pmgui::EventManager *eventManager);
+            explicit GuiManager(sf::RenderWindow *window);
 
 
-            void initialize(sf::RenderWindow *window); //, pmgui::EventManager *eventManager);
+            void initialize(sf::RenderWindow *window);
             void addForm(std::unique_ptr<pmgui::Form> form);
             void addFormReference(pmgui::Form * form);
             void addTestForm();
