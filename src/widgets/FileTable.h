@@ -11,7 +11,7 @@
 #include "FileTypeCollection.h"
 
 #include <map>
-#include "../managers/cpplinq.hpp"
+//#include "../managers/cpplinq.hpp"
 #include "../fmt/time.h"
 #include <ctime>
 #include <iostream>
@@ -24,7 +24,7 @@
 
 
 namespace pmgui_fm = pmgui_files_mapper;
-using namespace cpplinq;
+//using namespace cpplinq;
 
 #if _MSC_VER && !__INTEL_COMPILER
 #include <Windows.h>

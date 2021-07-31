@@ -12,18 +12,18 @@ pmgui::GuiManager::GuiManager()
 
 }
 
-pmgui::GuiManager::GuiManager(sf::RenderWindow *window, pmgui::EventManager *eventManager)
+pmgui::GuiManager::GuiManager(sf::RenderWindow *window)//, pmgui::EventManager *eventManager)
 {
-    initialize(window, eventManager);
+    initialize(window);//, eventManager);
 }
 
-void pmgui::GuiManager::initialize(sf::RenderWindow *window, pmgui::EventManager *eventManager)
+void pmgui::GuiManager::initialize(sf::RenderWindow *window)//, pmgui::EventManager *eventManager)
 {
     ImGui::CreateContext(); //IMGUI 1.60
     m_window = window;
     m_style = &ImGui::GetStyle();
     m_io = &ImGui::GetIO();
-    m_eventManager = eventManager;
+    //m_eventManager = eventManager;
 
     ImGui::SFML::Init(*m_window);
 
@@ -44,8 +44,11 @@ bool pmgui::GuiManager::run(bool callWindowDisplay)
 
 void pmgui::GuiManager::update()
 {
-    m_eventManager->update();
-    for(sf::Event &event : m_eventManager->getAllEvents())
+    //m_eventManager->update();
+    sf::Event event;
+
+    //for(sf::Event &event : m_eventManager->getAllEvents())
+    while(m_window->pollEvent(event))
     {
         ImGui::SFML::ProcessEvent(event);
         if (event.type == sf::Event::Closed)
@@ -80,259 +83,6 @@ void pmgui::GuiManager::draw(bool callWindowDisplay)
 
 void pmgui::GuiManager::addTestForm()
 {
-    /*unique_ptr<pmgui::Form> form = GuiFactory::CreateForm({0, 0}, {400, 600}, "form1", "Testalini", "0");
-    form->setFormFlags(pmgui::FormFlags::NoResize | FormFlags::NoTitleBar);
-
-    unique_ptr<pmgui::TreeNode> tree1 = GuiFactory::CreateTreeNode("tree1", "My first shit!", pmgui::TreeNode::NodeType::CollapsingHeader);
-    unique_ptr<pmgui::TreeNode> tree2 = GuiFactory::CreateTreeNode("tree2", "Treellooo!", pmgui::TreeNode::NodeType::CollapsingHeader);
-    unique_ptr<pmgui::TreeNode> tree3 = GuiFactory::CreateTreeNode("tree3", "Crapman", pmgui::TreeNode::NodeType::CollapsingHeader);
-    unique_ptr<pmgui::TreeNode> tree4 = GuiFactory::CreateTreeNode("tree_of_shit", "Bajsmais", pmgui::TreeNode::NodeType::CollapsingHeader);
-    unique_ptr<pmgui::TreeNode> tree5 = GuiFactory::CreateTreeNode("table_of_ass", "Taburu", pmgui::TreeNode::NodeType::CollapsingHeader);
-    unique_ptr<pmgui::TreeNode> tree6 = GuiFactory::CreateTreeNode("group_and_child", "Group And Child", pmgui::TreeNode::NodeType::CollapsingHeader);
-    unique_ptr<pmgui::TreeNode> tree7 = GuiFactory::CreateTreeNode("datatablerone", "DataTaburu", pmgui::TreeNode::NodeType::CollapsingHeader);
-
-    unique_ptr<pmgui::Textbox> textbox = GuiFactory::CreateTextbox("smiesh", "BROLO", 25);
-    textbox->createBasicTooltip("Skrellåååååå!");
-    textbox->setHasLabel(false);
-    //textbox->addTextboxFlag(TextboxFlags::ReadOnly);
-
-    textbox->setColor(sf::Color::Red, sf::Color::Black, sf::Color::Cyan, sf::Color::Blue);
-    tree1->add(move(textbox));
-    tree1->add(move(GuiFactory::CreateTextbox("besh", "SWAGGINS", 5)));
-    unique_ptr<pmgui::Label> label = GuiFactory::CreateLabel("label", "SHABBY NABBY", "GRASH!?");
-    label->setColor(sf::Color::Red);
-    tree1->add(move(label));
-    unique_ptr<pmgui::Button> button = GuiFactory::CreateButton("butz", "KNAPPERIER", {120, 30});
-    unique_ptr<pmgui::Button> button2 = GuiFactory::CreateButton("butz2", "KNAPPERIER", {120, 30});
-    button->setColor(sf::Color::Red, sf::Color::Cyan, sf::Color::Blue);
-    button2->setColor(sf::Color::Cyan, sf::Color::Red, sf::Color::Blue);
-    button2->setOnSameLine(true);
-    tree1->add(move(button));
-    tree1->add(move(button2));
-    unique_ptr<pmgui::ImageButton> imgButton = GuiFactory::CreateImageButton("imgbutt");
-    imgButton->setColor(sf::Color::Yellow, sf::Color::Green, sf::Color::Cyan);
-
-    tree1->add(move(imgButton));
-
-    unique_ptr<pmgui::InputInt> inputInt = std::make_unique<pmgui::InputInt>("input_int", "InputInt", 0, 100, 1, 10);
-    tree1->add(move(inputInt));
-
-    unique_ptr<pmgui::Combobox> comboboy = GuiFactory::CreateCombobox("comboboy", "james");
-    comboboy->addValueRange({"Shitfuck", "McCrabs", "Assbleed McGonoree", "Jæimz", "Blæim"});
-    comboboy->removeValue("Jæimz");
-    comboboy->setColor(sf::Color::Red, sf::Color::Blue);
-    tree1->add(move(comboboy));
-
-    unique_ptr<pmgui::RadioSection> radiosec = GuiFactory::CreateRadioSection("bucket", "radiosecie");
-    radiosec->addRadioData(0, "james?");
-    radiosec->addRadioData(1, "Hobbs");
-    radiosec->addRadioData(2, "Knobbs");
-    radiosec->addRadioData(3, "Kamelåså?");
-    radiosec->addRadioData(4, "Jimmy Fucker");
-    radiosec->addRadioData(5, "Kjell");
-    radiosec->addRadioData(6, "Grøt");
-    radiosec->addRadioData(7, "Pelle");
-    radiosec->addRadioData(8, "Tralle");
-    radiosec->setHorizontal(4);
-    tree2->add(move(radiosec));
-    //form->add(move(radiosec));
-
-    unique_ptr<pmgui::Checkbox> checkbox = GuiFactory::CreateCheckbox("checkie", "chack", true);
-    tree2->add(move(checkbox));
-    //form->add(move(checkbox));
-
-    unique_ptr<pmgui::CheckboxSection> checks = GuiFactory::CreateCheckboxSection("checkies", "yay");
-    checks->addCheckbox(0, "john", true);
-    checks->addCheckbox(1, "bon", false);
-    checks->addCheckbox(2, "tron", false);
-    checks->addCheckbox(3, "hohn", true);
-    checks->addCheckbox(4, "ron", true);
-    checks->setVertical();
-
-    tree2->add(move(checks));
-    //form->add(move(checks));
-
-    unique_ptr<pmgui::Listbox> listbox = GuiFactory::CreateListbox("listieboooy", "Listis", false);
-    listbox->addValues({{0, "Johnnyboooy"}, {1, "Jim Cartie"}, {2, "Bon bon John"}, {3, "Shitfuck McDiglets"}});
-    tree2->add(move(listbox));
-    //form->add(move(listbox));
-
-    unique_ptr<pmgui::Selectable> slect = GuiFactory::CreateSelectable("slect", "MÆIT!?", {150, 75});
-    tree2->add(move(slect));
-    //form->add(move(slect));
-
-    unique_ptr<pmgui::SliderInt> sliderint = GuiFactory::CreateSliderInt("slida", "slidie", -50, 100, pmgui::SliderInt::SliderIntType::H_One);
-    unique_ptr<pmgui::SliderInt> sliderint2 = GuiFactory::CreateSliderInt("slida2", "slidie2", -50, 100, pmgui::SliderInt::SliderIntType::H_Four);
-    sliderint2->setValues({1,2,3,4,5,6}); // 5 and 6 should be ignored
-    tree3->add(move(sliderint));
-    tree3->add(move(sliderint2));
-
-    unique_ptr<pmgui::SliderFloat> sliderfloat = GuiFactory::CreateSliderFloat("slidafloat", "slidie3", 0.f, 500.f, 4, pmgui::SliderFloat::SliderFloatType::H_Two);
-    unique_ptr<pmgui::SliderFloat> sliderfloat2 = GuiFactory::CreateSliderFloat("slidafloat2", "slidie4", 5.f, 10.f, 2, pmgui::SliderFloat::SliderFloatType::H_Three);
-
-    tree3->add(move(sliderfloat));
-    tree3->add(move(sliderfloat2));
-
-    unique_ptr<pmgui::SliderInt> vsliderint = GuiFactory::CreateSliderInt("vslida", "##vertint", 0, 8, pmgui::SliderInt::SliderIntType::Vertical, {10, 200});
-    vsliderint->setHideNumber(true);
-
-    unique_ptr<pmgui::SliderFloat> vsliderfloat = GuiFactory::CreateSliderFloat("vslidafloat", "##vertfloat", 0.f, 5.f, 4, pmgui::SliderFloat::SliderFloatType::Vertical, {15, 200});
-    vsliderfloat->setOnSameLine(true);
-    vsliderfloat->setHideNumber(true);
-
-    unique_ptr<pmgui::Image> img = GuiFactory::CreateImage("imgboy");
-    img->create(pmgui::logo::_pmgui_LOGO_PNG, pmgui::logo::_pmgui_LOGO_PNG_SIZE);
-    img->setOnSameLine(true);
-    unique_ptr<pmgui::Image> img2 = GuiFactory::CreateImage("imgboy2");
-    img2->create(pmgui::logo::_pmgui_LOGO_PNG, pmgui::logo::_pmgui_LOGO_PNG_SIZE);
-    img2->setOnSameLine(true);
-
-    unique_ptr<pmgui::ColorPicker> picker1 = GuiFactory::CreateColorPicker("pickerillo1", "picks", ColorPicker::ColorPickerType::ColorEdit3, sf::Color::Red);
-    unique_ptr<pmgui::ColorPicker> picker2 = GuiFactory::CreateColorPicker("pickerillo2", "pyck", ColorPicker::ColorPickerType::ColorEdit4, sf::Color::Green);
-
-    tree3->add(move(vsliderint));
-    tree3->add(move(vsliderfloat));
-    tree3->add(move(img));
-    tree3->add(move(img2));
-
-    tree4->add(move(picker1));
-    tree4->add(move(picker2));
-
-    unique_ptr<pmgui::DragInt> dragInt = GuiFactory::CreateDragInt("draggis", "DRA MEG!", 2, 45, 2.5f, DragInt::DragIntSize::Four);
-    unique_ptr<pmgui::DragFloat> dragFloat = GuiFactory::CreateDragFloat("draggis2", "DRA MEG MER!", 4.f, 250.f, 3, 5.f, DragFloat::DragFloatSize::Three);
-    tree4->add(move(dragInt));
-    tree4->add(move(dragFloat));
-
-    unique_ptr<pmgui::ColorButton> colorbtn = GuiFactory::CreateColorButton("colorbtn1", "Fargefaen", {255, 0, 0, 255});
-    unique_ptr<pmgui::ColorButton> colorbtn2 = GuiFactory::CreateColorButton("colorbtn2", "Drittfargen", {0, 0, 255, 255});
-    unique_ptr<pmgui::ColorButton> colorbtn3 = GuiFactory::CreateColorButton("colorbtn3", "BÆSJ!", {0, 0, 0, 255});
-    colorbtn2->setOnSameLine(true);
-    colorbtn3->setOnSameLine(true);
-
-    tree4->add(move(colorbtn));
-    tree4->add(move(colorbtn2));
-    tree4->add(move(colorbtn3));
-
-    unique_ptr<pmgui::Column> col1 = GuiFactory::CreateColumn("col1", "This column maaate");
-    col1->add(GuiFactory::CreateLabel("label_basic", "JAMES!?", "YES, JAMES."));
-    col1->add(GuiFactory::CreateTextbox("text_basic", "JAMES!?", 25));
-
-    unique_ptr<pmgui::Column> col2 = GuiFactory::CreateColumn("col2", "Other column");
-    col2->add(GuiFactory::CreateLabel("label_basic2", "Cream", "Seem"));
-    col2->add(GuiFactory::CreateTextbox("text_basic2", "John", 20));
-
-    unique_ptr<pmgui::Column> col3 = GuiFactory::CreateColumn("col3", "Even better column");
-    col3->add(GuiFactory::CreateLabel("label_basic3", "", "Just showin' the label mate"));
-
-    unique_ptr<pmgui::Column> col4 = GuiFactory::CreateColumn("col4", "The bestest");
-    col4->add(GuiFactory::CreateButton("el_buttonos", "Knappir", {300, 50}));
-
-    unique_ptr<pmgui::Column> col5 = GuiFactory::CreateColumn("col5", "Klonnerier");
-    col5->add(GuiFactory::CreateLabel("mkaylab", "Kringles", "Rendeem"));
-    col5->add(GuiFactory::CreateTextbox("mkaytext", "Bresk", 40));
-
-    unique_ptr<pmgui::Column> col6 = GuiFactory::CreateColumn("col6", "That is collieboy");
-    col6->add(GuiFactory::CreateLabel("jamescol", "Brysk", "Jeem"));
-    col6->add(GuiFactory::CreateTextbox("jamestext", "Shittalini", 20));
-
-    unique_ptr<pmgui::Table> table = GuiFactory::CreateTable("tabbie", "Tableboy");
-    unique_ptr<pmgui::Row> row = GuiFactory::CreateRow("rowie", "Dat row mate");
-    unique_ptr<pmgui::Row> row2 = GuiFactory::CreateRow("rowie2", "Another Row to grow");
-    unique_ptr<pmgui::Row> row3 = GuiFactory::CreateRow("rowie3", "Holy crapfuck");
-    row->add(move(col1));
-    row->add(move(col2));
-    row->add(move(col3));
-    row2->add(move(col4));
-    row3->add(move(col5));
-    row3->add(move(col6));
-
-    table->add(move(row));
-    table->add(move(row2));
-    table->add(move(row3));
-
-    tree5->add(move(table));
-
-    uptr_child child = GuiFactory::CreateChild("left_child", "kid", {150, 0});
-    uptr_listbox listbox2 = GuiFactory::CreateListbox("listkid", "Listarino", false, 30);
-    listbox2->addValues({{0, "Johohooo"}, {1, "Brannskader"}, {2, "Drasse"}, {3, "Shit in ass"}, {4, "Boyalini"}});
-    listbox2->setHasLabel(false);
-    child->add(move(listbox2));
-
-    uptr_group group = GuiFactory::CreateGroup("right_group", "groupalini");
-    uptr_child child2 = GuiFactory::CreateChild("right_child", "kid2", {0, -50});
-    group->setOnSameLine(true);
-    
-    unique_ptr<pmgui::Listbox> listbox3 = GuiFactory::CreateListbox("listkid2", "Klisterlister", false, 30);
-    listbox3->addValues({{0, "Gressløk"}, {1, "Grøt"}, {2, "Fløte"}, {3, "Karsk"}, {4, "Danskebåten"},
-                         {5, "Granløk"}, {6, "Kjeppfelle"}, {7, "Dritefest"}, {8, "Knappenål"},
-                         {9, "Hummer og kanari"}});
-    listbox3->setHasLabel(false);
-
-    uptr_progressbar progresso = GuiFactory::CreateProgressbar("progresso", 0, 100, "james: {0}/{1}", {-1, -1}, 50);
-    child2->add(move(listbox3));
-
-    group->add(move(child2));
-    group->add(move(progresso));
-
-    tree6->add(move(child));
-    tree6->add(move(group));
-
-    uptr_datatable datatable = GuiFactory::CreateDataTable("datatableboy", "El tabello");
-    datatable->addColumn("img", "ImgCustom", DataColumnType::Image, 0);
-    datatable->addColumn("live", "Live and loaded");
-    datatable->addColumn("cargo", "Cargolini", DataColumnType::Textbox, 0);
-    datatable->addColumn("lynsj", "Lynsje");
-    datatable->addColumn("crønsj", "Crønsj");
-
-    DataRow *newrow1 = datatable->newRow();
-    newrow1->setImage("img", pmgui_files::folders::blue::_FOLDER_OPENED_PNG, pmgui_files::folders::blue::_FOLDER_OPENED_PNG_SIZE);
-    newrow1->setValue("live", "Kreeeem");
-    newrow1->setValue("cargo", "Kjør biiil");
-    newrow1->setValue("lynsj", "Svosh!");
-    newrow1->setValue("crønsj", "Limesvette");
-
-    DataRow *newrow2 = datatable->newRow();
-    newrow2->setValues({"James", "Brames", "Chames", "www.shitfuckmcnuggets.com", "Should be ass"});
-
-    //std::string lolle = (*newrow2)["live"];
-
-    DataRow *newrow3 = datatable->newRow();
-    newrow3->setValuesWithKey({{"live", "Saftfyrste"}, {"lynsj", "Gretten bæsj"}});
-    tree7->add(move(datatable));
-
-    form->add(move(tree1));
-    form->add(move(tree2));
-    form->add(move(tree3));
-    form->add(move(tree4));
-    form->add(move(tree5));
-    form->add(move(tree6));
-    form->add(move(tree7));
-
-    //Menu items
-    unique_ptr<pmgui::MenuBar> mainboy = GuiFactory::CreateMenuBar("mainboy", true);
-    unique_ptr<pmgui::MenuItemCollection> file = GuiFactory::CreateMenuItemCollection("subbie1", "File");
-    unique_ptr<pmgui::MenuItem> fileItem1 = GuiFactory::CreateMenuItem("menuitem1", "Galder");
-    unique_ptr<pmgui::MenuItem> fileItem2 = GuiFactory::CreateMenuItem("menuitem2", "Rabalder");
-    file->add(move(fileItem1));
-    file->add(move(fileItem2));
-
-    unique_ptr<pmgui::MenuItemCollection> edit = GuiFactory::CreateMenuItemCollection("subbie2", "Edit");
-    unique_ptr<pmgui::MenuItemCollection> edit2 = GuiFactory::CreateMenuItemCollection("subbie3", "Edit even moooore");
-    unique_ptr<pmgui::MenuItem> fileItem3 = GuiFactory::CreateMenuItem("menuitem3", "TANK FRANK");
-    unique_ptr<pmgui::MenuItem> fileItem4 = GuiFactory::CreateMenuItem("menuitem4", "<==JÆIMS HERE!?");
-    edit->add(move(fileItem3));
-    edit2->add(move(fileItem4));
-    edit->add(move(edit2));
-
-    unique_ptr<pmgui::MenuItem> lastItem = GuiFactory::CreateMenuItem("getout", "GET OUT!");
-
-    mainboy->add(move(file));
-    mainboy->add(move(edit));
-    form->add(move(mainboy));
-
-    addForm(move(form));
-
-    addForm(make_unique<pmgui::TextEditorForm>("text_editor", "Code a random", "1"));*/
     m_showImguiDemoWindow = true;
 }
 
