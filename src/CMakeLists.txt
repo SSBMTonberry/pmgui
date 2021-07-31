@@ -5,7 +5,7 @@ configure_file (
         "${PROJECT_SOURCE_DIR}/../PmguiConfig.h.in"
         "${PROJECT_SOURCE_DIR}/PmguiConfig.h")
 
-include_directories(../external_libs/include)
+include_directories(../external_libs/ ../external_libs/include ../external_libs/sfml/include)
 
 set(FMT_SOURCE_FILES fmt/format.cc fmt/posix.cc)
 
@@ -36,8 +36,10 @@ set(SOURCE_FILES gui/controls/Button.cpp gui/controls/Button.h gui/controls/Chec
         gui/forms/MessagePopup.cpp gui/forms/MessagePopup.h gui/forms/Popup.cpp gui/forms/Popup.h
         gui/forms/TextEditorForm.cpp gui/forms/TextEditorForm.h gui/properties/RadioData.cpp gui/properties/RadioData.h
         gui/properties/Tooltip.cpp gui/properties/Tooltip.h gui/themes/Theme.cpp gui/themes/Theme.h
-        gui/TextEditor.cpp gui/TextEditor.h pmgui.h managers/cpplinq.hpp managers/EventManager.h managers/EventManager.cpp gui/GuiManager.h gui/GuiManager.cpp
+        gui/TextEditor.cpp gui/TextEditor.h pmgui.h gui/GuiManager.h gui/GuiManager.cpp
         widgets/FileDialog.h widgets/FileDialog.cpp widgets/FileTable.h widgets/FileTable.cpp
         widgets/FileType.cpp widgets/FileType.h widgets/FileTypeCollection.cpp widgets/FileTypeCollection.h)
+
+#Removed: managers/EventManager.h managers/EventManager.cpp
 
 add_library(pmgui ${SOURCE_FILES} ${IMGUI_SOURCE_FILES} ${FMT_SOURCE_FILES})

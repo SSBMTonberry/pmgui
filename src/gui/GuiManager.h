@@ -15,7 +15,7 @@
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/System/Clock.hpp"
 #include "SFML/Window/Event.hpp"
-#include "../managers/EventManager.h"
+//#include "../managers/EventManager.h"
 
 #include "forms/Form.h"
 #include "forms/TextEditorForm.h"
@@ -38,10 +38,10 @@ namespace pmgui
 
             GuiManager();
 
-            GuiManager(sf::RenderWindow *window, pmgui::EventManager *eventManager);
+            explicit GuiManager(sf::RenderWindow *window);
 
 
-            void initialize(sf::RenderWindow *window, pmgui::EventManager *eventManager);
+            void initialize(sf::RenderWindow *window);
             void addForm(std::unique_ptr<pmgui::Form> form);
             void addFormReference(pmgui::Form * form);
             void addTestForm();
@@ -76,7 +76,7 @@ namespace pmgui
             std::vector<func_customdraw> m_callbackOnCustomDraw;
             //std::map<std::string, std::unique_ptr<pmgui::Form>> m_forms;
             sf::RenderWindow *m_window;
-            pmgui::EventManager *m_eventManager;
+            //pmgui::EventManager *m_eventManager;
             sf::Clock m_deltaClock;
     };
 }

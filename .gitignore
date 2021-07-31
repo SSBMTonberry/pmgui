@@ -38,3 +38,5 @@ cmake-build-debug/
 cmake-build-release/
 
 PmguiConfig\.h
+
+cmake-build-minsizerel/

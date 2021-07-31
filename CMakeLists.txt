@@ -4,7 +4,7 @@ project(pmgui_project)
 set(CMAKE_CXX_STANDARD 17)
 set(PROJECT_VERSION_MAJOR 0)
 set(PROJECT_VERSION_MINOR 4)
-set(PROJECT_VERSION_PATCH 0)
+set(PROJECT_VERSION_PATCH 1)
 set(CMAKE_CXX_FLAGS -DSFML_STATIC)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DSFML_STATIC -DPMGUI_DEBUG")
@@ -63,6 +63,7 @@ option(BUILD_DEMO "Build demos." ON)
 #        "${PROJECT_SOURCE_DIR}/PmguiConfig.h.in"
 #        "${PROJECT_SOURCE_DIR}/src/PmguiConfig.h")
 
+add_subdirectory(external_libs/sfml)
 add_subdirectory(src)
 if(${BUILD_DEMO})
     add_subdirectory(demo)
