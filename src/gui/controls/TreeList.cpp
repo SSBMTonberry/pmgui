@@ -315,3 +315,29 @@ std::string_view pmgui::TreeList::getItemId(int index)
 
     return nullptr;
 }
+
+int pmgui::TreeList::getPagingSize() const
+{
+    return m_pagingSize;
+}
+
+void pmgui::TreeList::setPagingSize(int pagingSize)
+{
+    m_pagingSize = pagingSize;
+}
+
+int pmgui::TreeList::getCurrentPage() const
+{
+    return m_currentPage;
+}
+
+void pmgui::TreeList::setCurrentPage(int currentPage)
+{
+    m_currentPage = currentPage;
+    if(m_pagingSize > 0)
+    {
+        size_t maxPages = m_items.size() / m_pagingSize;
+        if(m_pagingSize > maxPages)
+            m_pagingSize = (int)maxPages;
+    }
+}

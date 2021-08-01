@@ -41,11 +41,13 @@ namespace pmgui
 
             TextEditorForm m_codeEditor {"code_editor", "Code Editor"};
             Form m_demoForm {"demo_form", "PmGui Demo"};
+            Form m_treeListForm {"treelist_form", "TreeList Demo"};
             Textbox *m_demoText1 = nullptr;
             Button *m_openFileOpenDialogBtn = nullptr;
             Button *m_openDirectoryOpenDialogBtn = nullptr;
             Button *m_openFileSaveDialogBtn = nullptr;
             Button *m_openCodeEditorBtn = nullptr;
+            TreeList *m_treeList = nullptr;
 
             FileDialog m_fileDialogFile { DialogType::OpenFile, "main_file_dialog_file", "Choose a file", false}; //, "main_file_dialog_file"};
             FileDialog m_fileDialogFolder { DialogType::OpenDirectory, "main_file_dialog_folder", "Choose a folder", false}; //, "main_file_dialog_file"};

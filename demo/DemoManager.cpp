@@ -24,6 +24,7 @@ void pmgui::DemoManager::initialize(const std::string &title, const sf::Vector2<
     m_fileDialogFile.initialize(std::nullopt, sf::Vector2i((int)m_window.getSize().x, (int)m_window.getSize().y));
     m_fileDialogFolder.initialize(std::nullopt, sf::Vector2i((int)m_window.getSize().x, (int)m_window.getSize().y));
     m_fileDialogSave.initialize(std::nullopt, sf::Vector2i((int)m_window.getSize().x, (int)m_window.getSize().y));
+    m_treeListForm.setSize({150, 600});
 
     m_window.resetGLStates(); // call it if you only process ImGui. Otherwise not needed.
 
@@ -77,6 +78,8 @@ void pmgui::DemoManager::draw()
     m_fileDialogFile.draw();
     m_fileDialogFolder.draw();
     m_fileDialogSave.draw();
+    m_treeListForm.draw();
+
     ImGui::SFML::Render(m_window);
 }
 
@@ -105,6 +108,11 @@ void pmgui::DemoManager::createDemo()
     m_fileDialogSave.setFileTypeCollection("images", true);
 
     m_fileDialogFile.setFileType("*.*");
+
+    m_treeList = m_treeListForm.create<pmgui::TreeList>("treelist_main", "TreeList");
+    m_treeList->setHasParentNode(false);
+    for(int i = 0; i < 1000; ++i)
+        m_treeList->add(fmt::format("tree_item_{0:04}", i+1), fmt::format("Item {0:04}", i+1));
 }
 
 void DemoManager::onButtonPressed(const pmgui::Button *btn)

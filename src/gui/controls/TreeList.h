@@ -40,6 +40,8 @@ namespace pmgui
             void registerOnDoubleClickCallback(const func_treelist_parent &cb);
             void registerOnChosenContextItemCallback(const func_treelist_parent_chosencontextitem &cb);
             void setHasParentNode(bool hasParentNode);
+            void setPagingSize(int pagingSize);
+            void setCurrentPage(int currentPage);
 
             void swap(const std::string &id1, const std::string &id2);
 
@@ -49,7 +51,8 @@ namespace pmgui
             std::vector<pmgui::Selectable *> getItems();
             bool isOpen() const;
             bool hasParentNode() const;
-
+            int getPagingSize() const;
+            int getCurrentPage() const;
 
         protected:
             void processMouseEvents();
@@ -65,6 +68,9 @@ namespace pmgui
             bool m_rightClickContextActivated = false;
             bool m_isOpen = false;
             bool m_hasParentNode = true; //true = Has a tree-node. false = Makes it pretty much work like a list
+
+            int m_pagingSize = 0;
+            int m_currentPage = 0;
     };
 }
 
