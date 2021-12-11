@@ -49,11 +49,13 @@ bool pmgui::TreeList::process()
 
             if(usePaging)
             {
+
+                auto item = std::next(m_items.begin(), itemsFrom);
                 for(size_t i = itemsFrom; i < itemsTo && i < m_items.size(); ++i)
                 {
-                    auto item = std::next(m_items.begin(), i);
                     if (item->second.process())
                         isAnyItemActivated = true;
+                    std::advance(item, 1);
                 }
             }
             else
@@ -91,7 +93,6 @@ void pmgui::TreeList::processPaging()
 {
     if(m_pagingSize > 0 && m_items.size() > m_pagingSize)
     {
-
         ImGuiStyle& style = ImGui::GetStyle();
 
         float window_visible_x2 = ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x;
