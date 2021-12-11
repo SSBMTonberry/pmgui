@@ -401,8 +401,8 @@ void pmgui::TreeList::setCurrentPage(int currentPage)
     if(m_pagingSize > 0)
     {
         size_t maxPages = m_items.size() / m_pagingSize;
-        if(m_pagingSize > maxPages)
-            m_pagingSize = (int)maxPages;
+        if(m_currentPage > maxPages)
+            m_currentPage = (int)maxPages;
     }
 }
 
