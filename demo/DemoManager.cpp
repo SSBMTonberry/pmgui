@@ -111,7 +111,8 @@ void pmgui::DemoManager::createDemo()
 
     m_treeList = m_treeListForm.create<pmgui::TreeList>("treelist_main", "TreeList");
     m_treeList->setHasParentNode(false);
-    for(int i = 0; i < 1000; ++i)
+    m_treeList->setPagingSize(1000);
+    for(int i = 0; i < 10000; ++i)
         m_treeList->add(fmt::format("tree_item_{0:04}", i+1), fmt::format("Item {0:04}", i+1));
 }
 

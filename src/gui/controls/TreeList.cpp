@@ -16,12 +16,24 @@ pmgui::TreeList::TreeList(const std::string &id, const std::string &label) : Con
 
 bool pmgui::TreeList::process()
 {
+    processPaging();
+    bool usePaging = (m_pagingSize > 0 && m_items.size() > m_pagingSize);
+    int itemsFrom, itemsTo;
+    if(usePaging)
+    {
+        //itemsPerPage = m_items.size() / m_pagingSize;
+        itemsFrom = m_currentPage * m_pagingSize;
+        itemsTo = itemsFrom + m_pagingSize;//(itemsPerPage - 1);
+    }
+
     bool isAnyItemActivated = false;
     if(Control::process())
     {
-        if (m_eraseItems.size() > 0) {
+        if (m_eraseItems.size() > 0)
+        {
             size_t erasedCount = 0;
-            for (auto del : m_eraseItems) {
+            for (auto del : m_eraseItems)
+            {
                 erasedCount += m_items.erase(del);
             }
             m_eraseItems.clear();
@@ -33,15 +45,29 @@ bool pmgui::TreeList::process()
         if(m_isOpen)
         {
             processMouseEvents();
-            int i = 0;
-            //Child nodes
-            for(auto & [pos, item] : m_items)
+
+
+            if(usePaging)
             {
-                if(item.process())
-                    isAnyItemActivated = true;
-                ++i;
+                for(size_t i = itemsFrom; i < itemsTo && i < m_items.size(); ++i)
+                {
+                    auto item = std::next(m_items.begin(), i);
+                    if (item->second.process())
+                        isAnyItemActivated = true;
+                }
             }
-            if(m_hasParentNode)
+            else
+            {
+                int i = 0;
+                //Child nodes
+                for (auto &[pos, item]: m_items)
+                {
+                    if (item.process())
+                        isAnyItemActivated = true;
+                    ++i;
+                }
+            }
+            if (m_hasParentNode)
                 ImGui::TreePop();
         }
         else
@@ -59,6 +85,43 @@ bool pmgui::TreeList::process()
     }
 
     return isAnyItemActivated;
+}
+
+void pmgui::TreeList::processPaging()
+{
+    if(m_pagingSize > 0 && m_items.size() > m_pagingSize)
+    {
+
+        ImGuiStyle& style = ImGui::GetStyle();
+
+        float window_visible_x2 = ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x;
+
+        ImGui::Separator();
+        size_t numberOfPages = m_items.size() / m_pagingSize;
+
+        for(int i = 0; i < numberOfPages; ++i)
+        {
+
+            ImVec2 size = {20, 20};
+            if(i >= 99)
+                size = {40, 20};
+
+            ImGui::PushID(i);
+            if(ImGui::Button(std::to_string(i+1).c_str(), size))
+            {
+                m_currentPage = i;
+            }
+
+            //Wrapping logic
+            float last_button_x2 = ImGui::GetItemRectMax().x;
+            float next_button_x2 = last_button_x2 + style.ItemSpacing.x + size.x; // Expected position if next button was on same line
+            if (i + 1 < numberOfPages && next_button_x2 < window_visible_x2)
+                ImGui::SameLine();
+
+            ImGui::PopID();
+        }
+        ImGui::Separator();
+    }
 }
 
 /*!
@@ -341,3 +404,5 @@ void pmgui::TreeList::setCurrentPage(int currentPage)
             m_pagingSize = (int)maxPages;
     }
 }
+
+

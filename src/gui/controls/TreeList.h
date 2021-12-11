@@ -71,6 +71,9 @@ namespace pmgui
 
             int m_pagingSize = 0;
             int m_currentPage = 0;
+
+        private:
+            void processPaging();
     };
 }
 
