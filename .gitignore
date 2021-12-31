@@ -40,3 +40,8 @@ cmake-build-release/
 PmguiConfig\.h
 
 cmake-build-minsizerel/
+out/
+
+.vs/
+
+CMakeSettings.json

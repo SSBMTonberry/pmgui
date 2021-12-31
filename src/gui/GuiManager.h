@@ -19,7 +19,7 @@
 
 #include "forms/Form.h"
 #include "forms/TextEditorForm.h"
-
+#include <functional>
 
 namespace pmgui
 {

@@ -56,7 +56,7 @@ else()
 endif()
 
 option(BUILD_SHARED_LIBS "Build shared libraries." OFF)
-option(BUILD_TESTS "Build unit tests." ON)
+option(BUILD_TESTS "Build unit tests." OFF)
 option(BUILD_DEMO "Build demos." ON)
 
 #configure_file (
