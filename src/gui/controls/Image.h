@@ -9,6 +9,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Shader.hpp>
 #include "Control.h"
+#include "../../imgui/imgui-SFML.h"
 
 namespace pmgui
 {

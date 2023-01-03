@@ -118,7 +118,7 @@ bool pmgui::Image::process()
         sf::FloatRect rect = static_cast<sf::FloatRect>(m_sprite.getTextureRect());
         if(size.x > 0 && size.y > 0)
         {
-            ImGui::Image(m_texture, size, rect, m_sprite.getColor());
+            ImGui::Image(m_texture, size, m_sprite.getColor());
             if (ImGui::IsItemHovered())
             {
                 isHovered = true;
@@ -165,7 +165,7 @@ void pmgui::Image::showZoomTooltip()
     sf::Vector2f size = {m_sprite.getTextureRect().width * m_zoomTooltipScaleRatio * m_scale.x, m_sprite.getTextureRect().height * m_zoomTooltipScaleRatio * m_scale.y};
     sf::FloatRect rect = static_cast<sf::FloatRect>(m_sprite.getTextureRect());
 
-    ImGui::Image(m_texture, size, rect, m_sprite.getColor());
+    ImGui::Image(m_texture, size, m_sprite.getColor());
     ImGui::EndTooltip();
 }
 

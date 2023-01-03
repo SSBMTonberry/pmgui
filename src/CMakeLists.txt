@@ -10,7 +10,7 @@ include_directories(../external_libs/ ../external_libs/include ../external_libs/
 set(FMT_SOURCE_FILES fmt/format.cc fmt/posix.cc)
 
 set(IMGUI_SOURCE_FILES imgui/imgui.cpp imgui/imconfig.h
-        imgui/imgui_draw.cpp imgui/imgui_widgets.cpp
+        imgui/imgui_draw.cpp imgui/imgui_tables.cpp imgui/imgui_widgets.cpp
         imgui/imgui_demo.cpp imgui/misc/cpp/imgui_stdlib.cpp
         imgui/imgui-SFML.cpp)
 
