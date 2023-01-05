@@ -57,6 +57,6 @@ void pmgui::Column::setWidthByPercent(size_t widthByPercentOfAvailableSpace)
     if(widthByPercentOfAvailableSpace > 100)
         widthByPercentOfAvailableSpace = 100;
 
-    float width = ImGui::GetContentRegionAvailWidth() * ((float)widthByPercentOfAvailableSpace / 100);
+    float width = ImGui::GetContentRegionAvail().x * ((float)widthByPercentOfAvailableSpace / 100);
     m_width = width;
 }
