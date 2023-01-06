@@ -114,6 +114,10 @@ void pmgui::DemoManager::createDemo()
     m_treeList->setPagingSize(5000);
     for(int i = 0; i < 100000; ++i)
         m_treeList->add(fmt::format("tree_item_{0:04}", i+1), fmt::format("Item {0:04}", i+1));
+
+    m_demoForm.create<pmgui::DragInt>("dragolini", "DragInt", 50, 500, 10.f, pmgui::DragInt::DragIntSize::One);
+    auto dragFloat = m_demoForm.create<pmgui::DragFloat>("dragoliniFloat", "DragFloat", 50.f, 500.f, 10.f, 2, pmgui::DragFloat::DragFloatSize::One);
+    dragFloat->setOnSameLine(true);
 }
 
 void DemoManager::onButtonPressed(const pmgui::Button *btn)

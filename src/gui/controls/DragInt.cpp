@@ -71,7 +71,7 @@ void pmgui::DragInt::initialize()
 
 bool pmgui::DragInt::processDrag()
 {
-    std::string format = (m_hideNumber) ? "" : "%.0f";
+    std::string format = (m_hideNumber) ? "" : "%d";
     //Not working if called through popWidth() - which does the same...
     if(m_width >= 1.f)
         ImGui::PushItemWidth(m_width);
