@@ -45,3 +45,5 @@ out/
 .vs/
 
 CMakeSettings.json
+
+.DS_Store
